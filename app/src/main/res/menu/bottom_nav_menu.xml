@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item android:id ="@+id/mnExplore"
+        android:title="Explore"
+        android:icon="@drawable/nav_explore"
+         />
+
+    <item android:id ="@+id/mnPlan"
+        android:title="Plan Meal"
+        android:icon="@drawable/nav_calendar"
+        />
+
+    <item android:id ="@+id/mnSearch"
+        android:title="Search"
+        android:icon="@drawable/nav_search"
+        />
+
+    <item android:id ="@+id/mnUpload"
+        android:title="Upload"
+        android:icon="@drawable/nav_upload"
+        />
+
+    <item android:id ="@+id/mnCookmarked"
+        android:title="Cookmarked"
+        android:icon="@drawable/nav_cookmark"
+        />
+
+</menu>
