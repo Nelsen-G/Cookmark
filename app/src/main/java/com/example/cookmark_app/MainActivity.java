@@ -1,44 +1,58 @@
 package com.example.cookmark_app;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 
+import com.example.cookmark_app.databinding.ActivityMainBinding;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
 public class MainActivity extends AppCompatActivity {
+
+    ActivityMainBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        binding = ActivityMainBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
-        Button logInButton = findViewById(R.id.buttonLogIn);
-        logInButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent it = new Intent(MainActivity.this, Login.class);
-                startActivity(it);
+        replaceFragment(new ExploreFragment());
+        binding.bottomNavigation.setBackground(null);
+
+        binding.bottomNavigationView.setOnItemSelectedListener(item -> {
+            switch(item.getItemId()){
+
+                case R.id.mnExplore:
+                    replaceFragment(new ExploreFragment());
+                    break;
+                case R.id.mnPlan:
+                    replaceFragment(new PlanFragment());
+                    break;
+                case R.id.mnUpload:
+                    replaceFragment(new UploadFragment());
+                    break;
+                case R.id.mnCookmarked:
+                    replaceFragment(new CookMarkedFragment());
+                    break;
             }
+            return true;
         });
 
-        Button registerButton = findViewById(R.id.buttonRegister);
-        registerButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent it = new Intent(MainActivity.this, Register.class);
-                startActivity(it);
-            }
+        FloatingActionButton searchBtn = findViewById(R.id.mnSearch);
+        searchBtn.setOnClickListener(item -> {
+            replaceFragment(new SearchFragment());
         });
+    }
 
-        Button signInGoogleButton = findViewById(R.id.buttonSignInGoogle);
-        signInGoogleButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // masukin logic sign in with google
-            }
-        });
-
+    private void replaceFragment(Fragment fragment){
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.activity_layout, fragment);
+        fragmentTransaction.commit();
     }
 }
