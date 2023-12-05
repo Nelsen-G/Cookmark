@@ -5,4 +5,5 @@
     <string name="log_in"><u>Log In</u></string>
     <string name="HorizontalLineOr1"><u>\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0</u></string>
     <string name="HorizontalLineOr2"><u>\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0</u></string>
+    <string name="registerBtn"><u>Register</u></string>
 </resources>
