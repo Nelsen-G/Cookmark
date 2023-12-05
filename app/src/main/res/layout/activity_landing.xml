@@ -76,9 +76,5 @@
             android:text="Sign In with Google"
             android:backgroundTint="@color/purple"/>
 
-
     </LinearLayout>
-    
-
-
 </RelativeLayout>
