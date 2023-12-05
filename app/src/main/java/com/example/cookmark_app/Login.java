@@ -30,7 +30,7 @@ public class Login extends AppCompatActivity {
 
                 // Logic login , cek ke db
                 //sementara ini langsung masuk ke explore
-                Intent it = new Intent(Login.this, Explore.class);
+                Intent it = new Intent(Login.this, MainActivity.class);
                 startActivity(it);
             }
         });
