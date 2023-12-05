@@ -1,5 +1,5 @@
 <resources>
     <string name="app_name">Cookmark.</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="web_client_id">724364237022-4tu84a1n125a711vrmvcg0mb2pmjmlor.apps.googleusercontent.com</string>
 </resources>
