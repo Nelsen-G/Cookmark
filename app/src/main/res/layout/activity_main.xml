@@ -8,10 +8,32 @@
     android:background="@color/white"
     tools:context=".MainActivity">
 
-    <FrameLayout
+
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/activity_layout" />
+        android:layout_height="match_parent">
+
+        <androidx.appcompat.widget.Toolbar
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/toolbar"
+
+            app:logo="@mipmap/ic_launcher"
+            app:title="CookMark."
+            app:titleTextColor="@color/orange"
+            android:background="@color/white"
+
+            app:menu="@menu/toolbar_menu"
+            android:layout_marginRight="10dp"
+            android:layout_alignParentTop="true" />
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/activity_layout"
+            android:layout_below="@id/toolbar"/>
+
+    </RelativeLayout>
 
     <com.google.android.material.bottomappbar.BottomAppBar
         android:id="@+id/bottom_navigation"

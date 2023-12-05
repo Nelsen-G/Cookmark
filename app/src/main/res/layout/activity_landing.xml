@@ -27,8 +27,6 @@
             android:layout_height="wrap_content"
             android:src="@drawable/logo_cookmark"/>
 
-
-
         <LinearLayout
             android:id="@+id/loginLayout"
             android:layout_width="match_parent"
@@ -49,14 +47,17 @@
                 android:id="@+id/buttonLogIn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Log In"/>
+                android:text="Log In"
+                android:backgroundTint="@color/transparent"
+                android:textColor="@color/purple"/>
         </LinearLayout>
 
         <Button
             android:id="@+id/buttonRegister"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Register"/>
+            android:text="Register"
+            android:backgroundTint="@color/orange"/>
 
         <TextView
             android:id="@+id/textViewOr"
@@ -72,7 +73,8 @@
             android:id="@+id/buttonSignInGoogle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Sign In with Google"/>
+            android:text="Sign In with Google"
+            android:backgroundTint="@color/purple"/>
 
 
     </LinearLayout>
