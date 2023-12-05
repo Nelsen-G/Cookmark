@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 public class Login extends AppCompatActivity {
 
@@ -19,7 +20,7 @@ public class Login extends AppCompatActivity {
         EditText editTextPassword = findViewById(R.id.editTextPassword);
 
         Button signInButton = findViewById(R.id.buttonSignIn);
-        Button registerButton = findViewById(R.id.buttonRegister);
+        TextView registerButton = findViewById(R.id.registerBtn);
 
         signInButton.setOnClickListener(new View.OnClickListener() {
             @Override
