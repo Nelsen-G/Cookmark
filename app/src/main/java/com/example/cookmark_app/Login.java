@@ -8,35 +8,53 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.example.cookmark_app.databinding.ActivityLoginBinding;
+import com.example.cookmark_app.databinding.ActivityRegisterBinding;
 
 public class Login extends AppCompatActivity {
+
+    ActivityLoginBinding binding;
+    DatabaseHelper databaseHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        EditText editTextUsername = findViewById(R.id.editTextUsername);
-        EditText editTextPassword = findViewById(R.id.editTextPassword);
+        binding = ActivityLoginBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
-        Button signInButton = findViewById(R.id.buttonSignIn);
-        TextView registerButton = findViewById(R.id.registerBtn);
+        databaseHelper = new DatabaseHelper(this);
 
-        signInButton.setOnClickListener(new View.OnClickListener() {
+        binding.buttonSignIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                String username = editTextUsername.getText().toString();
-                String password = editTextPassword.getText().toString();
+                String username = binding.editTextUsername.getText().toString();
+                String password = binding.editTextPassword.getText().toString();
 
                 // Logic login , cek ke db
-                //sementara ini langsung masuk ke explore
-                Intent it = new Intent(Login.this, MainActivity.class);
-                startActivity(it);
+                if(username.equals("") || password.equals("")){
+                    Toast.makeText(Login.this, "Please fill the login field!", Toast.LENGTH_SHORT).show();
+                }
+                else{
+                    Boolean checkCredentials = databaseHelper.checkUsernamePassword(username, password);
+
+                    if(checkCredentials == true){
+                        Toast.makeText(Login.this, "Login successfully! Welcome " + username + "!", Toast.LENGTH_SHORT).show();
+                        Intent it = new Intent(Login.this, MainActivity.class);
+                        startActivity(it);
+                    }
+                    else{
+                        Toast.makeText(Login.this, "Wrong username or password, please try again", Toast.LENGTH_SHORT).show();
+                    }
+                }
             }
         });
 
-        registerButton.setOnClickListener(new View.OnClickListener() {
+        binding.registerBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent it = new Intent(Login.this, Register.class);
