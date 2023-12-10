@@ -1,14 +1,216 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="20dp"
     tools:context=".AccountFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="ini Account" />
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        >
 
-</FrameLayout>
+        <ImageButton
+            android:id="@+id/backBtn"
+            android:layout_alignParentStart="true"
+            android:layout_width="40dp"
+            android:layout_height="12dp"
+            android:layout_marginTop="12dp"
+            android:src="@drawable/button_back"/>
+
+        <TextView
+            android:id="@+id/myProfile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="25sp"
+            android:fontFamily="@font/poppins_medium"
+            android:textColor="@color/purple"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="12dp"
+            android:layout_centerHorizontal="true"
+            android:text="My Profile" />
+
+        <ImageView
+            android:id="@+id/profilePicture"
+            android:layout_width="71dp"
+            android:layout_height="71dp"
+            android:layout_marginEnd="20dp"
+            android:layout_below="@id/myProfile"
+            android:src="@drawable/toolbar_account"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="10dp"
+            android:gravity="start"
+            android:layout_below="@id/myProfile"
+            android:layout_toEndOf="@id/profilePicture">
+
+            <TextView
+                android:id="@+id/userName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="16sp"
+                android:fontFamily="@font/poppins_medium"
+                android:textColor="@color/purple"
+                android:text="Username" />
+
+            <TextView
+                android:id="@+id/userEmail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_medium"
+                android:textColor="@color/purple"
+                android:textSize="16sp"
+                android:text="Email" />
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/logOutBtn"
+            android:layout_width="80dp"
+            android:layout_height="35dp"
+            android:layout_marginTop="18dp"
+            android:layout_alignParentEnd="true"
+            android:background="@drawable/button_settings"
+            android:textAllCaps="false"
+            app:backgroundTint="@color/text_gray"
+            android:textSize="12sp"
+            android:layout_below="@id/myProfile"
+            android:text="Logout" />
+
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/profileSettings"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="10dp"
+        android:fontFamily="@font/poppins_medium"
+        android:textColor="@color/purple"
+        android:textSize="24sp"
+        android:text="Profile Settings" />
+
+    <Button
+        android:id="@+id/editProfilePicture"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingVertical="14dp"
+        android:paddingLeft="50dp"
+        android:fontFamily="@font/poppins_medium"
+        android:background="@drawable/button_profile"
+        app:backgroundTint="@color/white"
+        app:backgroundTintMode="multiply"
+        android:gravity="start"
+        android:textColor="@color/purple"
+        android:textAllCaps="false"
+        android:text="Change profile picture                 >" />
+
+    <Button
+        android:id="@+id/editUsername"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingVertical="14dp"
+        android:paddingLeft="50dp"
+        android:fontFamily="@font/poppins_medium"
+        android:background="@drawable/button_profilemiddle"
+        app:backgroundTint="@color/white"
+        app:backgroundTintMode="multiply"
+        android:gravity="start"
+        android:textColor="@color/purple"
+        android:textAllCaps="false"
+        android:text="Change username                        >" />
+
+    <Button
+        android:id="@+id/editPassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins_medium"
+        android:background="@drawable/button_profileend"
+        android:paddingVertical="14dp"
+        android:paddingLeft="50dp"
+        android:gravity="start"
+        android:textAllCaps="false"
+        app:backgroundTint="@color/white"
+        app:backgroundTintMode="multiply"
+        android:textColor="@color/purple"
+        android:text="Change password                        >" />
+
+    <TextView
+        android:id="@+id/yourRecipes"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins_medium"
+        android:textColor="@color/purple"
+        android:layout_marginTop="24dp"
+        android:textSize="24sp"
+        android:text="Your Recipes" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/manageRecipes"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins_medium"
+        android:background="@drawable/button_settings"
+        app:backgroundTint="@color/orange"
+        android:layout_marginTop="6dp"
+        android:textAllCaps="false"
+        android:paddingLeft="30dp"
+        app:iconGravity="start"
+        app:icon="@drawable/account_managerecipes"
+        app:iconSize="16dp"
+        app:iconPadding="20dp"
+        android:text="Manage Recipes"
+        android:textAlignment="viewStart"
+        />
+
+    <TextView
+        android:id="@+id/systemText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins_medium"
+        android:textColor="@color/purple"
+        android:textSize="24sp"
+        android:layout_marginTop="24dp"
+        android:text="System" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/aboutBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins_medium"
+        android:background="@drawable/button_about"
+        app:backgroundTint="@color/white"
+        app:backgroundTintMode="multiply"
+        android:layout_marginTop="6dp"
+        android:textColor="@color/orange"
+        android:textAllCaps="false"
+        android:paddingLeft="30dp"
+        app:iconGravity="start"
+        app:icon="@drawable/account_about"
+        app:iconSize="20dp"
+        app:iconTint="@color/orange"
+        app:iconPadding="20dp"
+        android:textAlignment="viewStart"
+        android:text="About Cookmark" />
+
+
+
+    <TextView
+        android:id="@+id/versionText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:textColor="@color/text_gray"
+        android:fontFamily="@font/poppins_medium"
+        android:textSize="12sp"
+        android:layout_gravity="center_horizontal"
+        android:text="Cookmark v.1" />
+
+</LinearLayout>
