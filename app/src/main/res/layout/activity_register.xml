@@ -7,7 +7,7 @@
     android:layout_gravity="center"
     android:orientation="vertical"
     android:padding="40dp"
-    tools:context=".Register">
+    tools:context=".RegisterActivity">
 
     <TextView
         android:id="@+id/textViewRegister"
@@ -23,7 +23,7 @@
 
 
     <TextView
-        android:id="@+id/textViewUserName"
+        android:id="@+id/textViewUserEmail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/poppins_medium"
