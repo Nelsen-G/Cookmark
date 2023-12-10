@@ -22,7 +22,7 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:orientation="vertical"
-        android:paddingTop="16sp"
+        android:paddingTop="8sp"
         android:paddingBottom="4sp"
         android:layout_marginStart="16dp">
 
@@ -41,12 +41,18 @@
         <!-- Recipe Type -->
         <TextView
             android:id="@+id/recipeType"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Recipe Type"
             android:textSize="12sp"
             android:fontFamily="@font/poppins_medium"
-            android:layout_marginBottom="2sp"/>
+            android:background="@drawable/button_field"
+            android:backgroundTint="@color/orange"
+            android:textColor="@color/white"
+            android:paddingLeft="5sp"
+            android:paddingRight="5sp"
+            android:paddingTop="2sp"
+            android:paddingBottom="2sp"/>
 
         <!-- Cookmark -->
         <TextView
@@ -56,6 +62,7 @@
             android:text="_ cookmarked"
             android:textSize="14sp"
             android:fontFamily="@font/poppins_medium"
+            android:layout_marginTop="2sp"
             android:layout_marginBottom="2sp"/>
 
         <!-- Servings -->
@@ -75,6 +82,7 @@
                 android:id="@+id/servingsCount"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="3sp"
                 android:layout_marginStart="2sp"
                 android:text="Servings: _"
                 android:fontFamily="@font/poppins_medium"
@@ -98,6 +106,7 @@
                 android:id="@+id/duration"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="3sp"
                 android:layout_marginStart="2sp"
                 android:text="Duration: _"
                 android:fontFamily="@font/poppins_medium"
