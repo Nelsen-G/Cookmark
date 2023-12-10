@@ -47,8 +47,8 @@ public class LoginActivity extends AppCompatActivity {
                     // connect firebase, check username & password existance
                     FirebaseFirestore db = FirebaseFirestore.getInstance();
                     db.collection("users")
-                    .whereEqualTo("useremail", email)
-                    .whereEqualTo("userpassword", password)
+                    .whereEqualTo("email", email)
+                    .whereEqualTo("password", password)
                     .get()
                     .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                         @Override
@@ -57,6 +57,7 @@ public class LoginActivity extends AppCompatActivity {
                                 if (task.getResult().size() > 0) {
                                     Toast.makeText(LoginActivity.this, "Login successful!", Toast.LENGTH_SHORT).show();
                                     startActivity(new Intent(LoginActivity.this, MainActivity.class));
+
                                 } else {
                                     Toast.makeText(LoginActivity.this, "Invalid email or password!", Toast.LENGTH_SHORT).show();
                                 }
