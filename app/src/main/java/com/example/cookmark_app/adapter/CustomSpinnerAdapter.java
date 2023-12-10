@@ -33,7 +33,6 @@ public class CustomSpinnerAdapter extends ArrayAdapter<CharSequence> {
 
         View view = super.getDropDownView(position, convertView, parent);
 
-        // Customize the first item (placeholder)
         if (position == 0) {
             TextView textView = (TextView) view;
             textView.setTextColor(ContextCompat.getColor(getContext(), R.color.greyHint));
