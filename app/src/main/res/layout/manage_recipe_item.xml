@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    tools:context=".MainActivity">
+
+    <!-- Recipe Image -->
+    <ImageView
+        android:id="@+id/recipeImage"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/img_placeholder" />
+
+    <!-- Recipe info -->
+    <LinearLayout
+        android:id="@+id/recipeDetailsLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:paddingTop="16sp"
+        android:paddingBottom="4sp"
+        android:layout_marginStart="16dp">
+
+        <!-- Recipe Name -->
+        <TextView
+            android:id="@+id/recipeName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Recipe Name"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:fontFamily="@font/poppins_medium"
+
+            />
+
+        <!-- Recipe Type -->
+        <TextView
+            android:id="@+id/recipeType"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Recipe Type"
+            android:textSize="12sp"
+            android:fontFamily="@font/poppins_medium"
+            android:layout_marginBottom="2sp"/>
+
+        <!-- Cookmark -->
+        <TextView
+            android:id="@+id/cookmarkCount"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="_ cookmarked"
+            android:textSize="14sp"
+            android:fontFamily="@font/poppins_medium"
+            android:layout_marginBottom="2sp"/>
+
+        <!-- Servings -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="2sp"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+            <ImageView
+                android:layout_width="20sp"
+                android:layout_height="20sp"
+                android:src="@drawable/ic_cutlery"/>
+
+            <TextView
+                android:id="@+id/servingsCount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="2sp"
+                android:text="Servings: _"
+                android:fontFamily="@font/poppins_medium"
+                android:textSize="14sp"/>
+        </LinearLayout>
+
+        <!-- Duration -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="2sp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="20sp"
+                android:layout_height="20sp"
+                android:src="@drawable/ic_duration"/>
+
+            <TextView
+                android:id="@+id/duration"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="2sp"
+                android:text="Duration: _"
+                android:fontFamily="@font/poppins_medium"
+                android:textSize="14sp"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <!-- Edit -->
+    <ImageView
+        android:id="@+id/editIcon"
+        android:layout_marginTop="110sp"
+        android:layout_marginRight="17sp"
+
+        android:layout_width="36sp"
+        android:layout_height="36sp"
+        android:src="@drawable/ic_edit" />
+
+</LinearLayout>
