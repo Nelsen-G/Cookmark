@@ -117,10 +117,9 @@
 
     <!-- Edit -->
     <ImageView
-        android:id="@+id/editIcon"
+        android:id="@+id/editButton"
         android:layout_marginTop="110sp"
         android:layout_marginRight="17sp"
-
         android:layout_width="36sp"
         android:layout_height="36sp"
         android:src="@drawable/ic_edit" />
