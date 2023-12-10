@@ -5,4 +5,19 @@
     <string name="log_in"><u>Log In</u></string>
     <string name="HorizontalLineOr1"><u>\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0</u></string>
     <string name="HorizontalLineOr2"><u>\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0\u00A0</u></string>
+<<<<<<< Updated upstream
+=======
+    <string name="registerBtn"><u>Register</u></string>
+
+
+    <string-array name="options_array">
+        <item>Please select an option</item>
+        <item>Dessert</item>
+        <item>Beverage</item>
+        <item>Breakfast</item>
+        <item>Lunch</item>
+        <item>Dinner</item>
+        <item>Snacks</item>
+    </string-array>
+>>>>>>> Stashed changes
 </resources>
