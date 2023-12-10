@@ -103,12 +103,22 @@
                 android:src="@drawable/ic_duration"/>
 
             <TextView
-                android:id="@+id/duration"
+                android:id="@+id/hours"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="3sp"
                 android:layout_marginStart="2sp"
-                android:text="Duration: _"
+                android:text="Duration: _ h "
+                android:fontFamily="@font/poppins_medium"
+                android:textSize="14sp"/>
+
+            <TextView
+                android:id="@+id/minutes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3sp"
+                android:layout_marginStart="2sp"
+                android:text="_ m"
                 android:fontFamily="@font/poppins_medium"
                 android:textSize="14sp"/>
         </LinearLayout>

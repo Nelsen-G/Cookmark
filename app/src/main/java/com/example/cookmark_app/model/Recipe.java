@@ -1,5 +1,6 @@
 package com.example.cookmark_app.model;
 
+import com.google.firebase.firestore.PropertyName;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -33,75 +34,92 @@ public class Recipe {
         this.cookmarkCount = cookmarkCount;
     }
 
+    public Recipe() {
+    }
 
+    @PropertyName("image")
     public String getRecipeImage() {
         return recipeImage;
     }
 
+    @PropertyName("image")
     public void setRecipeImage(String recipeImage) {
         this.recipeImage = recipeImage;
     }
 
+    @PropertyName("recipeName")
     public String getRecipeName() {
         return recipeName;
     }
 
+    @PropertyName("recipeName")
     public void setRecipeName(String recipeName) {
         this.recipeName = recipeName;
     }
 
+    @PropertyName("hours")
     public int getHours() {
         return hours;
     }
-
+    @PropertyName("hours")
     public void setHours(int hours) {
         this.hours = hours;
     }
 
+    @PropertyName("minutes")
     public int getMinutes() {
         return minutes;
     }
 
+    @PropertyName("minutes")
     public void setMinutes(int minutes) {
         this.minutes = minutes;
     }
 
+    @PropertyName("selectedSpinnerItem")
     public String getFoodType() {
         return foodType;
     }
 
+    @PropertyName("selectedSpinnerItem")
     public void setFoodType(String foodType) {
         this.foodType = foodType;
     }
 
+    @PropertyName("servings")
     public int getServings() {
         return servings;
     }
 
+    @PropertyName("servings")
     public void setServings(int servings) {
         this.servings = servings;
     }
 
-    public ArrayList<Ingredient> getIngredientList() {
-        return ingredientList;
-    }
+//    public ArrayList<Ingredient> getIngredientList() {
+//        return ingredientList;
+//    }
+//
+//    public void setIngredientList(ArrayList<Ingredient> ingredientList) {
+//        this.ingredientList = ingredientList;
+//    }
 
-    public void setIngredientList(ArrayList<Ingredient> ingredientList) {
-        this.ingredientList = ingredientList;
-    }
-
+    @PropertyName("cookingSteps")
     public String getCookingSteps() {
         return cookingSteps;
     }
 
+    @PropertyName("cookingSteps")
     public void setCookingSteps(String cookingSteps) {
         this.cookingSteps = cookingSteps;
     }
 
+    @PropertyName("recipeURL")
     public String getRecipeURL() {
         return recipeURL;
     }
 
+    @PropertyName("recipeURL")
     public void setRecipeURL(String recipeURL) {
         this.recipeURL = recipeURL;
     }
@@ -117,9 +135,11 @@ public class Recipe {
         return gson.toJson(ingredientList);
     }
 
+    @PropertyName("cookmarkCount")
     public int getCookmarkCount() {
         return cookmarkCount;
     }
+    @PropertyName("cookmarkCount")
     public void setCookmarkCount(int cookmarkCount) {
         this.cookmarkCount = cookmarkCount;
     }
