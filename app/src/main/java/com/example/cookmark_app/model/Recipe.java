@@ -17,9 +17,10 @@ public class Recipe {
     private ArrayList<Ingredient> ingredientList;
     private String cookingSteps;
     private String recipeURL;
+    private int cookmarkCount;
 
     public Recipe(String recipeImage, String recipeName, int hours, int minutes, String foodType,
-                  int servings, ArrayList<Ingredient> ingredientList, String cookingSteps, String recipeURL) {
+                  int servings, ArrayList<Ingredient> ingredientList, String cookingSteps, String recipeURL, int cookmarkCount) {
         this.recipeImage = recipeImage;
         this.recipeName = recipeName;
         this.hours = hours;
@@ -29,6 +30,7 @@ public class Recipe {
         this.ingredientList = ingredientList;
         this.cookingSteps = cookingSteps;
         this.recipeURL = recipeURL;
+        this.cookmarkCount = cookmarkCount;
     }
 
 
@@ -113,6 +115,13 @@ public class Recipe {
     public String getIngredientListAsString() {
         Gson gson = new Gson();
         return gson.toJson(ingredientList);
+    }
+
+    public int getCookmarkCount() {
+        return cookmarkCount;
+    }
+    public void setCookmarkCount(int cookmarkCount) {
+        this.cookmarkCount = cookmarkCount;
     }
 
 }
