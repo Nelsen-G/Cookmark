@@ -1,22 +1,20 @@
 package com.example.cookmark_app;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-import androidx.core.content.ContextCompat;
-import androidx.core.graphics.drawable.IconCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import android.app.ActionBar;
-import android.graphics.drawable.AdaptiveIconDrawable;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.Menu;
-import android.view.MenuItem;
 
 import com.example.cookmark_app.databinding.ActivityMainBinding;
+import com.example.cookmark_app.fragment.AccountFragment;
+import com.example.cookmark_app.fragment.CookMarkedFragment;
+import com.example.cookmark_app.fragment.ExploreFragment;
+import com.example.cookmark_app.fragment.PlanFragment;
+import com.example.cookmark_app.fragment.SearchFragment;
+import com.example.cookmark_app.fragment.UploadFragment;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class MainActivity extends AppCompatActivity {
@@ -78,13 +76,4 @@ public class MainActivity extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.toolbar_menu, menu);
         return true;
     }
-
-//    @Override
-//    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-//        int id = item.getItemId();
-//        if(id == R.id.mnAccount){
-//            replaceFragment(new AccountFragment());
-//        }
-//        return true;
-//    }
 }

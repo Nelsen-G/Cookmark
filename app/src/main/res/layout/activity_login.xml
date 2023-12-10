@@ -7,7 +7,7 @@
     android:orientation="vertical"
     android:layout_gravity="center"
     android:padding="40dp"
-    tools:context=".Login">
+    tools:context=".LoginActivity">
 
     <TextView
         android:id="@+id/textViewLogin"
@@ -22,13 +22,13 @@
 
 
     <TextView
-        android:id="@+id/textViewUserName"
+        android:id="@+id/textViewUserEmail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/poppins_medium"
         android:textColor="@color/purple"
         android:textSize="13sp"
-        android:text="Username" />
+        android:text="Email" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -46,10 +46,10 @@
             android:src="@drawable/ic_user" />
 
         <EditText
-            android:id="@+id/editTextUsername"
+            android:id="@+id/editTextEmail"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:hint="Enter your username"
+            android:hint="@string/enter_your_email"
             android:layout_weight="1"
             android:fontFamily="@font/poppins_medium"
             android:layout_marginStart="12dp"
@@ -96,7 +96,7 @@
             android:layout_marginBottom="10dp"
             android:fontFamily="@font/poppins_medium"
             android:layout_weight="1"
-            android:hint="Enter your password"
+            android:hint="@string/enter_your_password"
             android:background="@null"
             android:textColorHint="#DDAAAAAA"
             android:textColor="@color/black"

@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "924421925643",
+    "project_id": "cookmark-a63f5",
+    "storage_bucket": "cookmark-a63f5.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:924421925643:android:b43c3bee8ffb2895dd100e",
+        "android_client_info": {
+          "package_name": "com.example.cookmark_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBdxKEX0xWWCiOgXrkrDi_dXJhqPnTqBOw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

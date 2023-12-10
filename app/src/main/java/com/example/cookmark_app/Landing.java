@@ -38,7 +38,7 @@ public class Landing extends AppCompatActivity {
         logInButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent it = new Intent(Landing.this, Login.class);
+                Intent it = new Intent(Landing.this, LoginActivity.class);
                 startActivity(it);
             }
         });
@@ -47,7 +47,7 @@ public class Landing extends AppCompatActivity {
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent it = new Intent(Landing.this, Register.class);
+                Intent it = new Intent(Landing.this, RegisterActivity.class);
                 startActivity(it);
             }
         });
