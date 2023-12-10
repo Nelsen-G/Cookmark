@@ -8,4 +8,16 @@
     <string name="registerBtn"><u>Register</u></string>
     <string name="enter_your_email">Enter your email</string>
     <string name="enter_your_password">Enter your password</string>
+
+
+    <string-array name="options_array">
+        <item>Please select an option</item>
+        <item>Dessert</item>
+        <item>Beverage</item>
+        <item>Breakfast</item>
+        <item>Lunch</item>
+        <item>Dinner</item>
+        <item>Snacks</item>
+    </string-array>
+
 </resources>

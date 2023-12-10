@@ -1,0 +1,12 @@
+<TextView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/customSpinnerItemText"
+    style="?android:attr/spinnerDropDownItemStyle"
+    android:singleLine="true"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingTop="12sp"
+    android:paddingBottom="12sp"
+    android:fontFamily="@font/poppins_medium"
+    android:textSize="16sp"
+    />
