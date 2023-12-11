@@ -248,19 +248,22 @@ public class UploadFragment extends Fragment {
                                 imageRef.getDownloadUrl().addOnSuccessListener(uri -> {
                                     String imageUrl = uri.toString();
 
-                                    Map<String, Object> recipeData = new HashMap<>();
-                                    recipeData.put("image", imageUrl);
-                                    recipeData.put("recipeName", recipeName);
-                                    recipeData.put("hours", hours);
-                                    recipeData.put("minutes", minutes);
-                                    recipeData.put("selectedSpinnerItem", selectedSpinnerItem);
-                                    recipeData.put("servings", servings);
-                                    recipeData.put("ingredientList", ingredientList);
-                                    recipeData.put("cookingSteps", cookingSteps);
-                                    recipeData.put("recipeURL", recipeURL);
+                                    Recipe newRecipe = new Recipe(imageUrl, recipeName, hours, minutes, selectedSpinnerItem,
+                                    servings, ingredientList, cookingSteps, recipeURL, 0);
+
+//                                    Map<String, Object> recipeData = new HashMap<>();
+//                                    recipeData.put("image", imageUrl);
+//                                    recipeData.put("recipeName", recipeName);
+//                                    recipeData.put("hours", hours);
+//                                    recipeData.put("minutes", minutes);
+//                                    recipeData.put("selectedSpinnerItem", selectedSpinnerItem);
+//                                    recipeData.put("servings", servings);
+//                                    recipeData.put("ingredientList", ingredientList);
+//                                    recipeData.put("cookingSteps", cookingSteps);
+//                                    recipeData.put("recipeURL", recipeURL);
 
                                     db.collection("recipes")
-                                            .add(recipeData)
+                                            .add(newRecipe)
                                             .addOnSuccessListener(documentReference -> {
                                                 Log.d(TAG, "Recipe added with ID: " + documentReference.getId());
                                                 showToast("Recipe uploaded successfully");

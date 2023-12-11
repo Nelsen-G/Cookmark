@@ -2,18 +2,28 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
+    android:background="@drawable/button_field"
+    android:layout_marginBottom="14sp"
     tools:context=".MainActivity">
 
     <!-- Recipe Image -->
-    <ImageView
-        android:id="@+id/recipeImage"
+    <com.google.android.material.card.MaterialCardView
         android:layout_width="150dp"
         android:layout_height="150dp"
-        android:scaleType="centerCrop"
-        android:src="@drawable/img_placeholder" />
+        app:cardCornerRadius="20sp">
+
+        <ImageView
+            android:id="@+id/recipeImage"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:src="@drawable/img_placeholder" />
+
+    </com.google.android.material.card.MaterialCardView>
 
     <!-- Recipe info -->
     <LinearLayout
@@ -22,7 +32,7 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:orientation="vertical"
-        android:paddingTop="16sp"
+        android:paddingTop="8sp"
         android:paddingBottom="4sp"
         android:layout_marginStart="16dp">
 
@@ -41,12 +51,18 @@
         <!-- Recipe Type -->
         <TextView
             android:id="@+id/recipeType"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Recipe Type"
             android:textSize="12sp"
             android:fontFamily="@font/poppins_medium"
-            android:layout_marginBottom="2sp"/>
+            android:background="@drawable/button_field"
+            android:backgroundTint="@color/orange"
+            android:textColor="@color/white"
+            android:paddingLeft="5sp"
+            android:paddingRight="5sp"
+            android:paddingTop="2sp"
+            android:paddingBottom="2sp"/>
 
         <!-- Cookmark -->
         <TextView
@@ -56,6 +72,7 @@
             android:text="_ cookmarked"
             android:textSize="14sp"
             android:fontFamily="@font/poppins_medium"
+            android:layout_marginTop="2sp"
             android:layout_marginBottom="2sp"/>
 
         <!-- Servings -->
@@ -75,6 +92,7 @@
                 android:id="@+id/servingsCount"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="3sp"
                 android:layout_marginStart="2sp"
                 android:text="Servings: _"
                 android:fontFamily="@font/poppins_medium"
@@ -95,11 +113,22 @@
                 android:src="@drawable/ic_duration"/>
 
             <TextView
-                android:id="@+id/duration"
+                android:id="@+id/hours"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="3sp"
                 android:layout_marginStart="2sp"
-                android:text="Duration: _"
+                android:text="Duration: _ h "
+                android:fontFamily="@font/poppins_medium"
+                android:textSize="14sp"/>
+
+            <TextView
+                android:id="@+id/minutes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3sp"
+                android:layout_marginStart="2sp"
+                android:text="_ m"
                 android:fontFamily="@font/poppins_medium"
                 android:textSize="14sp"/>
         </LinearLayout>
@@ -108,10 +137,9 @@
 
     <!-- Edit -->
     <ImageView
-        android:id="@+id/editIcon"
-        android:layout_marginTop="110sp"
+        android:id="@+id/editButton"
+        android:layout_marginTop="100sp"
         android:layout_marginRight="17sp"
-
         android:layout_width="36sp"
         android:layout_height="36sp"
         android:src="@drawable/ic_edit" />
