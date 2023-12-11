@@ -4,11 +4,11 @@ import com.google.firebase.firestore.PropertyName;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
+import java.io.Serializable;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 
-public class Recipe {
-
+public class Recipe implements Serializable {
     private String recipeImage;
     private String recipeName;
     private int hours;
@@ -96,14 +96,12 @@ public class Recipe {
         this.servings = servings;
     }
 
-//    public ArrayList<Ingredient> getIngredientList() {
-//        return ingredientList;
-//    }
-//
-//    public void setIngredientList(ArrayList<Ingredient> ingredientList) {
-//        this.ingredientList = ingredientList;
-//    }
-
+    public ArrayList<Ingredient> getIngredientList() {
+        return ingredientList;
+    }
+    public void setIngredientList(ArrayList<Ingredient> ingredientList) {
+        this.ingredientList = ingredientList;
+    }
     @PropertyName("cookingSteps")
     public String getCookingSteps() {
         return cookingSteps;
