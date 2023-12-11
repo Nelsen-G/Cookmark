@@ -8,6 +8,12 @@
     <string name="registerBtn"><u>Register</u></string>
     <string name="enter_your_email">Enter your email</string>
     <string name="enter_your_password">Enter your password</string>
+    <string name="quick_cook">Quick Cook</string>
+    <string name="see_all">see all</string>
+    <string name="trending_recipes">Trending Recipes</string>
+    <string name="you_might_like">You might like...</string>
+    <string name="_99_cookmarked">99+ Cookmarked</string>
+    <string name="chicken_cordon_bleu">Chicken Cordon Bleu</string>
 
 
     <string-array name="options_array">
