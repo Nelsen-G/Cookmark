@@ -50,7 +50,7 @@ import java.util.UUID;
 public class EditRecipeActivity extends AppCompatActivity {
     private IngredientAdapter ingredientAdapter;
     private String selectedSpinnerItem, imageUrl, recipeId;
-    private List<Ingredient> ingredients;
+    private ArrayList<Ingredient> ingredients;
     private ActivityResultLauncher<Intent> pickImageLauncher;
     private Uri imageUri;
     private ImageView uploadedImageView;
@@ -213,7 +213,7 @@ public class EditRecipeActivity extends AppCompatActivity {
 
     private void updateRecipeDetails(String recipeName, int hours, int minutes, int servings, String cookingSteps, String recipeURL) {
         Recipe updatedRecipe = new Recipe(recipeId, imageUrl, recipeName, hours, minutes, selectedSpinnerItem,
-                servings, (ArrayList<Ingredient>) ingredients, cookingSteps, recipeURL, 0);
+                servings, ingredients, cookingSteps, recipeURL, 0);
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         db.collection("recipes")
                 .whereEqualTo("id", recipeId)
@@ -228,7 +228,7 @@ public class EditRecipeActivity extends AppCompatActivity {
                                         "minutes", updatedRecipe.getMinutes(),
                                         "selectedSpinnerItem", updatedRecipe.getFoodType(),
                                         "servings", updatedRecipe.getServings(),
-                                        "ingredientList", updatedRecipe.getIngredientListAsString(),
+                                        "ingredientListAsString", updatedRecipe.getIngredientListAsString(),
                                         "cookingSteps", updatedRecipe.getCookingSteps(),
                                         "recipeURL", updatedRecipe.getRecipeURL())
                                 .addOnSuccessListener(aVoid -> {
@@ -374,6 +374,7 @@ public class EditRecipeActivity extends AppCompatActivity {
         ingredients.addAll(newIngredients);
         ingredientAdapter.notifyDataSetChanged();
     }
+
 
     private List<Ingredient> deserializeIngredients(String ingredientsAsString) {
         Type listType = new TypeToken<List<Ingredient>>(){}.getType();
