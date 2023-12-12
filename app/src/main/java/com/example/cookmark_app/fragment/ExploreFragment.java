@@ -76,9 +76,9 @@ public class ExploreFragment extends Fragment {
         ingredients.add(new Ingredient("Ham"));
 
         //contoh aja
-        items.add(new Recipe("https://www.jocooks.com/wp-content/uploads/2020/07/chicken-cordon-bleu-1-2-1.jpg", "Chicken Cordon Bleu", 2, 120, "Lunch", 4, ingredients, "blabla", "https://www.jocooks.com/recipes/chicken-cordon-bleu/", 16));
-        items.add(new Recipe("https://cdn.idntimes.com/content-images/community/2023/07/deep-fried-wonton-dark-surfaces-5f33a6106b7b2abdfec00ff311918826-150a7d7471f4188579a02bdf19d55ce6_600x400.jpg", "Deep Fried Wonton", 3, 180, "Snack", 8, ingredients, "blabla", "https://khinskitchen.com/crispy-fried-wonton/", 13));
-        items.add(new Recipe("https://i0.wp.com/i.gojekapi.com/darkroom/gofood-indonesia/v2/images/uploads/c293bd06-c598-488b-87c4-0d876d06ff24_Go-Biz_20210929_224129.jpeg", "Minced Pork with Rice", 1, 60, "Lunch", 8, ingredients, "blabla", "https://www.urbanasia.com/style/resep-thai-beef-basil-menu-makan-siang-gurih-dan-kaya-rempah-U62187#google_vignette", 12));
+        items.add(new Recipe("contohid1","https://www.jocooks.com/wp-content/uploads/2020/07/chicken-cordon-bleu-1-2-1.jpg", "Chicken Cordon Bleu", 2, 120, "Lunch", 4, ingredients, "blabla", "https://www.jocooks.com/recipes/chicken-cordon-bleu/", 16));
+        items.add(new Recipe("contohid2" ,"https://cdn.idntimes.com/content-images/community/2023/07/deep-fried-wonton-dark-surfaces-5f33a6106b7b2abdfec00ff311918826-150a7d7471f4188579a02bdf19d55ce6_600x400.jpg", "Deep Fried Wonton", 3, 180, "Snack", 8, ingredients, "blabla", "https://khinskitchen.com/crispy-fried-wonton/", 13));
+        items.add(new Recipe("contohid3","https://i0.wp.com/i.gojekapi.com/darkroom/gofood-indonesia/v2/images/uploads/c293bd06-c598-488b-87c4-0d876d06ff24_Go-Biz_20210929_224129.jpeg", "Minced Pork with Rice", 1, 60, "Lunch", 8, ingredients, "blabla", "https://www.urbanasia.com/style/resep-thai-beef-basil-menu-makan-siang-gurih-dan-kaya-rempah-U62187#google_vignette", 12));
 
         recyclerViewRecipe = rootView.findViewById(recyclerViewId);
         recyclerViewRecipe.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false));
