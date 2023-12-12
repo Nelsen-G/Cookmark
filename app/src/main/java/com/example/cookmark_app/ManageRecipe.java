@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 
@@ -32,13 +33,22 @@ public class ManageRecipe extends AppCompatActivity {
 
         recyclerView = findViewById(R.id.recyclerViewRecipe);
         recipeList = new ArrayList<>();
-        recipeAdapter = new ManageRecipeAdapter(recipeList);
-
+//        recipeAdapter = new ManageRecipeAdapter(recipeList);
+        recipeAdapter = new ManageRecipeAdapter(recipeList, new ManageRecipeAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(Recipe recipe) {
+                Intent intent = new Intent(ManageRecipe.this, EditRecipeActivity.class);
+                intent.putExtra("recipeId", recipe.getRecipeId());
+                startActivity(intent);
+            }
+        });
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(recipeAdapter);
 
         getRecipeData();
+
+
     }
 
     private void getRecipeData() {

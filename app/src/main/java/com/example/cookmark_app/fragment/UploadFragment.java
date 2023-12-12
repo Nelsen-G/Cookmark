@@ -205,7 +205,7 @@ public class UploadFragment extends Fragment {
         btnUploadRecipe.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                String recipeId = UUID.randomUUID().toString();
 //                imagePath = imageUri.getPath();
                 StorageReference imageRef = storageRef.child("images/" + UUID.randomUUID() + ".jpg");
 
@@ -248,7 +248,7 @@ public class UploadFragment extends Fragment {
                                 imageRef.getDownloadUrl().addOnSuccessListener(uri -> {
                                     String imageUrl = uri.toString();
 
-                                    Recipe newRecipe = new Recipe(imageUrl, recipeName, hours, minutes, selectedSpinnerItem,
+                                    Recipe newRecipe = new Recipe(recipeId, imageUrl, recipeName, hours, minutes, selectedSpinnerItem,
                                     servings, ingredientList, cookingSteps, recipeURL, 0);
 
 //                                    Map<String, Object> recipeData = new HashMap<>();
