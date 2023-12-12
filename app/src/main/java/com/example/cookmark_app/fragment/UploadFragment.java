@@ -28,6 +28,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.example.cookmark_app.ManageRecipe;
 import com.example.cookmark_app.R;
 import com.example.cookmark_app.adapter.CustomSpinnerAdapter;
 import com.example.cookmark_app.adapter.IngredientAdapter;
@@ -285,7 +286,8 @@ public class UploadFragment extends Fragment {
 
                 }
 
-
+                Intent intent = new Intent(getActivity(), ManageRecipe.class);
+                startActivity(intent);
 
             }
         });

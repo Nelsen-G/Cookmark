@@ -35,6 +35,7 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -185,7 +186,6 @@ public class EditRecipeActivity extends AppCompatActivity {
                     if (imageUri != null) {
                         uploadImageAndRecipe(recipeName, hours, minutes, servings, cookingSteps, recipeURL);
                     } else {
-                        // Use the existing image URL
                         updateRecipeDetails(recipeName, hours, minutes, servings, cookingSteps, recipeURL);
                     }
                 }
@@ -216,23 +216,36 @@ public class EditRecipeActivity extends AppCompatActivity {
                 servings, (ArrayList<Ingredient>) ingredients, cookingSteps, recipeURL, 0);
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         db.collection("recipes")
-                .document(recipeId)
-                .update("image", updatedRecipe.getRecipeImage(),
-                        "recipeName", updatedRecipe.getRecipeName(),
-                        "hours", updatedRecipe.getHours(),
-                        "minutes", updatedRecipe.getMinutes(),
-                        "selectedSpinnerItem", updatedRecipe.getFoodType(),
-                        "servings", updatedRecipe.getServings(),
-                        "ingredientList", updatedRecipe.getIngredientListAsString(),
-                        "cookingSteps", updatedRecipe.getCookingSteps(),
-                        "recipeURL", updatedRecipe.getRecipeURL())
-                .addOnSuccessListener(aVoid -> {
-                    Log.d(TAG, "Recipe updated successfully");
-                    showToast("Recipe updated successfully");
+                .whereEqualTo("id", recipeId)
+                .get()
+                .addOnSuccessListener(queryDocumentSnapshots -> {
+                    for (QueryDocumentSnapshot document : queryDocumentSnapshots) {
+                        db.collection("recipes")
+                                .document(document.getId())
+                                .update("image", updatedRecipe.getRecipeImage(),
+                                        "recipeName", updatedRecipe.getRecipeName(),
+                                        "hours", updatedRecipe.getHours(),
+                                        "minutes", updatedRecipe.getMinutes(),
+                                        "selectedSpinnerItem", updatedRecipe.getFoodType(),
+                                        "servings", updatedRecipe.getServings(),
+                                        "ingredientList", updatedRecipe.getIngredientListAsString(),
+                                        "cookingSteps", updatedRecipe.getCookingSteps(),
+                                        "recipeURL", updatedRecipe.getRecipeURL())
+                                .addOnSuccessListener(aVoid -> {
+                                    Log.d(TAG, "Recipe updated successfully");
+                                    showToast("Recipe updated successfully");
+                                    Intent intent = new Intent(EditRecipeActivity.this, ManageRecipe.class);
+                                    startActivity(intent);
+                                })
+                                .addOnFailureListener(e -> {
+                                    Log.e(TAG, "Error updating recipe", e);
+                                    showToast("Failed to update recipe");
+                                });
+                    }
                 })
                 .addOnFailureListener(e -> {
-                    Log.e(TAG, "Error updating recipe", e);
-                    showToast("Failed to update recipe");
+                    Log.e(TAG, "Error getting documents: ", e);
+                    showToast("Error getting recipe documents");
                 });
     }
 
@@ -275,7 +288,6 @@ public class EditRecipeActivity extends AppCompatActivity {
                         if (ingredients != null) {
                             updateIngredients(ingredients);
                         }
-
 
                         imageUrl = document.getString("image");
                         Glide.with(EditRecipeActivity.this)
