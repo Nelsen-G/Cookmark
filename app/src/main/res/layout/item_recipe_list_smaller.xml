@@ -1,0 +1,126 @@
+<!-- res/layout/activity_main.xml -->
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/card_smaller"
+    android:layout_width="175dp"
+    android:layout_height="223dp"
+    android:layout_marginHorizontal="5dp"
+    android:layout_marginBottom="10dp"
+    android:layout_marginTop="10dp"
+    app:cardCornerRadius="20dp"
+    android:background="@drawable/background_card_smaller">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/recipe_duration_smaller"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="3dp"
+            android:layout_marginBottom="12dp"
+            android:fontFamily="@font/poppins_medium"
+            android:text="120 min"
+            android:textColor="@color/black"
+            android:textSize="11sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/ic_duration_smaller" />
+
+        <ImageView
+            android:id="@+id/ic_duration_smaller"
+            android:layout_width="9dp"
+            android:layout_height="11dp"
+            android:layout_marginStart="13dp"
+            android:layout_marginTop="15dp"
+            android:src="@drawable/ic_duration"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/recipe_servings_smaller"
+            app:layout_constraintTop_toBottomOf="@+id/recipe_cookmarks_smaller" />
+
+        <TextView
+            android:id="@+id/recipe_servings_smaller"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="3dp"
+            android:layout_marginBottom="12dp"
+            android:fontFamily="@font/poppins_medium"
+            android:text="2"
+            android:textColor="@color/black"
+            android:textSize="11sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/ic_cutlery_smaller" />
+
+        <ImageView
+            android:id="@+id/ic_cutlery_smaller"
+            android:layout_width="11dp"
+            android:layout_height="12dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="17dp"
+            android:src="@drawable/ic_cutlery"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/foodtype_icon_smaller"
+            app:layout_constraintTop_toTopOf="@+id/recipe_title_smaller" />
+
+        <TextView
+            android:id="@+id/recipe_title_smaller"
+            android:layout_width="155dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="15dp"
+            android:ellipsize="end"
+            android:fontFamily="@font/poppins_medbold"
+            android:maxLines="1"
+            android:text="@string/chicken_cordon_bleu"
+            android:textColor="@color/purple"
+            android:textSize="13sp"
+            app:layout_constraintBottom_toTopOf="@+id/foodtype_icon_smaller"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/recipe_cookmarks_smaller"
+            app:layout_constraintWidth_percent="0.8" />
+
+        <TextView
+            android:id="@+id/recipe_cookmarks_smaller"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/poppins_medium"
+            android:text="@string/_99_cookmarked"
+            android:textColor="@color/greyHint"
+            android:textSize="10sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/recipe_photo_smaller" />
+
+        <ImageView
+            android:id="@+id/foodtype_icon_smaller"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="15dp"
+            android:layout_marginBottom="13dp"
+            android:src="@drawable/ic_lunch"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <ImageView
+            android:id="@+id/recipe_photo_smaller"
+            android:layout_width="211dp"
+            android:layout_height="135dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/example_food1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/cookmark_icon_smaller"
+            android:layout_width="42dp"
+            android:layout_height="42dp"
+            android:layout_marginTop="114dp"
+            android:layout_marginEnd="9dp"
+            android:src="@drawable/ic_uncookmarked"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>

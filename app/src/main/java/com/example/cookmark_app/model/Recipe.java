@@ -108,12 +108,12 @@ public class Recipe implements Serializable {
         this.servings = servings;
     }
 
-//    public ArrayList<Ingredient> getIngredientList() {
-//        return ingredientList;
-//    }
-//    public void setIngredientList(ArrayList<Ingredient> ingredientList) {
-//        this.ingredientList = ingredientList;
-//    }
+    public ArrayList<Ingredient> getIngredientList() {
+        return ingredientList;
+    }
+    public void setIngredientList(ArrayList<Ingredient> ingredientList) {
+        this.ingredientList = ingredientList;
+    }
     @PropertyName("cookingSteps")
     public String getCookingSteps() {
         return cookingSteps;
