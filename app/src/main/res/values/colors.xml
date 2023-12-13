@@ -13,6 +13,8 @@
     <color name="transparent">#00FFFFFF</color>
     <color name="text_gray">#75424757</color>
 
+    <color name="lightOrange">#F1C98D</color>
+    <color name="midOrange">#F1B267</color>
     <color name="greyHint">#8e919a</color>
     <color name="red">#d11a2a</color>
 </resources>

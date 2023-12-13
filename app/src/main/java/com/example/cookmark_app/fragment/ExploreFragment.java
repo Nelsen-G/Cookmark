@@ -1,5 +1,7 @@
 package com.example.cookmark_app.fragment;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -9,9 +11,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
+import com.example.cookmark_app.AllTrendingRecipeActivity;
+import com.example.cookmark_app.MightLikeRecipeActivity;
+import com.example.cookmark_app.QuickRecipeActivity;
 import com.example.cookmark_app.R;
-import com.example.cookmark_app.adapter.RecipeListAdapter;
+import com.example.cookmark_app.adapter.RegularRecipeListAdapter;
 import com.example.cookmark_app.model.Ingredient;
 import com.example.cookmark_app.model.Recipe;
 import com.example.cookmark_app.utils.MarginCardItemDecoration;
@@ -24,36 +30,11 @@ public class ExploreFragment extends Fragment {
     private RecyclerView.Adapter adapterRecipeList;
     private RecyclerView recyclerViewRecipe;
 
-
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    private ArrayList<Recipe> items;
+    private ArrayList<Ingredient> ingredients;
 
     public ExploreFragment() {
         // Required empty public constructor
-    }
-
-    public static ExploreFragment newInstance(String param1, String param2) {
-        ExploreFragment fragment = new ExploreFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
     }
 
     @Override
@@ -66,14 +47,19 @@ public class ExploreFragment extends Fragment {
         initializeRecyclerView(rootView, R.id.cardView2);
         initializeRecyclerView(rootView, R.id.cardView3);
 
+        setSeeAllClickListener(rootView, R.id.seeAll1, AllTrendingRecipeActivity.class);
+        setSeeAllClickListener(rootView, R.id.seeAll2, QuickRecipeActivity.class);
+        setSeeAllClickListener(rootView, R.id.seeAll3, MightLikeRecipeActivity.class);
+
         return rootView;
     }
 
     private void initializeRecyclerView(View rootView, int recyclerViewId) {
-        ArrayList<Recipe> items = new ArrayList<>();
-        ArrayList<Ingredient> ingredients = new ArrayList<>();
+        items = new ArrayList<>();
+        ingredients = new ArrayList<>();
         ingredients.add(new Ingredient("Boneless chicken breast"));
         ingredients.add(new Ingredient("Ham"));
+        ingredients.add(new Ingredient("Cheese"));
 
         //contoh aja
         items.add(new Recipe("contohid1","https://www.jocooks.com/wp-content/uploads/2020/07/chicken-cordon-bleu-1-2-1.jpg", "Chicken Cordon Bleu", 2, 120, "Lunch", 4, ingredients, "blabla", "https://www.jocooks.com/recipes/chicken-cordon-bleu/", 16));
@@ -89,7 +75,23 @@ public class ExploreFragment extends Fragment {
         MarginSnapHelper snapHelper = new MarginSnapHelper();
         snapHelper.attachToRecyclerView(recyclerViewRecipe);
 
-        adapterRecipeList = new RecipeListAdapter(items);
+        adapterRecipeList = new RegularRecipeListAdapter(items, getChildFragmentManager());
         recyclerViewRecipe.setAdapter(adapterRecipeList);
+    }
+
+    private void setSeeAllClickListener(View rootView, int seeAllId, Class<? extends Activity> targetActivity) {
+        TextView seeAllTextView = rootView.findViewById(seeAllId);
+        seeAllTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                createAndStartIntent(targetActivity);
+            }
+        });
+    }
+
+    private void createAndStartIntent(Class<? extends Activity> targetActivity) {
+        Intent intent = new Intent(getActivity(), targetActivity);
+        intent.putExtra("items", items);
+        startActivity(intent);
     }
 }

@@ -15,6 +15,18 @@
         android:theme="@style/Theme.Cookmark_App"
         tools:targetApi="31">
         <activity
+            android:name=".MightLikeRecipeActivity"
+            android:exported="false" />
+        <activity
+            android:name=".QuickRecipeActivity"
+            android:exported="false" />
+        <activity
+            android:name=".AllTrendingRecipeActivity"
+            android:exported="false" />
+        <activity
+            android:name=".RecipeDetailActivity"
+            android:exported="false" />
+        <activity
             android:name=".EditRecipeActivity"
             android:exported="false" />
         <activity
