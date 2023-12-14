@@ -390,7 +390,7 @@
         <!--            app:backgroundTint="@color/purple"-->
         <!--            android:layout_marginTop="30sp"/>-->
 
-        <!-- Upload Recipe Button -->
+        <!-- Update Recipe Button -->
         <Button
             android:id="@+id/btnUpdateRecipe"
             android:layout_width="match_parent"
@@ -398,10 +398,23 @@
             android:text="Update Recipe"
             android:background="@drawable/button_field"
             android:fontFamily="@font/poppins_medium"
-            android:layout_marginBottom="100dp"
             android:textSize="20sp"
             android:textAllCaps="false"
             app:backgroundTint="@color/purple"
+            android:layout_marginTop="30sp"/>
+
+        <!-- Delete Recipe Button -->
+        <Button
+            android:id="@+id/btnDeleteRecipe"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Delete Recipe"
+            android:background="@drawable/button_field"
+            android:fontFamily="@font/poppins_medium"
+            android:layout_marginBottom="100dp"
+            android:textSize="20sp"
+            android:textAllCaps="false"
+            app:backgroundTint="@color/red"
             android:layout_marginTop="30sp"/>
 
 

@@ -200,6 +200,45 @@ public class EditRecipeActivity extends AppCompatActivity {
 
             }
         });
+
+
+        Button btnDeleteRecipe = findViewById(R.id.btnDeleteRecipe);
+        btnDeleteRecipe.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                deleteRecipe();
+            }
+        });
+
+
+    }
+
+    private void deleteRecipe() {
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+        db.collection("recipes")
+                .whereEqualTo("id", recipeId)
+                .get()
+                .addOnSuccessListener(queryDocumentSnapshots -> {
+                    for (QueryDocumentSnapshot document : queryDocumentSnapshots) {
+                        db.collection("recipes")
+                                .document(document.getId())
+                                .delete()
+                                .addOnSuccessListener(aVoid -> {
+                                    Log.d(TAG, "Recipe deleted successfully");
+                                    showToast("Recipe deleted successfully");
+                                    finish();
+                                })
+                                .addOnFailureListener(e -> {
+                                    Log.e(TAG, "Error deleting recipe", e);
+                                    showToast("Error deleting recipe");
+                                });
+                    }
+                })
+                .addOnFailureListener(e -> {
+                    Log.e(TAG, "Error getting documents: ", e);
+                    showToast("Error getting documents");
+                });
+
     }
 
     private void uploadImageAndRecipe(String recipeName, int hours, int minutes, int servings, String cookingSteps, String recipeURL) {
@@ -247,13 +286,13 @@ public class EditRecipeActivity extends AppCompatActivity {
                                 })
                                 .addOnFailureListener(e -> {
                                     Log.e(TAG, "Error updating recipe", e);
-                                    showToast("Failed to update recipe");
+                                    showToast("Error updating recipe");
                                 });
                     }
                 })
                 .addOnFailureListener(e -> {
                     Log.e(TAG, "Error getting documents: ", e);
-                    showToast("Error getting recipe documents");
+                    showToast("Error getting documents");
                 });
     }
 
