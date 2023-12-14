@@ -69,6 +69,14 @@ public class EditRecipeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_recipe);
 
+        ImageView backToPrevious = findViewById(R.id.manage_back);
+        backToPrevious.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
         uploadedImageView = findViewById(R.id.uploadedImageView);
         btnUploadRecipeImage = findViewById(R.id.btnUploadRecipeImage);
         pickImageLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),

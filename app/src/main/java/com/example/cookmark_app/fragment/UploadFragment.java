@@ -268,6 +268,8 @@ public class UploadFragment extends Fragment {
                                             .addOnSuccessListener(documentReference -> {
                                                 Log.d(TAG, "Recipe added with ID: " + documentReference.getId());
                                                 showToast("Recipe uploaded successfully");
+                                                Intent intent = new Intent(getActivity(), ManageRecipe.class);
+                                                startActivity(intent);
                                             })
                                             .addOnFailureListener(e -> {
                                                 Log.w(TAG, "Error adding recipe", e);
@@ -286,8 +288,6 @@ public class UploadFragment extends Fragment {
 
                 }
 
-                Intent intent = new Intent(getActivity(), ManageRecipe.class);
-                startActivity(intent);
 
             }
         });
