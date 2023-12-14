@@ -1,4 +1,4 @@
-package com.example.cookmark_app;
+package com.example.cookmark_app.adapter.cookmark_app;
 
 import android.os.Bundle;
 import android.view.View;
@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.cookmark_app.R;
 import com.example.cookmark_app.adapter.SmallerRecipeListAdapter;
 import com.example.cookmark_app.model.Recipe;
 

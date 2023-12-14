@@ -1,4 +1,4 @@
-package com.example.cookmark_app;
+package com.example.cookmark_app.adapter.cookmark_app;
 
 import static android.content.ContentValues.TAG;
 
@@ -7,7 +7,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -15,11 +14,10 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.example.cookmark_app.R;
 import com.example.cookmark_app.adapter.TagTypeAdapter;
 import com.example.cookmark_app.model.Ingredient;
 import com.example.cookmark_app.model.Recipe;
-import com.example.cookmark_app.utils.CookmarkStatusManager;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentSnapshot;
@@ -61,7 +59,6 @@ public class RecipeDetailActivity extends AppCompatActivity {
             TextView recipeCookingSteps = findViewById(R.id.detail_steps_tv);
             TextView recipeUrl = findViewById(R.id.detail_url_tv);
             ImageView recipePhoto = findViewById(R.id.detail_photo_iv);
-            ImageView recipeCookmarkIcon = findViewById(R.id.detail_cookmark);
             int placeholderImage = R.drawable.img_placeholder;
 
             titleToolbar.setText(recipe.getRecipeName());
@@ -75,8 +72,6 @@ public class RecipeDetailActivity extends AppCompatActivity {
             if (recipe.getRecipeImage() != null) {
                 Glide.with(this)
                         .load(recipe.getRecipeImage())
-                        .diskCacheStrategy(DiskCacheStrategy.NONE)
-                        .skipMemoryCache(true)
                         .placeholder(placeholderImage)
                         .error(placeholderImage)
                         .into(recipePhoto);
@@ -89,21 +84,6 @@ public class RecipeDetailActivity extends AppCompatActivity {
             tagContainer.setAdapter(tagAdapter);
             tagContainer.setLayoutManager(new GridLayoutManager(this, 2));
 
-            boolean currentCookmarkStatus = CookmarkStatusManager.getInstance().getCookmarkStatus(recipe.getRecipeId());
-
-            recipeCookmarkIcon.setImageResource(currentCookmarkStatus ? R.drawable.ic_cookmarked : R.drawable.ic_uncookmarked);
-            recipeCookmarkIcon.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    boolean newCookmarkStatus = !currentCookmarkStatus;
-                    CookmarkStatusManager.getInstance().setCookmarkStatus(recipe.getRecipeId(), newCookmarkStatus);
-
-                    recipeCookmarkIcon.setImageResource(newCookmarkStatus ? R.drawable.ic_cookmarked : R.drawable.ic_uncookmarked);
-
-                    String toastMessage = newCookmarkStatus ? "Cookmarked " + recipe.getRecipeName() : "Uncookmarked " + recipe.getRecipeName();
-                    Toast.makeText(RecipeDetailActivity.this, toastMessage, Toast.LENGTH_SHORT).show();
-                }
-            });
             backToPrevious.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -156,4 +136,27 @@ public class RecipeDetailActivity extends AppCompatActivity {
             }
         });
     }
+
+//    private List<Ingredient> deserializeIngredients(String ingredientsAsString) {
+//        List<Ingredient> ingredientsList = new ArrayList<>();
+//
+//        try {
+//            Gson gson = new Gson();
+//            JsonArray jsonArray = JsonParser.parseString(ingredientsAsString).getAsJsonArray();
+//
+//            for (JsonElement jsonElement : jsonArray) {
+//                Ingredient ingredient = gson.fromJson(jsonElement, Ingredient.class);
+//                ingredientsList.add(ingredient);
+//            }
+//        } catch (JsonSyntaxException e) {
+//            e.printStackTrace();
+//        }
+//
+//        return ingredientsList;
+//    }
+
+//    private List<Ingredient> deserializeIngredients(String ingredientsAsString) {
+//        Type listType = new TypeToken<List<Ingredient>>(){}.getType();
+//        return new Gson().fromJson(ingredientsAsString, listType);
+//    }
 }

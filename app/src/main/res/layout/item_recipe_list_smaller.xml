@@ -1,7 +1,6 @@
 <!-- res/layout/activity_main.xml -->
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/card_smaller"
     android:layout_width="175dp"
     android:layout_height="223dp"
@@ -32,8 +31,8 @@
             android:id="@+id/ic_duration_smaller"
             android:layout_width="9dp"
             android:layout_height="11dp"
-            android:layout_marginStart="13dp"
-            android:layout_marginTop="15dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
             android:src="@drawable/ic_duration"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@+id/recipe_servings_smaller"
@@ -56,11 +55,11 @@
             android:id="@+id/ic_cutlery_smaller"
             android:layout_width="11dp"
             android:layout_height="12dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="17dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="13dp"
             android:src="@drawable/ic_cutlery"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/foodtype_icon_smaller"
+            app:layout_constraintStart_toEndOf="@+id/recipe_foodtype_smaller"
             app:layout_constraintTop_toTopOf="@+id/recipe_title_smaller" />
 
         <TextView
@@ -75,7 +74,7 @@
             android:text="@string/chicken_cordon_bleu"
             android:textColor="@color/purple"
             android:textSize="13sp"
-            app:layout_constraintBottom_toTopOf="@+id/foodtype_icon_smaller"
+            app:layout_constraintBottom_toTopOf="@+id/recipe_foodtype_smaller"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/recipe_cookmarks_smaller"
             app:layout_constraintWidth_percent="0.8" />
@@ -93,13 +92,22 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/recipe_photo_smaller" />
 
-        <ImageView
-            android:id="@+id/foodtype_icon_smaller"
+        <TextView
+            android:id="@+id/recipe_foodtype_smaller"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="15dp"
-            android:layout_marginBottom="13dp"
-            android:src="@drawable/ic_lunch"
+            android:layout_marginBottom="12dp"
+            android:background="@drawable/tag_foodtype"
+            android:fontFamily="@font/poppins_medbold"
+            android:paddingStart="8dp"
+            android:paddingTop="3dp"
+            android:paddingEnd="8dp"
+            android:paddingBottom="3dp"
+            android:src="@drawable/tag_foodtype"
+            android:text="Breakfast"
+            android:textColor="@android:color/white"
+            android:textSize="8sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 

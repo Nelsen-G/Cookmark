@@ -1,5 +1,6 @@
-package com.example.cookmark_app.model;
+package com.example.cookmark_app.adapter.cookmark_app.model;
 
+import com.example.cookmark_app.model.Ingredient;
 import com.google.firebase.firestore.PropertyName;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
