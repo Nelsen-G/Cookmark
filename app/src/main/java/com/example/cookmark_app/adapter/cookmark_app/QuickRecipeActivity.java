@@ -1,4 +1,4 @@
-package com.example.cookmark_app;
+package com.example.cookmark_app.adapter.cookmark_app;
 
 import android.os.Bundle;
 import android.view.View;
@@ -9,12 +9,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.cookmark_app.R;
 import com.example.cookmark_app.adapter.SmallerRecipeListAdapter;
 import com.example.cookmark_app.model.Recipe;
 
 import java.util.ArrayList;
 
-public class AllTrendingRecipeActivity extends AppCompatActivity {
+public class QuickRecipeActivity extends AppCompatActivity {
     private RecyclerView recyclerViewRecipe;
     private RecyclerView.Adapter adapterRecipeList;
     @Override
@@ -27,7 +28,7 @@ public class AllTrendingRecipeActivity extends AppCompatActivity {
         ImageView backToPrevious = findViewById(R.id.seeall_back_iv);
         TextView titleToolBar = findViewById(R.id.seeall_toolbar_title_tv);
 
-        titleToolBar.setText("All Trendings");
+        titleToolBar.setText("Quick Cook");
 
         initializeRecyclerView(items);
 

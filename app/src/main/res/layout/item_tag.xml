@@ -6,7 +6,7 @@
     android:layout_margin="8dp">
 
     <ImageView
-        android:id="@+id/background_tag_iv"
+        android:id="@+id/ingredient_tag_iv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/tag_ingredients"
@@ -26,11 +26,11 @@
         android:textSize="16sp"
         android:ellipsize="end"
         android:maxLines="1"
-        app:layout_constraintWidth_max="160dp"
-        app:layout_constraintBottom_toBottomOf="@id/background_tag_iv"
-        app:layout_constraintEnd_toEndOf="@id/background_tag_iv"
-        app:layout_constraintStart_toStartOf="@id/background_tag_iv"
-        app:layout_constraintTop_toTopOf="@id/background_tag_iv"
+        app:layout_constraintWidth_max="155dp"
+        app:layout_constraintBottom_toBottomOf="@id/ingredient_tag_iv"
+        app:layout_constraintEnd_toEndOf="@id/ingredient_tag_iv"
+        app:layout_constraintStart_toStartOf="@id/ingredient_tag_iv"
+        app:layout_constraintTop_toTopOf="@id/ingredient_tag_iv"
         app:layout_constraintVertical_bias="0.5"
         app:layout_constraintHorizontal_bias="0.5" />
 </androidx.constraintlayout.widget.ConstraintLayout>

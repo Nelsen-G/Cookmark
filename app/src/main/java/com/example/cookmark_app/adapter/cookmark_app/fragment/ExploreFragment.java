@@ -1,4 +1,4 @@
-package com.example.cookmark_app.fragment;
+package com.example.cookmark_app.adapter.cookmark_app.fragment;
 
 import android.app.Activity;
 import android.content.Intent;
