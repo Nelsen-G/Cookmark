@@ -18,11 +18,15 @@ import java.util.List;
 
 
 public class ManageRecipeAdapter extends RecyclerView.Adapter<ManageRecipeAdapter.RecipeViewHolder> {
-
+    public interface OnItemClickListener {
+        void onItemClick(Recipe recipe);
+    }
     private List<Recipe> recipes;
+    private OnItemClickListener itemClickListener;
 
-    public ManageRecipeAdapter(List<Recipe> recipes) {
+    public ManageRecipeAdapter(List<Recipe> recipes, OnItemClickListener itemClickListener) {
         this.recipes = recipes;
+        this.itemClickListener = itemClickListener;
     }
 
     @NonNull
@@ -41,10 +45,13 @@ public class ManageRecipeAdapter extends RecyclerView.Adapter<ManageRecipeAdapte
         holder.editButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // hehehe
+                if (itemClickListener != null) {
+                    itemClickListener.onItemClick(recipe);
+                }
             }
         });
     }
+
 
     @Override
     public int getItemCount() {

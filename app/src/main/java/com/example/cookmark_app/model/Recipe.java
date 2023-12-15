@@ -4,11 +4,12 @@ import com.google.firebase.firestore.PropertyName;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
+import java.io.Serializable;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 
-public class Recipe {
-
+public class Recipe implements Serializable {
+    private String recipeId;
     private String recipeImage;
     private String recipeName;
     private int hours;
@@ -20,8 +21,9 @@ public class Recipe {
     private String recipeURL;
     private int cookmarkCount;
 
-    public Recipe(String recipeImage, String recipeName, int hours, int minutes, String foodType,
+    public Recipe(String recipeId, String recipeImage, String recipeName, int hours, int minutes, String foodType,
                   int servings, ArrayList<Ingredient> ingredientList, String cookingSteps, String recipeURL, int cookmarkCount) {
+        this.recipeId = recipeId;
         this.recipeImage = recipeImage;
         this.recipeName = recipeName;
         this.hours = hours;
@@ -35,6 +37,16 @@ public class Recipe {
     }
 
     public Recipe() {
+    }
+
+    @PropertyName("id")
+    public String getRecipeId() {
+        return recipeId;
+    }
+
+    @PropertyName("id")
+    public void setRecipeId(String recipeId) {
+        this.recipeId = recipeId;
     }
 
     @PropertyName("image")
@@ -99,11 +111,9 @@ public class Recipe {
 //    public ArrayList<Ingredient> getIngredientList() {
 //        return ingredientList;
 //    }
-//
 //    public void setIngredientList(ArrayList<Ingredient> ingredientList) {
 //        this.ingredientList = ingredientList;
 //    }
-
     @PropertyName("cookingSteps")
     public String getCookingSteps() {
         return cookingSteps;
@@ -135,6 +145,12 @@ public class Recipe {
         return gson.toJson(ingredientList);
     }
 
+    public ArrayList<Ingredient> getIngredientListFromString(String ingredientListString) {
+        Gson gson = new Gson();
+        Type type = new TypeToken<ArrayList<Ingredient>>() {}.getType();
+        return gson.fromJson(ingredientListString, type);
+    }
+
     @PropertyName("cookmarkCount")
     public int getCookmarkCount() {
         return cookmarkCount;
@@ -144,5 +160,10 @@ public class Recipe {
         this.cookmarkCount = cookmarkCount;
     }
 
+    public void setIngredientListAsString(String ingredientsAsString) {
+        Gson gson = new Gson();
+        Type type = new TypeToken<ArrayList<Ingredient>>() {}.getType();
+        this.ingredientList = gson.fromJson(ingredientsAsString, type);
+    }
 }
 

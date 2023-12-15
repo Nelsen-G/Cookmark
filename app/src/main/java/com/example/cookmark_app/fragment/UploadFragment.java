@@ -28,6 +28,7 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.example.cookmark_app.ManageRecipe;
 import com.example.cookmark_app.R;
 import com.example.cookmark_app.adapter.CustomSpinnerAdapter;
 import com.example.cookmark_app.adapter.IngredientAdapter;
@@ -205,7 +206,7 @@ public class UploadFragment extends Fragment {
         btnUploadRecipe.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                String recipeId = UUID.randomUUID().toString();
 //                imagePath = imageUri.getPath();
                 StorageReference imageRef = storageRef.child("images/" + UUID.randomUUID() + ".jpg");
 
@@ -248,7 +249,7 @@ public class UploadFragment extends Fragment {
                                 imageRef.getDownloadUrl().addOnSuccessListener(uri -> {
                                     String imageUrl = uri.toString();
 
-                                    Recipe newRecipe = new Recipe(imageUrl, recipeName, hours, minutes, selectedSpinnerItem,
+                                    Recipe newRecipe = new Recipe(recipeId, imageUrl, recipeName, hours, minutes, selectedSpinnerItem,
                                     servings, ingredientList, cookingSteps, recipeURL, 0);
 
 //                                    Map<String, Object> recipeData = new HashMap<>();
@@ -267,6 +268,8 @@ public class UploadFragment extends Fragment {
                                             .addOnSuccessListener(documentReference -> {
                                                 Log.d(TAG, "Recipe added with ID: " + documentReference.getId());
                                                 showToast("Recipe uploaded successfully");
+                                                Intent intent = new Intent(getActivity(), ManageRecipe.class);
+                                                startActivity(intent);
                                             })
                                             .addOnFailureListener(e -> {
                                                 Log.w(TAG, "Error adding recipe", e);
@@ -284,7 +287,6 @@ public class UploadFragment extends Fragment {
 
 
                 }
-
 
 
             }

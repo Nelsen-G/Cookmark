@@ -8,7 +8,6 @@
     <string name="registerBtn"><u>Register</u></string>
     <string name="enter_your_email">Enter your email</string>
     <string name="enter_your_password">Enter your password</string>
-    <string name="enter_new_username">Enter your new username</string>
 
 
     <string-array name="options_array">

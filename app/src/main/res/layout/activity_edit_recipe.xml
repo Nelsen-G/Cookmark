@@ -1,0 +1,426 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+
+        tools:context=".UploadFragment">
+
+        <!-- TODO: Update blank fragment layout -->
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/detail_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/white">
+
+            <ImageView
+                android:id="@+id/manage_back"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_back"/>
+
+            <TextView
+                android:id="@+id/manage_toolbar_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:textColor="@color/purple"
+                android:textSize="20sp"
+                android:fontFamily="@font/poppins_medium"
+                android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
+                android:ellipsize="end"
+                android:maxLines="1"
+                android:text="Edit Recipe"/>
+        </androidx.appcompat.widget.Toolbar>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="40dp"
+        >
+
+        <ImageView
+            android:id="@+id/uploadedImageView"
+            android:layout_width="match_parent"
+            android:layout_height="180sp"
+            android:layout_gravity="center"
+            android:src="@drawable/img_placeholder"
+            android:scaleType="centerInside"
+            android:layout_marginTop="10sp"
+            android:layout_marginBottom="20sp"/>
+
+        <!-- Upload Recipe Image -->
+        <Button
+            android:id="@+id/btnUploadRecipeImage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Upload Image"
+            android:background="@drawable/button_field"
+            android:fontFamily="@font/poppins_medium"
+            android:textSize="20sp"
+            android:textAllCaps="false"
+            app:backgroundTint="@color/orange"
+            />
+
+        <!--        <FrameLayout-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:background="@drawable/button_field"-->
+        <!--            >-->
+
+        <!--            <ImageView-->
+        <!--                android:id="@+id/imageView"-->
+        <!--                android:layout_width="match_parent"-->
+        <!--                android:layout_height="36sp"-->
+        <!--                android:layout_gravity="center"-->
+        <!--                android:src="@drawable/ic_upload"-->
+        <!--                android:contentDescription="Upload Recipe Image"-->
+        <!--                android:layout_marginTop="10sp"-->
+        <!--                android:layout_marginBottom="20sp"/>-->
+
+        <!--            <TextView-->
+        <!--                android:layout_marginTop="60sp"-->
+        <!--                android:id="@+id/uploadRecipeImageButton"-->
+        <!--                android:layout_width="match_parent"-->
+        <!--                android:layout_height="100sp"-->
+        <!--                android:textSize="16sp"-->
+        <!--                android:text="Upload Recipe Image"-->
+        <!--                android:gravity="center"-->
+        <!--                android:textAllCaps="false"-->
+        <!--                />-->
+
+        <!--        </FrameLayout>-->
+
+        <!-- Recipe Name -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Recipe Name"
+            android:textSize="20sp"
+            android:fontFamily="@font/poppins_medium"
+            android:textColor="@color/purple"
+            android:textStyle="bold"
+            android:layout_marginTop="30sp"
+            android:layout_marginBottom="6sp"/>
+
+        <EditText
+            android:id="@+id/editTextRecipeName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/button_field"
+            android:hint="What's it called?"
+            android:textSize="16sp"
+            android:fontFamily="@font/poppins_medium"
+            android:textColor="@color/greyHint"
+            android:inputType="text"
+            android:paddingLeft="18sp"
+            android:paddingTop="12sp"
+            android:paddingBottom="12sp"
+            android:paddingRight="18sp"
+            />
+
+        <!-- Cooking Duration -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Cooking Duration"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:fontFamily="@font/poppins_medium"
+            android:textColor="@color/purple"
+            android:layout_marginTop="30sp"
+            android:layout_marginBottom="6sp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/editTextHours"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:hint="Hours"
+                android:textColor="@color/greyHint"
+                android:background="@drawable/button_field"
+                android:fontFamily="@font/poppins_medium"
+                android:textSize="16sp"
+                android:inputType="number"
+                android:paddingLeft="18sp"
+                android:paddingTop="12sp"
+                android:paddingBottom="12sp"
+                android:paddingRight="18sp"
+
+                android:layout_marginEnd="9sp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=":"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:fontFamily="@font/poppins_medium"
+                android:textColor="@color/greyHint"
+                />
+
+            <EditText
+                android:id="@+id/editTextMinutes"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:hint="Minutes"
+                android:textColor="@color/greyHint"
+                android:fontFamily="@font/poppins_medium"
+                android:background="@drawable/button_field"
+                android:textSize="16sp"
+                android:inputType="number"
+                android:paddingLeft="18sp"
+                android:paddingTop="12sp"
+                android:paddingBottom="12sp"
+                android:paddingRight="18sp"
+                android:layout_marginStart="9sp"/>
+        </LinearLayout>
+
+        <!-- Food Type -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Food Type"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:fontFamily="@font/poppins_medium"
+            android:textColor="@color/purple"
+            android:layout_marginTop="30sp"
+            android:layout_marginBottom="6sp"/>
+
+        <!--    <EditText-->
+        <!--        android:id="@+id/editTextFoodType"-->
+        <!--        android:layout_width="match_parent"-->
+        <!--        android:layout_height="wrap_content"-->
+        <!--        android:hint="Specify category of your cooking!"-->
+        <!--        android:textSize="16sp"-->
+        <!--        android:background="@drawable/button_field"-->
+        <!--        android:fontFamily="@font/poppins_medium"-->
+        <!--        android:textColor="@color/greyHint"-->
+        <!--        android:inputType="text"-->
+        <!--        android:paddingLeft="18sp"-->
+        <!--        android:paddingTop="12sp"-->
+        <!--        android:paddingBottom="12sp"-->
+        <!--        android:paddingRight="18sp"/>-->
+
+        <Spinner
+            android:id="@+id/spinnerOptions"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/button_field"
+            android:paddingLeft="10sp"
+            />
+
+        <!-- Servings -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Servings"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:fontFamily="@font/poppins_medium"
+            android:textColor="@color/purple"
+            android:layout_marginBottom="6sp"
+            android:layout_marginTop="30sp"/>
+
+        <EditText
+            android:id="@+id/editTextServings"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Enter Servings"
+            android:textSize="16sp"
+            android:background="@drawable/button_field"
+            android:fontFamily="@font/poppins_medium"
+            android:textColor="@color/greyHint"
+            android:inputType="number"
+            android:paddingLeft="18sp"
+            android:paddingTop="12sp"
+            android:paddingBottom="12sp"
+            android:paddingRight="18sp"/>
+
+        <!--        <NumberPicker-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="wrap_content"-->
+
+        <!--            android:background="@drawable/button_field"-->
+        <!--            android:fontFamily="@font/poppins_medium"-->
+        <!--            android:textColor="@color/greyHint"-->
+
+        <!--           />-->
+
+        <!-- Ingredients -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Ingredients"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:fontFamily="@font/poppins_medium"
+            android:textColor="@color/purple"
+            android:layout_marginTop="30sp"
+            android:layout_marginBottom="6sp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/editTextIngredient"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:hint="Enter Ingredient"
+                android:background="@drawable/button_field"
+                android:fontFamily="@font/poppins_medium"
+                android:textSize="16sp"
+                android:textColor="@color/greyHint"
+                android:inputType="text"
+                android:paddingLeft="18sp"
+                android:paddingTop="12sp"
+                android:paddingBottom="12sp"
+                android:paddingRight="18sp"
+                android:layout_marginEnd="10sp"/>
+
+            <Button
+                android:id="@+id/btnAddIngredient"
+                android:layout_width="100sp"
+                android:layout_height="wrap_content"
+                android:text="+"
+                app:backgroundTint="@color/orange"
+                android:background="@drawable/button_field"
+                android:textSize="16sp"
+                android:fontFamily="@font/poppins_medium"
+                android:textAllCaps="false"
+
+                />
+        </LinearLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerViewIngredients"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="1dp"
+            android:layout_marginTop="8dp"/>
+
+        <!-- Cooking Steps -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Cooking Steps"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:fontFamily="@font/poppins_medium"
+            android:textColor="@color/purple"
+            android:layout_marginTop="30sp"
+            android:layout_marginBottom="6sp"/>
+
+        <EditText
+            android:id="@+id/editTextCookingSteps"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/button_field"
+            android:inputType="textMultiLine"
+            android:fontFamily="@font/poppins_medium"
+            android:textSize="16sp"
+            android:hint="1. Explain the cooking process here"
+            android:textColor="@color/greyHint"
+            android:minLines="3"
+            android:paddingLeft="18sp"
+            android:paddingTop="12sp"
+            android:paddingBottom="12sp"
+            android:paddingRight="18sp"/>
+
+        <!-- Add Recipe URL -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Add Recipe URL (optional)"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:fontFamily="@font/poppins_medium"
+            android:textColor="@color/purple"
+            android:layout_marginTop="30sp"
+            android:layout_marginBottom="6sp"/>
+
+        <EditText
+            android:id="@+id/editTextRecipeURL"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/button_field"
+            android:fontFamily="@font/poppins_medium"
+            android:textSize="16sp"
+            android:hint="Paste the url here!"
+            android:textColor="@color/greyHint"
+            android:inputType="text"
+            android:paddingLeft="18sp"
+            android:paddingTop="12sp"
+            android:paddingBottom="12sp"
+            android:paddingRight="18sp"/>
+
+
+        <!--        <Button-->
+        <!--            android:id="@+id/btnShowRecipe"-->
+        <!--            android:layout_width="match_parent"-->
+        <!--            android:layout_height="wrap_content"-->
+        <!--            android:text="Show Recipe"-->
+        <!--            android:background="@drawable/button_field"-->
+        <!--            android:fontFamily="@font/poppins_medium"-->
+
+        <!--            android:textSize="20sp"-->
+        <!--            android:textAllCaps="false"-->
+        <!--            app:backgroundTint="@color/purple"-->
+        <!--            android:layout_marginTop="30sp"/>-->
+
+        <!-- Update Recipe Button -->
+        <Button
+            android:id="@+id/btnUpdateRecipe"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Update Recipe"
+            android:background="@drawable/button_field"
+            android:fontFamily="@font/poppins_medium"
+            android:textSize="20sp"
+            android:textAllCaps="false"
+            app:backgroundTint="@color/purple"
+            android:layout_marginTop="30sp"/>
+
+        <!-- Delete Recipe Button -->
+        <Button
+            android:id="@+id/btnDeleteRecipe"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Delete Recipe"
+            android:background="@drawable/button_field"
+            android:fontFamily="@font/poppins_medium"
+            android:layout_marginBottom="100dp"
+            android:textSize="20sp"
+            android:textAllCaps="false"
+            app:backgroundTint="@color/red"
+            android:layout_marginTop="30sp"/>
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</ScrollView>
+
