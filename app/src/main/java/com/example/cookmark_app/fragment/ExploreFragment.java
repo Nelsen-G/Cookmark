@@ -3,6 +3,7 @@ package com.example.cookmark_app.fragment;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,6 +33,7 @@ public class ExploreFragment extends Fragment {
     private RecyclerView recyclerViewRecipe;
     private ArrayList<Recipe> items;
     private ArrayList<Ingredient> ingredients;
+    private String userId;
 
     public ExploreFragment() {}
 
@@ -39,6 +41,13 @@ public class ExploreFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_explore, container, false);
+
+        //get user_id
+        Bundle bundle = getArguments();
+        if (bundle != null) {
+            userId = bundle.getString("user_id");
+            Log.d("PlanFragment -> ", "User ID: " + userId);
+        }
 
         initializeRecyclerView(rootView, R.id.cardView1);
         initializeRecyclerView(rootView, R.id.cardView2);
@@ -69,7 +78,7 @@ public class ExploreFragment extends Fragment {
         MarginSnapHelper snapHelper = new MarginSnapHelper();
         snapHelper.attachToRecyclerView(recyclerViewRecipe);
 
-        adapterRecipeList = new RegularRecipeListAdapter(items, getChildFragmentManager());
+        adapterRecipeList = new RegularRecipeListAdapter(items, getChildFragmentManager(), userId);
         recyclerViewRecipe.setAdapter(adapterRecipeList);
 
         connectToDatabase(items, adapterRecipeList);

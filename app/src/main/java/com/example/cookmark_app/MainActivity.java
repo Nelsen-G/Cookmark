@@ -25,26 +25,28 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        String userId = getIntent().getStringExtra("user_id");
+
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        replaceFragment(new ExploreFragment());
+        replaceFragment(new ExploreFragment(), userId);
         binding.bottomNavigation.setBackground(null);
 
         binding.bottomNavigationView.setOnItemSelectedListener(item -> {
             switch(item.getItemId()){
 
                 case R.id.mnExplore:
-                    replaceFragment(new ExploreFragment());
+                    replaceFragment(new ExploreFragment(), userId);
                     break;
                 case R.id.mnPlan:
-                    replaceFragment(new PlanFragment());
+                    replaceFragment(new PlanFragment(), userId);
                     break;
                 case R.id.mnUpload:
-                    replaceFragment(new UploadFragment());
+                    replaceFragment(new UploadFragment(), userId);
                     break;
                 case R.id.mnCookmarked:
-                    replaceFragment(new CookMarkedFragment());
+                    replaceFragment(new CookMarkedFragment(), userId);
                     break;
             }
             return true;
@@ -53,18 +55,22 @@ public class MainActivity extends AppCompatActivity {
         binding.toolbar.setOnMenuItemClickListener(item -> {
             int id = item.getItemId();
             if(id == R.id.mnAccount){
-                replaceFragment(new AccountFragment());
+                replaceFragment(new AccountFragment(), userId);
             }
             return true;
         });
 
         FloatingActionButton searchBtn = findViewById(R.id.mnSearch);
         searchBtn.setOnClickListener(item -> {
-            replaceFragment(new SearchFragment());
+            replaceFragment(new SearchFragment(), userId);
         });
     }
 
-    private void replaceFragment(Fragment fragment){
+    private void replaceFragment(Fragment fragment, String userId){
+        Bundle bundle = new Bundle();
+        bundle.putString("user_id", userId);
+        fragment.setArguments(bundle);
+
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.activity_layout, fragment);

@@ -17,10 +17,13 @@ import java.util.ArrayList;
 public class QuickRecipeActivity extends AppCompatActivity {
     private RecyclerView recyclerViewRecipe;
     private RecyclerView.Adapter adapterRecipeList;
+    private String userId;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_see_all_recipe);
+
+        userId = getIntent().getStringExtra("user_id");
 
         ArrayList<Recipe> items = (ArrayList<Recipe>) getIntent().getSerializableExtra("items");
 
@@ -44,7 +47,7 @@ public class QuickRecipeActivity extends AppCompatActivity {
 
         recyclerViewRecipe.setLayoutManager(new GridLayoutManager(this, 2));
 
-        adapterRecipeList = new SmallerRecipeListAdapter(items, getSupportFragmentManager());
+        adapterRecipeList = new SmallerRecipeListAdapter(items, getSupportFragmentManager(), userId);
         recyclerViewRecipe.setAdapter(adapterRecipeList);
     }
 }

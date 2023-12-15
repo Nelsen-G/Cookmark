@@ -2,13 +2,13 @@ package com.example.cookmark_app.model;
 
 public class User {
 
-    private int user_id;
+    private String user_id;
     private String user_name;
     private String email;
     private String password;
     private String profile_picture;
 
-    public User(int user_id, String user_name, String email, String password) {
+    public User(String user_id, String user_name, String email, String password) {
         this.user_id = user_id;
         this.user_name = user_name;
         this.email = email;
@@ -16,11 +16,11 @@ public class User {
         this.profile_picture = "";
     }
 
-    public int getUser_id() {
+    public String getUser_id() {
         return user_id;
     }
 
-    public void setUser_id(int user_id) {
+    public void setUser_id(String user_id) {
         this.user_id = user_id;
     }
 
