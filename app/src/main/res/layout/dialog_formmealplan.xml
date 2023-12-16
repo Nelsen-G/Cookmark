@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="40dp">
+
+    <EditText
+        android:id="@+id/dateET"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/greyHint"
+        android:inputType="none"
+        android:focusable="false"
+        android:focusableInTouchMode="false" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/prepareTimeET"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:hint="Select time to prepare meal"
+            android:textColorHint="@color/greyHint"
+            android:layout_alignParentLeft="true"
+            android:focusable="false"
+            android:focusableInTouchMode="false"/>
+
+        <Button
+            android:id="@+id/addTimeBtn"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:foreground="@drawable/ic_addtime"
+            android:foregroundGravity="center"
+            android:backgroundTint="@color/purple"/>
+
+    </RelativeLayout>
+
+    <AutoCompleteTextView
+        android:id="@+id/recipeAc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Select recipe by name..."
+        android:textColorHint="@color/greyHint"
+        android:completionThreshold="1"
+        android:completionHint="Select recipe"/>
+
+</LinearLayout>

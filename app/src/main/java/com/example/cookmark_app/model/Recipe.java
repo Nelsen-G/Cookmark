@@ -108,15 +108,12 @@ public class Recipe implements Serializable {
         this.servings = servings;
     }
 
-    @PropertyName("ingredientList")
-    public ArrayList<Ingredient> getIngredientList() {
-        return ingredientList;
-    }
-
-    @PropertyName("ingredientList")
-    public void setIngredientList(ArrayList<Ingredient> ingredientList) {
-        this.ingredientList = ingredientList;
-    }
+//    public ArrayList<Ingredient> getIngredientList() {
+//        return ingredientList;
+//    }
+//    public void setIngredientList(ArrayList<Ingredient> ingredientList) {
+//        this.ingredientList = ingredientList;
+//    }
     @PropertyName("cookingSteps")
     public String getCookingSteps() {
         return cookingSteps;
@@ -137,17 +134,21 @@ public class Recipe implements Serializable {
         this.recipeURL = recipeURL;
     }
 
-    @PropertyName("ingredientListAsString")
     public void setIngredientListFromString(String ingredientListString) {
         Gson gson = new Gson();
         Type type = new TypeToken<ArrayList<Ingredient>>() {}.getType();
         ingredientList = gson.fromJson(ingredientListString, type);
     }
 
-    @PropertyName("ingredientListAsString")
     public String getIngredientListAsString() {
         Gson gson = new Gson();
         return gson.toJson(ingredientList);
+    }
+
+    public ArrayList<Ingredient> getIngredientListFromString(String ingredientListString) {
+        Gson gson = new Gson();
+        Type type = new TypeToken<ArrayList<Ingredient>>() {}.getType();
+        return gson.fromJson(ingredientListString, type);
     }
 
     @PropertyName("cookmarkCount")
@@ -159,4 +160,10 @@ public class Recipe implements Serializable {
         this.cookmarkCount = cookmarkCount;
     }
 
+    public void setIngredientListAsString(String ingredientsAsString) {
+        Gson gson = new Gson();
+        Type type = new TypeToken<ArrayList<Ingredient>>() {}.getType();
+        this.ingredientList = gson.fromJson(ingredientsAsString, type);
+    }
 }
+

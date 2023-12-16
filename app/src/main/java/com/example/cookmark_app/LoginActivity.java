@@ -47,25 +47,33 @@ public class LoginActivity extends AppCompatActivity {
                     // connect firebase, check username & password existance
                     FirebaseFirestore db = FirebaseFirestore.getInstance();
                     db.collection("users")
-                    .whereEqualTo("email", email)
-                    .whereEqualTo("password", password)
-                    .get()
-                    .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                        @Override
-                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                            if (task.isSuccessful()) {
-                                if (task.getResult().size() > 0) {
-                                    Toast.makeText(LoginActivity.this, "Login successful!", Toast.LENGTH_SHORT).show();
-                                    startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                            .whereEqualTo("email", email)
+                            .whereEqualTo("password", password)
+                            .get()
+                            .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                                @Override
+                                public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                                    if (task.isSuccessful()) {
+                                        if (task.getResult().size() > 0) {
+                                            // Assuming "user_id" is the field in your Firestore document
+                                            String userId = task.getResult().getDocuments().get(0).getString("user_id");
+                                            if (userId != null) {
+                                                Toast.makeText(LoginActivity.this, "Login successful!", Toast.LENGTH_SHORT).show();
 
-                                } else {
-                                    Toast.makeText(LoginActivity.this, "Invalid email or password!", Toast.LENGTH_SHORT).show();
+                                                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                                                intent.putExtra("user_id", userId);
+                                                startActivity(intent);
+                                            } else {
+                                                Toast.makeText(LoginActivity.this, "User id not valid!", Toast.LENGTH_SHORT).show();
+                                            }
+                                        } else {
+                                            Toast.makeText(LoginActivity.this, "User not found!", Toast.LENGTH_SHORT).show();
+                                        }
+                                    } else {
+                                        Toast.makeText(LoginActivity.this, "Login failed. Please try again.", Toast.LENGTH_SHORT).show();
+                                    }
                                 }
-                            } else {
-                                Toast.makeText(LoginActivity.this, "Error: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
-                            }
-                        }
-                    });
+                            });
                 }
             }
         });
