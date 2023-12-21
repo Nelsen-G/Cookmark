@@ -158,7 +158,7 @@ public class MealPlanDialog extends AppCompatDialogFragment {
                                     time = jam + ":" + menit;
                                 }
 
-                                if (jam <= 12) {
+                                if (jam < 10) {
                                     timeET.setText(String.format(Locale.getDefault(), "0%s AM", time));
                                 } else {
                                     timeET.setText(String.format(Locale.getDefault(), "%s PM", time));

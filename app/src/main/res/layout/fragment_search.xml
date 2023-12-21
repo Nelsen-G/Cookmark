@@ -8,12 +8,12 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical">
 
         <!-- Title -->
         <TextView
-            android:id="@+id/myTextView"
+            android:id="@+id/searchTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Your ingredients,\nOur inspiration"
@@ -26,20 +26,181 @@
             android:layout_marginBottom="20dp"
             />
 
-<!--        search bar-->
-        <EditText
-            android:id="@+id/mySearchBar"
+        <!-- Search bar -->
+        <AutoCompleteTextView
+            android:id="@+id/ingredientSearchBar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Search Ingredient..."
-            android:layout_gravity="top" />
+            android:hint="Search Ingredient"
+            android:background="@drawable/background_searchbar"
+            android:layout_gravity="top"
+            android:inputType="text"
+            android:padding="8dp"
+            android:layout_marginEnd="48dp"
+            android:layout_marginStart="48dp"
+            android:layout_marginTop="8dp"
+            android:outlineProvider="background"
+            android:backgroundTint="@android:color/white"
+            android:drawableLeft="@drawable/ic_search"
+            android:drawablePadding="10dp"
+            android:completionThreshold="1"
+            android:completionHint="Select ingredient"
+            />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rvIngredientsData"
+        <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1" />
+            android:layout_height="match_parent">
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <!-- RecyclerViews and their corresponding subtitles -->
+                <!-- Repeat the following block for each set of subtitle and RecyclerView -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginLeft="21dp"
+                    android:layout_marginRight="21dp">
+
+                    <TextView
+                        android:id="@+id/searchSubtitle1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Dairy"
+                        android:fontFamily="@font/poppins_medium"
+                        android:textSize="24sp"
+                        android:textColor="@color/purple"
+                        android:gravity="left"
+                        android:layout_marginTop="38dp"
+                        android:layout_marginBottom="20dp"
+                        />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rvIngredientsData1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginLeft="21dp"
+                    android:layout_marginRight="21dp">
+
+                    <TextView
+                        android:id="@+id/searchSubtitle2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="38dp"
+                        android:layout_marginBottom="20dp"
+                        android:fontFamily="@font/poppins_medium"
+                        android:gravity="left"
+                        android:text="Meat"
+                        android:textColor="@color/purple"
+                        android:textSize="24sp" />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rvIngredientsData2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginLeft="21dp"
+                    android:layout_marginRight="21dp">
+
+                    <TextView
+                        android:id="@+id/searchSubtitle3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Vegetables"
+                        android:fontFamily="@font/poppins_medium"
+                        android:textSize="24sp"
+                        android:textColor="@color/purple"
+                        android:gravity="left"
+                        android:layout_marginTop="38dp"
+                        android:layout_marginBottom="20dp"
+                        />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rvIngredientsData3"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginLeft="21dp"
+                    android:layout_marginRight="21dp">
+
+                    <TextView
+                        android:id="@+id/searchSubtitle4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Seafood"
+                        android:fontFamily="@font/poppins_medium"
+                        android:textSize="24sp"
+                        android:textColor="@color/purple"
+                        android:gravity="left"
+                        android:layout_marginTop="38dp"
+                        android:layout_marginBottom="20dp"
+                        />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rvIngredientsData4"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginLeft="21dp"
+                    android:layout_marginRight="21dp">
+
+                    <TextView
+                        android:id="@+id/searchSubtitle5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Others"
+                        android:fontFamily="@font/poppins_medium"
+                        android:textSize="24sp"
+                        android:textColor="@color/purple"
+                        android:gravity="left"
+                        android:layout_marginTop="38dp"
+                        android:layout_marginBottom="20dp"
+                        />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rvIngredientsData5"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1" />
+
+                </LinearLayout>
+            </LinearLayout>
+
+
+        </ScrollView>
     </LinearLayout>
 
 </FrameLayout>
