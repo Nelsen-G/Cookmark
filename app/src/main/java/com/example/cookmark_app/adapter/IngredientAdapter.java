@@ -18,6 +18,7 @@ public class IngredientAdapter extends RecyclerView.Adapter<IngredientAdapter.Vi
 
     private List<Ingredient> ingredients;
 
+
     public IngredientAdapter(List<Ingredient> ingredients) {
         this.ingredients = ingredients;
     }

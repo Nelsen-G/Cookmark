@@ -3,50 +3,57 @@ package com.example.cookmark_app.fragment;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.cookmark_app.R;
+import com.example.cookmark_app.adapter.IngredientAdapter;
+import com.example.cookmark_app.adapter.TagTypeAdapter;
+import com.example.cookmark_app.model.Ingredient;
+
+import java.util.ArrayList;
 
 public class SearchFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+   private ArrayList<Ingredient> ingredients;
 
     public SearchFragment() {
         // Required empty public constructor
     }
 
-    public static SearchFragment newInstance(String param1, String param2) {
-        SearchFragment fragment = new SearchFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_search, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_search, container, false);
+        initializeRecyclerView(rootView, R.id.rvIngredientsData);
+        return rootView;
+
+    }
+
+    private void initializeRecyclerView(View rootView, int recyclerViewId) {
+        ingredients = new ArrayList<>();
+        ingredients.add(new Ingredient("Cheese"));
+        ingredients.add(new Ingredient("Salt"));
+        ingredients.add(new Ingredient("Egg"));
+
+        RecyclerView recyclerView = rootView.findViewById(recyclerViewId);
+
+        // Create the adapter and set it to the RecyclerView
+        TagTypeAdapter tagTypeAdapter = new TagTypeAdapter(ingredients);
+        // display the tag into 2 column
+        recyclerView.setLayoutManager(new GridLayoutManager(requireContext(), 2)); // 2 is the number of columns
+
+        recyclerView.setAdapter(tagTypeAdapter);
+
     }
 }
