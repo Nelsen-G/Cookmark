@@ -8,23 +8,6 @@
     <string name="registerBtn"><u>Register</u></string>
     <string name="enter_your_email">Enter your email</string>
     <string name="enter_your_password">Enter your password</string>
-    <string name="quick_cook">Quick Cook</string>
-    <string name="see_all">see all</string>
-    <string name="trending_recipes">Trending Recipes</string>
-    <string name="you_might_like">You might like...</string>
-    <string name="_99_cookmarked">99+ Cookmarked</string>
-    <string name="chicken_cordon_bleu">Chicken Cordon Bleu</string>
-    <string name="https_sample_link">https://sample.link</string>
-    <string name="recipe_url">Recipe URL</string>
-    <string name="_1_lorem_2_ipsum_3_dolor_4_amet">1. Lorem 2. Ipsum 3. Dolor 4. Amet</string>
-    <string name="cooking_steps">Cooking Steps</string>
-    <string name="ingredients">Ingredients</string>
-    <string name="_4_servings">4 Servings</string>
-    <string name="western">Western</string>
-    <string name="_1_hr_30_min">1 hr 30 min</string>
-    <string name="servings">Servings</string>
-    <string name="food_type">Food Type</string>
-    <string name="time_to_make">Time to make</string>
 
 
     <string-array name="options_array">
