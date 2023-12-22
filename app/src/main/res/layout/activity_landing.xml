@@ -144,14 +144,16 @@
             <Button
                 android:id="@+id/buttonSignInGoogle"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="47dp"
+                android:layout_marginTop="1.5dp"
                 android:background="@drawable/button_google"
                 android:fontFamily="@font/poppins_bold"
                 android:text="Sign In with Google"
                 android:textAllCaps="false"
-                android:textSize="16sp"
+                android:textSize="14sp"
                 app:backgroundTint="@color/purple" />
 
         </LinearLayout>
+
     </RelativeLayout>
 </LinearLayout>

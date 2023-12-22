@@ -24,7 +24,7 @@
             android:id="@+id/editUsername"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:hint="@string/enter_new_username"
+            android:hint="Enter new username"
             android:layout_weight="1"
             android:fontFamily="@font/poppins_medium"
             android:layout_marginStart="12dp"

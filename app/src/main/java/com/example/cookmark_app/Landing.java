@@ -14,6 +14,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,12 +24,16 @@ import com.google.android.gms.auth.api.identity.Identity;
 import com.google.android.gms.auth.api.identity.SignInClient;
 import com.google.android.gms.auth.api.identity.SignInCredential;
 import com.google.android.gms.common.api.ApiException;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 public class Landing extends AppCompatActivity {
     private SignInClient oneTapClient;
     private BeginSignInRequest signUpRequest;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,15 +61,15 @@ public class Landing extends AppCompatActivity {
         ActivityResultLauncher<IntentSenderRequest> activityResultLauncher = registerForActivityResult(new ActivityResultContracts.StartIntentSenderForResult(), new ActivityResultCallback<ActivityResult>() {
             @Override
             public void onActivityResult(ActivityResult result) {
-                if(result.getResultCode() == Activity.RESULT_OK){
-                    try{
+                if (result.getResultCode() == Activity.RESULT_OK) {
+                    try {
                         SignInCredential credential = oneTapClient.getSignInCredentialFromIntent(result.getData());
                         String idToken = credential.getGoogleIdToken();
-                        if(idToken != null){
+                        if (idToken != null) {
                             String email = credential.getId();
                             Toast.makeText(getApplicationContext(), "Email: " + email, Toast.LENGTH_SHORT).show();
                         }
-                    }catch(ApiException e){
+                    } catch (ApiException e) {
                         e.printStackTrace();
                     }
                 }
@@ -74,7 +79,7 @@ public class Landing extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 oneTapClient.beginSignIn(signUpRequest)
-                        .addOnSuccessListener(Landing.this, new OnSuccessListener<BeginSignInResult>(){
+                        .addOnSuccessListener(Landing.this, new OnSuccessListener<BeginSignInResult>() {
                             @Override
                             public void onSuccess(BeginSignInResult result) {
                                 IntentSenderRequest intentSenderRequest = new IntentSenderRequest.Builder(result.getPendingIntent().getIntentSender()).build();
