@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.cookmark_app.R;
 import com.example.cookmark_app.model.Ingredient;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class IngredientAdapter extends RecyclerView.Adapter<IngredientAdapter.ViewHolder> {

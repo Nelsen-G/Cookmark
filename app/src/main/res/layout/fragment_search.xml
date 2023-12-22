@@ -7,6 +7,7 @@
     tools:context=".fragment.SearchFragment">
 
     <LinearLayout
+        android:id="@+id/searchParent"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
@@ -27,14 +28,13 @@
             />
 
         <!-- Search bar -->
-        <AutoCompleteTextView
+        <android.widget.SearchView
             android:id="@+id/ingredientSearchBar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Search Ingredient"
+            android:queryHint="Search Ingredient"
             android:background="@drawable/background_searchbar"
             android:layout_gravity="top"
-            android:inputType="text"
             android:padding="8dp"
             android:layout_marginEnd="48dp"
             android:layout_marginStart="48dp"
@@ -43,8 +43,8 @@
             android:backgroundTint="@android:color/white"
             android:drawableLeft="@drawable/ic_search"
             android:drawablePadding="10dp"
-            android:completionThreshold="1"
-            android:completionHint="Select ingredient"
+            android:iconifiedByDefault="false"
+            android:queryBackground="@android:color/transparent"
             />
 
         <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
