@@ -144,8 +144,8 @@
             <Button
                 android:id="@+id/buttonSignInGoogle"
                 android:layout_width="wrap_content"
-                android:layout_height="47dp"
-                android:layout_marginTop="1.5dp"
+                android:layout_height="47.5dp"
+                android:layout_marginTop="1.3dp"
                 android:background="@drawable/button_google"
                 android:fontFamily="@font/poppins_bold"
                 android:text="Sign In with Google"
