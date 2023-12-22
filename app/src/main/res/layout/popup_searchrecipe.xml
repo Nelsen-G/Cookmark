@@ -11,7 +11,7 @@
         android:id="@+id/addSearchIngredientTv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Dairy"
+        android:text="You selected"
         android:fontFamily="@font/poppins_medium"
         android:textSize="24sp"
         android:textColor="@color/purple"
@@ -23,7 +23,7 @@
     <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="500dp">
+        android:layout_height="200dp">
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvIngredientSearch"
             android:layout_width="match_parent"
