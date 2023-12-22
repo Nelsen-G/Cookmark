@@ -12,6 +12,7 @@ import com.example.cookmark_app.R;
 import com.example.cookmark_app.model.Ingredient;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class TagTypeAdapter extends RecyclerView.Adapter<TagTypeAdapter.TagViewHolder> {
     private ArrayList<Ingredient> tagList;
@@ -45,6 +46,12 @@ public class TagTypeAdapter extends RecyclerView.Adapter<TagTypeAdapter.TagViewH
             super(itemView);
             tagTextView = itemView.findViewById(R.id.tag_tv);
         }
+    }
+
+    public void updateData(List<Ingredient> newData) {
+        tagList.clear();
+        tagList.addAll(newData);
+        notifyDataSetChanged();
     }
 
 }
