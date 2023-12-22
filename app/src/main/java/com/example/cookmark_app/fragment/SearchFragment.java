@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,9 +29,12 @@ public class SearchFragment extends Fragment implements OnItemClickCallback {
     private ArrayList<Ingredient> ingredients4;
     private ArrayList<Ingredient> ingredients5;
 
+    private ArrayList<Ingredient> selectedIngredients;
+
     private SearchView searchBar;
     private View rootView;
 
+    private SearchRecipePopup popup;
     public SearchFragment() {
         // Required empty public constructor
     }
@@ -46,6 +50,7 @@ public class SearchFragment extends Fragment implements OnItemClickCallback {
 
         // fill the arraylist
         fillIngredientData();
+
 
         // Inflate the layout for this fragment
         rootView = inflater.inflate(R.layout.fragment_search, container, false);
@@ -69,7 +74,7 @@ public class SearchFragment extends Fragment implements OnItemClickCallback {
             @Override
             public boolean onQueryTextChange(String newText) {
 
-
+                // change recycler view everytime user type something
                 // 1
                 ArrayList<Ingredient> filteredIngredients1 = new ArrayList<>();
                 for (Ingredient ingredient : ingredients1) {
@@ -123,6 +128,11 @@ public class SearchFragment extends Fragment implements OnItemClickCallback {
                 return true;
             }
         });
+
+        // initialized selected ingredients
+        selectedIngredients = new ArrayList<>();
+        popup = new SearchRecipePopup(getContext(), selectedIngredients);
+
         return rootView;
 
     }
@@ -187,12 +197,21 @@ public class SearchFragment extends Fragment implements OnItemClickCallback {
         for(String s : dummy5) {
             ingredients5.add(new Ingredient(s));
         }
+
+
     }
 
     @Override
     public void onItemClicked(Ingredient ingredient) {
         // everytime a tag clicked, add that item to recycler view in popup
-        SearchRecipePopup popup = new SearchRecipePopup(getContext());
+        // validate that the data added is unique
+        if(!selectedIngredients.contains(ingredient)) {
+            selectedIngredients.add(ingredient);
+        }
+        else {
+            Log.d("search", "You have selected this ingredient");
+        }
+
         popup.show();
     }
 }
