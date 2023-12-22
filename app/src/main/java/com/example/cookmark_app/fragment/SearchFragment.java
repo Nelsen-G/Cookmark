@@ -131,6 +131,7 @@ public class SearchFragment extends Fragment implements OnItemClickCallback {
 
         // initialized selected ingredients
         selectedIngredients = new ArrayList<>();
+        // pass selected ingredient into popup
         popup = new SearchRecipePopup(getContext(), selectedIngredients);
 
         return rootView;
@@ -205,7 +206,7 @@ public class SearchFragment extends Fragment implements OnItemClickCallback {
     public void onItemClicked(Ingredient ingredient) {
         // everytime a tag clicked, add that item to recycler view in popup
         // validate that the data added is unique
-        if(!selectedIngredients.contains(ingredient)) {
+        if(!popup.getSelectedIngredients().contains(ingredient)) {
             selectedIngredients.add(ingredient);
         }
         else {

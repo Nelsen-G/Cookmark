@@ -27,6 +27,7 @@ import java.util.ArrayList;
 public class SearchRecipePopup extends Dialog implements OnItemClickCallback {
 
     private ArrayList<Ingredient> selectedIngredients;
+    private TagTypeAdapter tagTypeAdapter;
     public SearchRecipePopup(@NonNull Context context, ArrayList<Ingredient> ingredients) {
         super(context);
         this.selectedIngredients = ingredients;
@@ -41,7 +42,7 @@ public class SearchRecipePopup extends Dialog implements OnItemClickCallback {
         // page logic here
         RecyclerView ingreAddRv = findViewById(R.id.rvIngredientSearch);
         // create adapter and set it to recycler view
-        TagTypeAdapter tagTypeAdapter = new TagTypeAdapter(selectedIngredients, this);
+        tagTypeAdapter = new TagTypeAdapter(selectedIngredients, this);
         ingreAddRv.setLayoutManager(new GridLayoutManager(getContext(), 2)); // 2 is the number of columns
         ingreAddRv.setAdapter(tagTypeAdapter);
 
@@ -58,6 +59,14 @@ public class SearchRecipePopup extends Dialog implements OnItemClickCallback {
 
     @Override
     public void onItemClicked(Ingredient ingredient) {
-
+        // everytime a tag in selected ingredient clicked
+        // it will delete the selected ingredient
+        selectedIngredients.remove(ingredient);
+        tagTypeAdapter.notifyDataSetChanged();
     }
+
+    public ArrayList<Ingredient> getSelectedIngredients() {
+        return selectedIngredients;
+    }
+
 }
