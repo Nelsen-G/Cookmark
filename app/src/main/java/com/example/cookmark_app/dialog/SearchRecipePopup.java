@@ -10,9 +10,9 @@ import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
-
+// a popup to show what ingredients that user selected
 public class SearchRecipePopup extends AppCompatActivity {
-    private void showBottomDialog() {
+    public void showBottomDialog() {
         final Dialog dialog = new Dialog(this);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setContentView(R.layout.popup_searchrecipe);
