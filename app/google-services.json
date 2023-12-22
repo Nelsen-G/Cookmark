@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "924421925643",
+    "firebase_url": "https://cookmark-a63f5-default-rtdb.firebaseio.com",
     "project_id": "cookmark-a63f5",
     "storage_bucket": "cookmark-a63f5.appspot.com"
   },
@@ -12,7 +13,20 @@
           "package_name": "com.example.cookmark_app"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "924421925643-a4qdth2iq019gabc0secq6cdsorm3k4u.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.cookmark_app",
+            "certificate_hash": "4f7b008681e2635cb0c3e35b6e2c52559235f92c"
+          }
+        },
+        {
+          "client_id": "924421925643-smh7i8n51kki63e7ri2ls871fv3efm4h.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyBdxKEX0xWWCiOgXrkrDi_dXJhqPnTqBOw"
@@ -20,7 +34,12 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "924421925643-7s41gvt59tk8h0djaurejhl4kf9bmqfh.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }
