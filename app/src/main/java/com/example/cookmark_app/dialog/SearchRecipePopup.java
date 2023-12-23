@@ -50,6 +50,8 @@ public class SearchRecipePopup extends Dialog implements OnItemClickCallback {
         // add data from search fragment to recycler view in popup
 
         Button ingreSearchBtn = findViewById(R.id.buttonSearchRecipe);
+        // if button is clicked, it will redirect to search result
+
 
         getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
