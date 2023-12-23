@@ -1,37 +1,27 @@
 package com.example.cookmark_app.fragment;
 
-import android.app.Dialog;
-import android.content.Context;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.view.Gravity;
+import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
-import android.view.inputmethod.InputMethodManager;
-import android.widget.ArrayAdapter;
-import android.widget.AutoCompleteTextView;
-import android.widget.Button;
 import android.widget.SearchView;
-import android.widget.Toast;
 
 import com.example.cookmark_app.R;
-import com.example.cookmark_app.adapter.IngredientAdapter;
+import com.example.cookmark_app.dialog.SearchRecipePopup;
 import com.example.cookmark_app.adapter.TagTypeAdapter;
+import com.example.cookmark_app.interfaces.OnItemClickCallback;
 import com.example.cookmark_app.model.Ingredient;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
-public class SearchFragment extends Fragment {
+// search page to show all ingredient and let user pick ingredients they have
+public class SearchFragment extends Fragment implements OnItemClickCallback {
 
     private ArrayList<Ingredient> ingredients1;
     private ArrayList<Ingredient> ingredients2;
@@ -39,9 +29,12 @@ public class SearchFragment extends Fragment {
     private ArrayList<Ingredient> ingredients4;
     private ArrayList<Ingredient> ingredients5;
 
+    private ArrayList<Ingredient> selectedIngredients;
+
     private SearchView searchBar;
     private View rootView;
 
+    private SearchRecipePopup popup;
     public SearchFragment() {
         // Required empty public constructor
     }
@@ -57,6 +50,7 @@ public class SearchFragment extends Fragment {
 
         // fill the arraylist
         fillIngredientData();
+
 
         // Inflate the layout for this fragment
         rootView = inflater.inflate(R.layout.fragment_search, container, false);
@@ -80,7 +74,7 @@ public class SearchFragment extends Fragment {
             @Override
             public boolean onQueryTextChange(String newText) {
 
-
+                // change recycler view everytime user type something
                 // 1
                 ArrayList<Ingredient> filteredIngredients1 = new ArrayList<>();
                 for (Ingredient ingredient : ingredients1) {
@@ -134,6 +128,12 @@ public class SearchFragment extends Fragment {
                 return true;
             }
         });
+
+        // initialized selected ingredients
+        selectedIngredients = new ArrayList<>();
+        // pass selected ingredient into popup
+        popup = new SearchRecipePopup(getContext(), selectedIngredients);
+
         return rootView;
 
     }
@@ -143,11 +143,12 @@ public class SearchFragment extends Fragment {
         RecyclerView recyclerView = rootView.findViewById(recyclerViewId);
 
         // Create the adapter and set it to the RecyclerView
-        TagTypeAdapter tagTypeAdapter = new TagTypeAdapter(ingredients);
+        TagTypeAdapter tagTypeAdapter = new TagTypeAdapter(ingredients, this);
         // display the tag into 2 column
         recyclerView.setLayoutManager(new GridLayoutManager(requireContext(), 2)); // 2 is the number of columns
 
         recyclerView.setAdapter(tagTypeAdapter);
+
 
     }
 
@@ -197,5 +198,21 @@ public class SearchFragment extends Fragment {
         for(String s : dummy5) {
             ingredients5.add(new Ingredient(s));
         }
+
+
+    }
+
+    @Override
+    public void onItemClicked(Ingredient ingredient) {
+        // everytime a tag clicked, add that item to recycler view in popup
+        // validate that the data added is unique
+        if(!popup.getSelectedIngredients().contains(ingredient)) {
+            selectedIngredients.add(ingredient);
+        }
+        else {
+            Log.d("search", "You have selected this ingredient");
+        }
+
+        popup.show();
     }
 }
