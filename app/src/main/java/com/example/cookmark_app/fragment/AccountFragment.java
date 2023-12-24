@@ -55,6 +55,13 @@ public class AccountFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), ManageRecipe.class);
+
+                Bundle bundle = getArguments();
+                if (bundle != null) {
+                    String userId = bundle.getString("user_id");
+                    intent.putExtra("user_id", userId);
+                }
+
                 startActivity(intent);
             }
         });

@@ -31,6 +31,8 @@ import com.example.cookmark_app.model.Recipe;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.common.reflect.TypeToken;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -192,9 +194,9 @@ public class EditRecipeActivity extends AppCompatActivity {
                     }
 
                     if (imageUri != null) {
-                        uploadImageAndRecipe(recipeName, hours, minutes, servings, cookingSteps, recipeURL);
+                        uploadImageAndRecipe(recipeName, hours, minutes, servings, ingredients, cookingSteps, recipeURL);
                     } else {
-                        updateRecipeDetails(recipeName, hours, minutes, servings, cookingSteps, recipeURL);
+                        updateRecipeDetails(recipeName, hours, minutes, servings, ingredients, cookingSteps, recipeURL);
                     }
                 }
 
@@ -241,14 +243,14 @@ public class EditRecipeActivity extends AppCompatActivity {
 
     }
 
-    private void uploadImageAndRecipe(String recipeName, int hours, int minutes, int servings, String cookingSteps, String recipeURL) {
+    private void uploadImageAndRecipe(String recipeName, int hours, int minutes, int servings, ArrayList<Ingredient> ingredients, String cookingSteps, String recipeURL) {
         StorageReference imageRef = storageRef.child("images/" + UUID.randomUUID() + ".jpg");
 
         imageRef.putFile(imageUri)
                 .addOnSuccessListener(taskSnapshot -> {
                     imageRef.getDownloadUrl().addOnSuccessListener(uri -> {
                         imageUrl = uri.toString();
-                        updateRecipeDetails(recipeName, hours, minutes, servings, cookingSteps, recipeURL);
+                        updateRecipeDetails(recipeName, hours, minutes, servings, ingredients, cookingSteps, recipeURL);
                     }).addOnFailureListener(exception -> {
                         Log.e(TAG, "Error getting download URL");
                     });
@@ -258,26 +260,29 @@ public class EditRecipeActivity extends AppCompatActivity {
                 });
     }
 
-    private void updateRecipeDetails(String recipeName, int hours, int minutes, int servings, String cookingSteps, String recipeURL) {
-        Recipe updatedRecipe = new Recipe(recipeId, imageUrl, recipeName, hours, minutes, selectedSpinnerItem,
-                servings, ingredients, cookingSteps, recipeURL, 0);
+    private void updateRecipeDetails(String recipeName, int hours, int minutes, int servings, ArrayList<Ingredient> ingredients, String cookingSteps, String recipeURL) {
+
         FirebaseFirestore db = FirebaseFirestore.getInstance();
         db.collection("recipes")
                 .whereEqualTo("id", recipeId)
                 .get()
                 .addOnSuccessListener(queryDocumentSnapshots -> {
                     for (QueryDocumentSnapshot document : queryDocumentSnapshots) {
+                        Recipe existingRecipe = document.toObject(Recipe.class);
+
+                        existingRecipe.setRecipeImage(imageUrl);
+                        existingRecipe.setRecipeName(recipeName);
+                        existingRecipe.setHours(hours);
+                        existingRecipe.setMinutes(minutes);
+                        existingRecipe.setFoodType(selectedSpinnerItem);
+                        existingRecipe.setServings(servings);
+                        existingRecipe.setIngredientListAsString(new Gson().toJson(ingredients));
+                        existingRecipe.setCookingSteps(cookingSteps);
+                        existingRecipe.setRecipeURL(recipeURL);
+
                         db.collection("recipes")
                                 .document(document.getId())
-                                .update("image", updatedRecipe.getRecipeImage(),
-                                        "recipeName", updatedRecipe.getRecipeName(),
-                                        "hours", updatedRecipe.getHours(),
-                                        "minutes", updatedRecipe.getMinutes(),
-                                        "selectedSpinnerItem", updatedRecipe.getFoodType(),
-                                        "servings", updatedRecipe.getServings(),
-                                        "ingredientListAsString", updatedRecipe.getIngredientListAsString(),
-                                        "cookingSteps", updatedRecipe.getCookingSteps(),
-                                        "recipeURL", updatedRecipe.getRecipeURL())
+                                .set(existingRecipe)
                                 .addOnSuccessListener(aVoid -> {
                                     Log.d(TAG, "Recipe updated successfully");
                                     showToast("Recipe updated successfully");

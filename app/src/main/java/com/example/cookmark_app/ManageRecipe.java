@@ -66,7 +66,11 @@ public class ManageRecipe extends AppCompatActivity {
     private void getRecipeData() {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
+        Intent intent = getIntent();
+        String userId = intent.getStringExtra("user_id");
+
         db.collection("recipes")
+                .whereEqualTo("userId", userId)
                 .get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
@@ -81,7 +85,7 @@ public class ManageRecipe extends AppCompatActivity {
 
                             updateAdapter(recipes);
                         } else {
-                            Log.w(TAG, "Error fetch", task.getException());
+                            Log.w(TAG, "Error");
                         }
                     }
                 });

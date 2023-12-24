@@ -10,6 +10,7 @@ import java.util.ArrayList;
 
 public class Recipe implements Serializable {
     private String recipeId;
+    private String userId;
     private String recipeImage;
     private String recipeName;
     private int hours;
@@ -21,9 +22,10 @@ public class Recipe implements Serializable {
     private String recipeURL;
     private int cookmarkCount;
 
-    public Recipe(String recipeId, String recipeImage, String recipeName, int hours, int minutes, String foodType,
+    public Recipe(String recipeId, String userId, String recipeImage, String recipeName, int hours, int minutes, String foodType,
                   int servings, ArrayList<Ingredient> ingredientList, String cookingSteps, String recipeURL, int cookmarkCount) {
         this.recipeId = recipeId;
+        this.userId = userId;
         this.recipeImage = recipeImage;
         this.recipeName = recipeName;
         this.hours = hours;
@@ -47,6 +49,16 @@ public class Recipe implements Serializable {
     @PropertyName("id")
     public void setRecipeId(String recipeId) {
         this.recipeId = recipeId;
+    }
+
+    @PropertyName("userId")
+    public String getUserId() {
+        return userId;
+    }
+
+    @PropertyName("userId")
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
     @PropertyName("image")
