@@ -3,6 +3,7 @@ package com.example.cookmark_app.fragment;
 import static android.content.ContentValues.TAG;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
@@ -25,11 +26,13 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.cookmark_app.ManageRecipe;
 import com.example.cookmark_app.R;
+import com.example.cookmark_app.RecipeDetailActivity;
 import com.example.cookmark_app.adapter.CustomSpinnerAdapter;
 import com.example.cookmark_app.adapter.IngredientAdapter;
 import com.example.cookmark_app.databinding.ActivityRegisterBinding;
@@ -126,7 +129,12 @@ public class UploadFragment extends Fragment {
     private Button btnUploadRecipe;
     private String selectedSpinnerItem, imagePath;
     private Uri imageUri;
-    private String userId;
+    private String userId, recipeId, recipeName, cookingSteps, recipeURL;
+    private StorageReference imageRef;
+
+    private FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private FirebaseStorage storage = FirebaseStorage.getInstance();
+    private StorageReference storageRef = storage.getReference();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -199,9 +207,6 @@ public class UploadFragment extends Fragment {
             }
         });
 
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-        FirebaseStorage storage = FirebaseStorage.getInstance();
-        StorageReference storageRef = storage.getReference();
 
         Bundle bundle = getArguments();
         if (bundle != null) {
@@ -214,12 +219,12 @@ public class UploadFragment extends Fragment {
         btnUploadRecipe.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String recipeId = UUID.randomUUID().toString();
+                recipeId = UUID.randomUUID().toString();
 //                imagePath = imageUri.getPath();
-                StorageReference imageRef = storageRef.child("images/" + UUID.randomUUID() + ".jpg");
+                imageRef = storageRef.child("images/" + UUID.randomUUID() + ".jpg");
 
                 editTextRecipeName = view.findViewById(R.id.editTextRecipeName);
-                String recipeName = editTextRecipeName.getText().toString();
+                recipeName = editTextRecipeName.getText().toString();
 
                 editTextHours = view.findViewById(R.id.editTextHours);
                 hours = 0;
@@ -243,56 +248,15 @@ public class UploadFragment extends Fragment {
                 }
 
                 editTextCookingSteps = view.findViewById(R.id.editTextCookingSteps);
-                String cookingSteps = editTextCookingSteps.getText().toString();
+                cookingSteps = editTextCookingSteps.getText().toString();
 
                 editTextRecipeURL = view.findViewById(R.id.editTextRecipeURL);
-                String recipeURL = editTextRecipeURL.getText().toString();
+                recipeURL = editTextRecipeURL.getText().toString();
 
 
                 if (validateInputs()) {
 
-                    imageRef.putFile(imageUri)
-                            .addOnSuccessListener(taskSnapshot -> {
-
-                                imageRef.getDownloadUrl().addOnSuccessListener(uri -> {
-                                    String imageUrl = uri.toString();
-
-                                    Recipe newRecipe = new Recipe(recipeId, userId, imageUrl, recipeName, hours, minutes, selectedSpinnerItem,
-                                    servings, ingredientList, cookingSteps, recipeURL, 0);
-
-//                                    Map<String, Object> recipeData = new HashMap<>();
-//                                    recipeData.put("image", imageUrl);
-//                                    recipeData.put("recipeName", recipeName);
-//                                    recipeData.put("hours", hours);
-//                                    recipeData.put("minutes", minutes);
-//                                    recipeData.put("selectedSpinnerItem", selectedSpinnerItem);
-//                                    recipeData.put("servings", servings);
-//                                    recipeData.put("ingredientList", ingredientList);
-//                                    recipeData.put("cookingSteps", cookingSteps);
-//                                    recipeData.put("recipeURL", recipeURL);
-
-                                    db.collection("recipes")
-                                            .add(newRecipe)
-                                            .addOnSuccessListener(documentReference -> {
-                                                Log.d(TAG, "Recipe added with ID: " + documentReference.getId());
-                                                showToast("Recipe uploaded successfully");
-                                                Intent intent = new Intent(getActivity(), ManageRecipe.class);
-                                                startActivity(intent);
-                                            })
-                                            .addOnFailureListener(e -> {
-                                                Log.w(TAG, "Error adding recipe", e);
-                                                showToast("Failed to upload recipe");
-                                            });
-
-                                }).addOnFailureListener(exception -> {
-                                    Log.e(TAG, "Error getting download URL");
-                                });
-                            })
-                            .addOnFailureListener(exception -> {
-                                Log.e(TAG, "Error uploading recipe image");
-                            });
-
-
+                    showUpdateConfirmationDialog();
 
                 }
 
@@ -323,6 +287,90 @@ public class UploadFragment extends Fragment {
 //        });
 
         return view;
+    }
+
+    private void showUpdateConfirmationDialog(){
+        Dialog dialog = new Dialog(requireContext());
+        dialog.setContentView(R.layout.custom_dialog);
+        TextView dialogTitle = dialog.findViewById(R.id.dialogTitle);
+        TextView dialogContent = dialog.findViewById(R.id.dialogContent);
+        Button btnNo = dialog.findViewById(R.id.btnNo);
+        Button btnYes = dialog.findViewById(R.id.btnYes);
+
+        dialogTitle.setText("Upload Recipe");
+        dialogContent.setText("Are you sure you want to upload this recipe?");
+
+        btnNo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+
+        btnYes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                imageRef.putFile(imageUri)
+                        .addOnSuccessListener(taskSnapshot -> {
+
+                            imageRef.getDownloadUrl().addOnSuccessListener(uri -> {
+                                String imageUrl = uri.toString();
+
+                                Recipe newRecipe = new Recipe(recipeId, userId, imageUrl, recipeName, hours, minutes, selectedSpinnerItem,
+                                        servings, ingredientList, cookingSteps, recipeURL, 0);
+
+//                                    Map<String, Object> recipeData = new HashMap<>();
+//                                    recipeData.put("image", imageUrl);
+//                                    recipeData.put("recipeName", recipeName);
+//                                    recipeData.put("hours", hours);
+//                                    recipeData.put("minutes", minutes);
+//                                    recipeData.put("selectedSpinnerItem", selectedSpinnerItem);
+//                                    recipeData.put("servings", servings);
+//                                    recipeData.put("ingredientList", ingredientList);
+//                                    recipeData.put("cookingSteps", cookingSteps);
+//                                    recipeData.put("recipeURL", recipeURL);
+
+                                db.collection("recipes")
+                                        .add(newRecipe)
+                                        .addOnSuccessListener(documentReference -> {
+                                            Log.d(TAG, "Recipe added with ID: " + documentReference.getId());
+                                            showToast("Recipe uploaded successfully");
+                                            dialog.dismiss();
+
+                                            Intent intent = new Intent(getActivity(), RecipeDetailActivity.class);
+                                            intent.putExtra("recipe", newRecipe);
+                                            startActivity(intent);
+
+                                            uploadedImageView.setImageResource(R.drawable.img_placeholder);
+                                            editTextRecipeName.setText("");
+                                            editTextHours.setText("");
+                                            editTextMinutes.setText("");
+                                            editTextServings.setText("");
+                                            ingredientList.clear();
+                                            ingredientAdapter.notifyDataSetChanged();
+                                            editTextCookingSteps.setText("");
+                                            editTextRecipeURL.setText("");
+                                        })
+                                        .addOnFailureListener(e -> {
+                                            Log.w(TAG, "Error adding recipe", e);
+                                            showToast("Failed to upload recipe");
+                                        });
+
+                            }).addOnFailureListener(exception -> {
+                                Log.e(TAG, "Error getting download URL");
+                            });
+                        })
+                        .addOnFailureListener(exception -> {
+                            Log.e(TAG, "Error uploading recipe image");
+                        });
+
+
+
+
+            }
+        });
+
+        dialog.show();
     }
 
     private static final int PLACEHOLDER_RESOURCE_ID = R.drawable.img_placeholder;
