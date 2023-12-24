@@ -44,4 +44,28 @@
         android:scrollbars="vertical"
         />
 
+    <LinearLayout
+        android:id="@+id/emptyLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="500sp"
+        android:paddingTop="200sp"
+        android:orientation="vertical"
+        android:layout_gravity="center"
+      >
+
+        <ImageView
+            android:layout_width="150sp"
+            android:layout_height="150sp"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_empty_plate"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:fontFamily="@font/poppins_medium"
+            android:textSize="16sp"
+            android:text="Start uploading new recipes"/>
+    </LinearLayout>
+
 </LinearLayout>

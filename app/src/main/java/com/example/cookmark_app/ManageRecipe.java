@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.cookmark_app.adapter.ManageRecipeAdapter;
@@ -95,6 +96,17 @@ public class ManageRecipe extends AppCompatActivity {
         recipeList.clear();
         recipeList.addAll(recipes);
         recipeAdapter.notifyDataSetChanged();
+
+        LinearLayout emptyLayout = findViewById(R.id.emptyLayout);
+        RecyclerView recyclerView = findViewById(R.id.recyclerViewRecipe);
+        if (recipes.isEmpty()) {
+            emptyLayout.setVisibility(View.VISIBLE);
+            recyclerView.setVisibility(View.GONE);
+
+        } else {
+            emptyLayout.setVisibility(View.GONE);
+            recyclerView.setVisibility(View.VISIBLE);
+        }
     }
 
 }
