@@ -40,6 +40,8 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseApp;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.firestore.DocumentReference;
@@ -124,7 +126,7 @@ public class UploadFragment extends Fragment {
     private Button btnUploadRecipe;
     private String selectedSpinnerItem, imagePath;
     private Uri imageUri;
-
+    private String userId;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -201,6 +203,12 @@ public class UploadFragment extends Fragment {
         FirebaseStorage storage = FirebaseStorage.getInstance();
         StorageReference storageRef = storage.getReference();
 
+        Bundle bundle = getArguments();
+        if (bundle != null) {
+            userId = bundle.getString("user_id");
+            Log.d("Upload Fragment -> ", "User ID: " + userId);
+        }
+
         btnUploadRecipe = view.findViewById(R.id.btnUploadRecipe);
 
         btnUploadRecipe.setOnClickListener(new View.OnClickListener() {
@@ -249,7 +257,7 @@ public class UploadFragment extends Fragment {
                                 imageRef.getDownloadUrl().addOnSuccessListener(uri -> {
                                     String imageUrl = uri.toString();
 
-                                    Recipe newRecipe = new Recipe(recipeId, imageUrl, recipeName, hours, minutes, selectedSpinnerItem,
+                                    Recipe newRecipe = new Recipe(recipeId, userId, imageUrl, recipeName, hours, minutes, selectedSpinnerItem,
                                     servings, ingredientList, cookingSteps, recipeURL, 0);
 
 //                                    Map<String, Object> recipeData = new HashMap<>();
