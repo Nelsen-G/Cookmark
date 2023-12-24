@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -21,6 +22,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
@@ -51,7 +53,7 @@ import java.util.UUID;
 
 public class EditRecipeActivity extends AppCompatActivity {
     private IngredientAdapter ingredientAdapter;
-    private String selectedSpinnerItem, imageUrl, recipeId;
+    private String selectedSpinnerItem, imageUrl, recipeId, recipeName, cookingSteps, recipeURL;
     private ArrayList<Ingredient> ingredients;
     private ActivityResultLauncher<Intent> pickImageLauncher;
     private Uri imageUri;
@@ -163,7 +165,7 @@ public class EditRecipeActivity extends AppCompatActivity {
             public void onClick(View view) {
                 StorageReference imageRef = storageRef.child("images/" + UUID.randomUUID() + ".jpg");
 
-                String recipeName = editTextRecipeName.getText().toString();
+                recipeName = editTextRecipeName.getText().toString();
 
                 hours = 0;
                 String hoursText = editTextHours.getText().toString();
@@ -183,9 +185,9 @@ public class EditRecipeActivity extends AppCompatActivity {
                     servings = Integer.parseInt(servingsText);
                 }
 
-                String cookingSteps = editTextCookingSteps.getText().toString();
+                cookingSteps = editTextCookingSteps.getText().toString();
 
-                String recipeURL = editTextRecipeURL.getText().toString();
+                recipeURL = editTextRecipeURL.getText().toString();
 
                 if (validateInputs()) {
                     if (imageUri == null && TextUtils.isEmpty(imageUrl)) {
@@ -193,11 +195,7 @@ public class EditRecipeActivity extends AppCompatActivity {
                         return;
                     }
 
-                    if (imageUri != null) {
-                        uploadImageAndRecipe(recipeName, hours, minutes, servings, ingredients, cookingSteps, recipeURL);
-                    } else {
-                        updateRecipeDetails(recipeName, hours, minutes, servings, ingredients, cookingSteps, recipeURL);
-                    }
+                    showUpdateConfirmationDialog();
                 }
 
             }
@@ -208,11 +206,79 @@ public class EditRecipeActivity extends AppCompatActivity {
         btnDeleteRecipe.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                deleteRecipe();
+                showDeleteConfirmationDialog();
+
+//                deleteRecipe();
             }
         });
 
 
+    }
+
+    private void showUpdateConfirmationDialog(){
+        Dialog dialog = new Dialog(this);
+        dialog.setContentView(R.layout.custom_dialog);
+        TextView dialogTitle = dialog.findViewById(R.id.dialogTitle);
+        TextView dialogContent = dialog.findViewById(R.id.dialogContent);
+        Button btnNo = dialog.findViewById(R.id.btnNo);
+        Button btnYes = dialog.findViewById(R.id.btnYes);
+
+        dialogTitle.setText("Update Recipe");
+        dialogContent.setText("Are you sure you want to update this recipe?");
+
+        btnNo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+
+        btnYes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (imageUri != null) {
+                    uploadImageAndRecipe(recipeName, hours, minutes, servings, ingredients, cookingSteps, recipeURL);
+                } else {
+                    updateRecipeDetails(recipeName, hours, minutes, servings, ingredients, cookingSteps, recipeURL);
+                }
+
+
+                dialog.dismiss();
+
+
+            }
+        });
+
+        dialog.show();
+    }
+
+    private void showDeleteConfirmationDialog(){
+        Dialog dialog = new Dialog(this);
+        dialog.setContentView(R.layout.custom_dialog);
+        TextView dialogTitle = dialog.findViewById(R.id.dialogTitle);
+        TextView dialogContent = dialog.findViewById(R.id.dialogContent);
+        Button btnNo = dialog.findViewById(R.id.btnNo);
+        Button btnYes = dialog.findViewById(R.id.btnYes);
+
+        dialogTitle.setText("Delete Recipe");
+        dialogContent.setText("Are you sure you want to delete this recipe?");
+
+        btnNo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+
+        btnYes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+                deleteRecipe();
+            }
+        });
+
+        dialog.show();
     }
 
     private void deleteRecipe() {
