@@ -162,7 +162,7 @@
                 android:paddingTop="12sp"
                 android:paddingBottom="12sp"
                 android:paddingRight="18sp"
-
+                android:maxLength="2"
                 android:layout_marginEnd="9sp"/>
 
             <TextView
@@ -190,6 +190,7 @@
                 android:paddingTop="12sp"
                 android:paddingBottom="12sp"
                 android:paddingRight="18sp"
+                android:maxLength="2"
                 android:layout_marginStart="9sp"/>
         </LinearLayout>
 
@@ -251,6 +252,7 @@
             android:fontFamily="@font/poppins_medium"
             android:textColor="@color/greyHint"
             android:inputType="number"
+            android:maxLength="3"
             android:paddingLeft="18sp"
             android:paddingTop="12sp"
             android:paddingBottom="12sp"
