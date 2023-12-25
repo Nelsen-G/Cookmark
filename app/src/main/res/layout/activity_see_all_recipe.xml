@@ -28,6 +28,7 @@
             android:layout_gravity="center"
             android:textColor="@color/purple"
             android:textSize="20sp"
+            android:maxWidth="260dp"
             android:fontFamily="@font/poppins_medium"
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
@@ -51,13 +52,16 @@
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/seeall_rv"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="17dp"
-                android:layout_marginEnd="10dp"
+                android:layout_weight="1"
+                android:clipToPadding="false"
+                android:nestedScrollingEnabled="true"
+                android:layout_gravity="center_horizontal"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/seeall_constraintLayout" />
+                app:layout_constraintTop_toTopOf="@+id/seeall_constraintLayout"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

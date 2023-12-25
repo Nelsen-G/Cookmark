@@ -2,9 +2,14 @@ package com.example.cookmark_app;
 
 import static android.content.ContentValues.TAG;
 
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.GradientDrawable;
+import android.graphics.drawable.LayerDrawable;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -13,6 +18,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
@@ -62,11 +68,18 @@ public class RecipeDetailActivity extends AppCompatActivity {
             TextView recipeUrl = findViewById(R.id.detail_url_tv);
             ImageView recipePhoto = findViewById(R.id.detail_photo_iv);
             ImageView recipeCookmarkIcon = findViewById(R.id.detail_cookmark);
+
             int placeholderImage = R.drawable.img_placeholder;
 
             titleToolbar.setText(recipe.getRecipeName());
             recipeTitle.setText(recipe.getRecipeName());
-            recipeTimeToMake.setText(String.valueOf(recipe.getHours()) + " hr");
+            if (recipe.getHours() == 0) {
+                recipeTimeToMake.setText(String.valueOf(recipe.getMinutes()) + " minutes");
+            } else if (recipe.getHours() == 1) {
+                recipeTimeToMake.setText(String.valueOf(recipe.getHours()) + " hour " + recipe.getMinutes() + " minutes");
+            } else {
+                recipeTimeToMake.setText(String.valueOf(recipe.getHours()) + " hours " + recipe.getMinutes() + " minutes");
+            }
             recipeFoodtype.setText(recipe.getFoodType());
             recipeServings.setText(String.valueOf(recipe.getServings()) + " Servings");
             recipeCookingSteps.setText(recipe.getCookingSteps());
@@ -84,10 +97,20 @@ public class RecipeDetailActivity extends AppCompatActivity {
 
             List<Ingredient> ingredientsList = recipe.getIngredientListFromString(recipe.getIngredientListAsString());
             if (ingredientsList != null) {
+//                tagContainer.setLayoutManager(new GridLayoutManager(this, 2));
+//                tagAdapter = new TagTypeAdapter(new ArrayList<>(ingredientsList));
+//                tagContainer.setAdapter(tagAdapter);
+//                adjustTagContainerWidth(tagContainer);
+
+                // Use StaggeredGridLayoutManager with span count 2
+                StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
+                tagContainer.setLayoutManager(layoutManager);
+
+                // Set the adapter as before
                 tagAdapter = new TagTypeAdapter(new ArrayList<>(ingredientsList));
+                tagContainer.setAdapter(tagAdapter);
+
             }
-            tagContainer.setAdapter(tagAdapter);
-            tagContainer.setLayoutManager(new GridLayoutManager(this, 2));
 
             boolean currentCookmarkStatus = CookmarkStatusManager.getInstance().getCookmarkStatus(recipe.getRecipeId());
 
@@ -114,6 +137,19 @@ public class RecipeDetailActivity extends AppCompatActivity {
         }
 
     }
+
+    private void adjustTagContainerWidth(RecyclerView tagContainer) {
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+        int parentWidth = displayMetrics.widthPixels;
+        int newWidth = (int) (parentWidth * 0.3);
+
+        ViewGroup.LayoutParams layoutParams = tagContainer.getLayoutParams();
+        layoutParams.width = newWidth;
+        layoutParams.height = ViewGroup.LayoutParams.WRAP_CONTENT;  // Set height to wrap_content
+        tagContainer.setLayoutParams(layoutParams);
+    }
+
 
     private void loadRecipeDetails(String recipeId) {
         FirebaseFirestore db = FirebaseFirestore.getInstance();

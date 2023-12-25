@@ -32,6 +32,7 @@
             android:fontFamily="@font/poppins_medium"
             android:layout_marginStart="20dp"
             android:layout_marginEnd="20dp"
+            android:maxWidth="260dp"
             android:ellipsize="end"
             android:maxLines="1"
             android:text=""/>
@@ -60,15 +61,17 @@
 
             <TextView
                 android:id="@+id/detail_title_tv"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
+                android:layout_marginEnd="20dp"
                 android:layout_marginTop="20dp"
                 android:fontFamily="@font/poppins_medbold"
-                android:text=""
+                android:text="Testestestestestestestesteste"
                 android:textColor="@color/purple"
                 android:textSize="32sp"
                 app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/detail_photo_iv" />
 
             <TextView
@@ -78,7 +81,7 @@
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="10dp"
                 android:fontFamily="@font/poppins_medium"
-                android:text=""
+                android:text="Time to make"
                 android:textColor="@color/purple"
                 android:textSize="20sp"
                 app:layout_constraintStart_toStartOf="parent"
@@ -91,7 +94,7 @@
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="20dp"
                 android:fontFamily="@font/poppins_medium"
-                android:text=""
+                android:text="Food Type"
                 android:textColor="@color/purple"
                 android:textSize="20sp"
                 app:layout_constraintStart_toStartOf="parent"
@@ -104,7 +107,7 @@
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="20dp"
                 android:fontFamily="@font/poppins_medium"
-                android:text=""
+                android:text="Servings"
                 android:textColor="@color/purple"
                 android:textSize="20sp"
                 app:layout_constraintStart_toStartOf="parent"
@@ -176,7 +179,7 @@
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="20dp"
                 android:fontFamily="@font/poppins_medium"
-                android:text=""
+                android:text="Ingredients"
                 android:textColor="@color/purple"
                 android:textSize="20sp"
                 app:layout_constraintStart_toStartOf="parent"
@@ -184,14 +187,29 @@
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/tag_container"
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="4dp"
                 android:layout_marginStart="10dp"
                 android:layout_marginEnd="10dp"
-                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginBottom="4dp"
                 app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/detail_ingredient"/>
+
+
+            <!--            <androidx.recyclerview.widget.RecyclerView-->
+<!--                android:id="@+id/tag_container"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginTop="4dp"-->
+<!--                android:layout_marginStart="10dp"-->
+<!--                android:layout_marginEnd="10dp"-->
+<!--                android:layout_marginBottom="4dp"-->
+<!--                android:background="@drawable/tag_ingredients"-->
+<!--                app:layout_constraintEnd_toEndOf="parent"-->
+<!--                app:layout_constraintStart_toStartOf="parent"-->
+<!--                app:layout_constraintTop_toBottomOf="@+id/detail_ingredient"/>-->
 
             <TextView
                 android:id="@+id/detail_steps"
@@ -200,7 +218,7 @@
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="20dp"
                 android:fontFamily="@font/poppins_medium"
-                android:text=""
+                android:text="Cooking Steps"
                 android:textColor="@color/purple"
                 android:textSize="20sp"
                 app:layout_constraintStart_toStartOf="parent"
@@ -226,7 +244,7 @@
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="20dp"
                 android:fontFamily="@font/poppins_medium"
-                android:text=""
+                android:text="Recipe URL"
                 android:textColor="@color/purple"
                 android:textSize="20sp"
                 app:layout_constraintStart_toStartOf="parent"

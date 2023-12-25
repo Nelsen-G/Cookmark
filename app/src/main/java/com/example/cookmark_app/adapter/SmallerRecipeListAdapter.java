@@ -39,7 +39,6 @@ public class SmallerRecipeListAdapter extends RecyclerView.Adapter<SmallerRecipe
     private Context context;
     private FragmentManager fragmentManager;
     private CookmarkStatusManager cookmarkStatusManager;
-
     private String userId;
 
     public SmallerRecipeListAdapter(ArrayList<Recipe> items, FragmentManager fragmentManager, String userId) {
@@ -106,8 +105,8 @@ public class SmallerRecipeListAdapter extends RecyclerView.Adapter<SmallerRecipe
             foodtypeTxt.setText(recipe.getFoodType());
             int servings = recipe.getServings();
             servingsTxt.setText(String.valueOf(servings));
-            int minutes = recipe.getMinutes();
-            durationTxt.setText(String.valueOf(minutes) + " min");
+            int totalMinutes = recipe.getTotalMinutes();
+            durationTxt.setText(String.valueOf(totalMinutes) + " min");
             int cookmarkCount = recipe.getCookmarkCount();
             cookmarksTxt.setText(String.valueOf(cookmarkCount) + " Cookmarked");
 
