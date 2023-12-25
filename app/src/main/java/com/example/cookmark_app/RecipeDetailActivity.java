@@ -97,19 +97,10 @@ public class RecipeDetailActivity extends AppCompatActivity {
 
             List<Ingredient> ingredientsList = recipe.getIngredientListFromString(recipe.getIngredientListAsString());
             if (ingredientsList != null) {
-//                tagContainer.setLayoutManager(new GridLayoutManager(this, 2));
-//                tagAdapter = new TagTypeAdapter(new ArrayList<>(ingredientsList));
-//                tagContainer.setAdapter(tagAdapter);
-//                adjustTagContainerWidth(tagContainer);
-
-                // Use StaggeredGridLayoutManager with span count 2
                 StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
                 tagContainer.setLayoutManager(layoutManager);
-
-                // Set the adapter as before
                 tagAdapter = new TagTypeAdapter(new ArrayList<>(ingredientsList));
                 tagContainer.setAdapter(tagAdapter);
-
             }
 
             boolean currentCookmarkStatus = CookmarkStatusManager.getInstance().getCookmarkStatus(recipe.getRecipeId());
