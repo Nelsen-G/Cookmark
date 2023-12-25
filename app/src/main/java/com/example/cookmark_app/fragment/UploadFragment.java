@@ -233,7 +233,7 @@ public class UploadFragment extends Fragment {
                     hours = Integer.parseInt(hoursText);
                 }
 
-                editTextMinutes = view.findViewById(R.id.editTextHours);
+                editTextMinutes = view.findViewById(R.id.editTextMinutes);
                 minutes = 0;
                 String minutesText = editTextMinutes.getText().toString();
                 if (!minutesText.isEmpty()) {
