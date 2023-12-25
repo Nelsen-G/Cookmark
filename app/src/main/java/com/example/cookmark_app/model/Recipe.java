@@ -21,9 +21,10 @@ public class Recipe implements Serializable {
     private String cookingSteps;
     private String recipeURL;
     private int cookmarkCount;
+    private int totalMinutes;
 
     public Recipe(String recipeId, String userId, String recipeImage, String recipeName, int hours, int minutes, String foodType,
-                  int servings, ArrayList<Ingredient> ingredientList, String cookingSteps, String recipeURL, int cookmarkCount) {
+                  int servings, ArrayList<Ingredient> ingredientList, String cookingSteps, String recipeURL, int cookmarkCount, int totalMinutes) {
         this.recipeId = recipeId;
         this.userId = userId;
         this.recipeImage = recipeImage;
@@ -36,6 +37,7 @@ public class Recipe implements Serializable {
         this.cookingSteps = cookingSteps;
         this.recipeURL = recipeURL;
         this.cookmarkCount = cookmarkCount;
+        this.totalMinutes = totalMinutes;
     }
 
     public Recipe() {
@@ -176,6 +178,14 @@ public class Recipe implements Serializable {
         Gson gson = new Gson();
         Type type = new TypeToken<ArrayList<Ingredient>>() {}.getType();
         this.ingredientList = gson.fromJson(ingredientsAsString, type);
+    }
+
+    public int getTotalMinutes() {
+        return totalMinutes;
+    }
+
+    public void setTotalMinutes(int totalMinutes) {
+        this.totalMinutes = totalMinutes;
     }
 }
 

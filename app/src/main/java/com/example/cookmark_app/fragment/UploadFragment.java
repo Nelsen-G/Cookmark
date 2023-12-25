@@ -317,7 +317,7 @@ public class UploadFragment extends Fragment {
                                 String imageUrl = uri.toString();
 
                                 Recipe newRecipe = new Recipe(recipeId, userId, imageUrl, recipeName, hours, minutes, selectedSpinnerItem,
-                                        servings, ingredientList, cookingSteps, recipeURL, 0);
+                                        servings, ingredientList, cookingSteps, recipeURL, 0, 0);
 
 //                                    Map<String, Object> recipeData = new HashMap<>();
 //                                    recipeData.put("image", imageUrl);

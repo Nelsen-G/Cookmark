@@ -107,8 +107,8 @@ public class RegularRecipeListAdapter extends RecyclerView.Adapter<RegularRecipe
             foodtypeTxt.setText(recipe.getFoodType());
             int servings = recipe.getServings();
             servingsTxt.setText(String.valueOf(servings));
-            int minutes = recipe.getMinutes();
-            durationTxt.setText(String.valueOf(minutes) + " min");
+            int totalMinutes = recipe.getTotalMinutes();
+            durationTxt.setText(String.valueOf(totalMinutes) + " min");
             int cookmarkCount = recipe.getCookmarkCount();
             cookmarksTxt.setText(String.valueOf(cookmarkCount) + " Cookmarked");
 
@@ -136,7 +136,6 @@ public class RegularRecipeListAdapter extends RecyclerView.Adapter<RegularRecipe
                     }
                 }
             });
-
 
             String imageUrl = recipe.getRecipeImage();
             int placeholderImage = R.drawable.img_placeholder;
@@ -185,7 +184,7 @@ public class RegularRecipeListAdapter extends RecyclerView.Adapter<RegularRecipe
                                         db.collection("cookmarks")
                                                 .document(document.getId())
                                                 .delete();
-                                        String toastMessage = "Oppss you've already uncookmark a recipe";
+                                        String toastMessage = "Oopss you've already uncookmark a recipe";
                                         Toast.makeText(itemView.getContext(), toastMessage, Toast.LENGTH_SHORT).show();
                                     }
                                 }
@@ -291,9 +290,9 @@ public class RegularRecipeListAdapter extends RecyclerView.Adapter<RegularRecipe
         return cookmarkStatusManager.getCookmarkStatus(recipeId);
     }
 
-    private void setCookmarkStatus(String recipeId, boolean isCookmarked) {
-        cookmarkStatusManager.setCookmarkStatus(recipeId, isCookmarked);
-    }
+//    private void setCookmarkStatus(String recipeId, boolean isCookmarked) {
+//        cookmarkStatusManager.setCookmarkStatus(recipeId, isCookmarked);
+//    }
 }
 
 

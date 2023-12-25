@@ -1,5 +1,6 @@
 package com.example.cookmark_app;
 
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -13,6 +14,8 @@ import com.example.cookmark_app.adapter.SmallerRecipeListAdapter;
 import com.example.cookmark_app.model.Recipe;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 public class AllTrendingRecipeActivity extends AppCompatActivity {
     private RecyclerView recyclerViewRecipe;
@@ -31,6 +34,10 @@ public class AllTrendingRecipeActivity extends AppCompatActivity {
         TextView titleToolBar = findViewById(R.id.seeall_toolbar_title_tv);
 
         titleToolBar.setText("All Trendings");
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            Collections.sort(items, Comparator.comparingInt(Recipe::getCookmarkCount).reversed());
+        }
 
         initializeRecyclerView(items);
 
