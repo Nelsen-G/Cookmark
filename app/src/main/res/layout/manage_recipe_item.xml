@@ -8,7 +8,7 @@
     android:orientation="horizontal"
     android:background="@drawable/button_field"
     android:layout_marginBottom="14sp"
-    tools:context=".MainActivity">
+    tools:context=".activity.MainActivity">
 
     <!-- Recipe Image -->
     <com.google.android.material.card.MaterialCardView

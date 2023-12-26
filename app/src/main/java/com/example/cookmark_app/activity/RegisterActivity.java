@@ -1,4 +1,4 @@
-package com.example.cookmark_app;
+package com.example.cookmark_app.activity;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -10,6 +10,7 @@ import android.util.Patterns;
 import android.view.View;
 import android.widget.Toast;
 
+import com.example.cookmark_app.R;
 import com.example.cookmark_app.databinding.ActivityRegisterBinding;
 import com.example.cookmark_app.model.User;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -17,14 +18,10 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseApp;
-import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
 
-import java.util.List;
 import java.util.UUID;
 
 public class RegisterActivity extends AppCompatActivity {

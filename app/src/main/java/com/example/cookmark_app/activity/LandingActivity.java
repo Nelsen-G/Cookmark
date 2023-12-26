@@ -1,4 +1,6 @@
-package com.example.cookmark_app;
+package com.example.cookmark_app.activity;
+
+import static com.google.firebase.appcheck.internal.util.Logger.TAG;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -15,6 +17,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.cookmark_app.R;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -28,11 +31,12 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 import java.util.HashMap;
 import java.util.Objects;
 
-public class Landing extends AppCompatActivity {
+public class LandingActivity extends AppCompatActivity {
     FirebaseAuth auth;
     FirebaseDatabase database;
     GoogleSignInClient googleSignInClient;
@@ -43,11 +47,24 @@ public class Landing extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_landing);
 
+//        Ini buat nampilin FCM Regist token di log nnti, buat dipake push notif ke device tersebut
+//        FirebaseMessaging.getInstance().getToken()
+//                .addOnCompleteListener(new OnCompleteListener<String>() {
+//                    @Override
+//                    public void onComplete(@NonNull Task<String> task) {
+//                        String token = task.getResult();
+//
+//                        String msg = getString(R.string.msg_token_fmt, token);
+//                        Log.d(TAG, msg);
+//                        Toast.makeText(LandingActivity.this, msg, Toast.LENGTH_SHORT).show();
+//                    }
+//                });
+
         TextView logInButton = findViewById(R.id.buttonLogIn);
         logInButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent it = new Intent(Landing.this, LoginActivity.class);
+                Intent it = new Intent(LandingActivity.this, LoginActivity.class);
                 startActivity(it);
             }
         });
@@ -56,7 +73,7 @@ public class Landing extends AppCompatActivity {
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent it = new Intent(Landing.this, RegisterActivity.class);
+                Intent it = new Intent(LandingActivity.this, RegisterActivity.class);
                 startActivity(it);
             }
         });
@@ -133,10 +150,10 @@ public class Landing extends AppCompatActivity {
 
                             database.getReference().child("users").child(user.getUid()).setValue(map);
 
-                            Intent intent = new Intent(Landing.this, MainActivity.class);
+                            Intent intent = new Intent(LandingActivity.this, MainActivity.class);
                             startActivity(intent);
                         } else {
-                            Toast.makeText(Landing.this, "Something went wrong", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(LandingActivity.this, "Something went wrong", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
