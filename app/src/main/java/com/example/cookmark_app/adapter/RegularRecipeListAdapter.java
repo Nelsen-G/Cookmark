@@ -19,7 +19,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.GranularRoundedCorners;
 import com.example.cookmark_app.R;
-import com.example.cookmark_app.RecipeDetailActivity;
+import com.example.cookmark_app.activity.RecipeDetailActivity;
 import com.example.cookmark_app.model.Cookmark;
 import com.example.cookmark_app.model.Recipe;
 import com.example.cookmark_app.utils.CookmarkStatusManager;
@@ -33,8 +33,6 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 public class RegularRecipeListAdapter extends RecyclerView.Adapter<RegularRecipeListAdapter.ViewHolder> {
     private ArrayList<Recipe> items;

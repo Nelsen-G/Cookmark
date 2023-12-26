@@ -15,46 +15,46 @@
         android:theme="@style/Theme.Cookmark_App"
         tools:targetApi="31">
         <activity
-            android:name=".MightLikeRecipeActivity"
+            android:name=".activity.MightLikeRecipeActivity"
             android:exported="false" />
         <activity
-            android:name=".QuickRecipeActivity"
+            android:name=".activity.QuickRecipeActivity"
             android:exported="false" />
         <activity
-            android:name=".AllTrendingRecipeActivity"
+            android:name=".activity.AllTrendingRecipeActivity"
             android:exported="false" />
         <activity
-            android:name=".RecipeDetailActivity"
+            android:name=".activity.RecipeDetailActivity"
             android:exported="false" />
         <activity
-            android:name=".EditRecipeActivity"
+            android:name=".activity.EditRecipeActivity"
             android:exported="false" />
         <activity
-            android:name=".ManageRecipe"
+            android:name=".activity.ManageRecipeActivity"
             android:exported="false" />
         <activity
-            android:name=".RegisterActivity"
+            android:name=".activity.RegisterActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".LoginActivity"
+            android:name=".activity.LoginActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".MainActivity"
+            android:name=".activity.MainActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".Landing"
+            android:name=".activity.LandingActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -67,7 +67,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".About"
+            android:name=".activity.AboutActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -80,7 +80,7 @@
                 android:value="" />
         </activity>
         <service
-            android:name=".MyService"
+            android:name=".utils.NotificationService"
             android:exported="false">
 
             <intent-filter>

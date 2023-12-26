@@ -1,4 +1,4 @@
-package com.example.cookmark_app;
+package com.example.cookmark_app.activity;
 
 import static android.content.ContentValues.TAG;
 
@@ -26,6 +26,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.example.cookmark_app.R;
 import com.example.cookmark_app.adapter.CustomSpinnerAdapter;
 import com.example.cookmark_app.adapter.IngredientAdapter;
 import com.example.cookmark_app.model.Ingredient;
@@ -33,9 +34,6 @@ import com.example.cookmark_app.model.Recipe;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.common.reflect.TypeToken;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
@@ -352,7 +350,7 @@ public class EditRecipeActivity extends AppCompatActivity {
                                 .addOnSuccessListener(aVoid -> {
                                     Log.d(TAG, "Recipe updated successfully");
                                     showToast("Recipe updated successfully");
-                                    Intent intent = new Intent(EditRecipeActivity.this, ManageRecipe.class);
+                                    Intent intent = new Intent(EditRecipeActivity.this, ManageRecipeActivity.class);
                                     startActivity(intent);
                                 })
                                 .addOnFailureListener(e -> {

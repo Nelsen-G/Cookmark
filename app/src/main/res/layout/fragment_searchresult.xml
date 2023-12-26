@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".ManageRecipe">
+    tools:context=".activity.ManageRecipeActivity">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/detail_toolbar"
@@ -41,7 +41,6 @@
             android:id="@+id/ingreSearchRv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:layout_margin="8dp"
             android:clipToPadding="false"
             android:scrollbars="vertical"
@@ -55,7 +54,6 @@
             android:id="@+id/searchResultRv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:layout_margin="8dp"
             android:clipToPadding="false"
             android:scrollbars="vertical"

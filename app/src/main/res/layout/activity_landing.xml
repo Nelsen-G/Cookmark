@@ -6,7 +6,7 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:layout_gravity="center"
-    tools:context=".Landing">
+    tools:context=".activity.LandingActivity">
 
     <TextView
         android:id="@+id/textViewGreeting"
@@ -101,7 +101,7 @@
                 android:alpha="0.5"
                 android:fontFamily="@font/poppins_medium"
                 android:paddingBottom="22dp"
-                android:text="@string/HorizontalLineOr1"
+                android:text="@string/HorizontalLineOr"
                 android:textColor="@color/black"
                 android:textSize="16sp" />
 
@@ -123,7 +123,7 @@
                 android:alpha="0.5"
                 android:fontFamily="@font/poppins_medium"
                 android:paddingBottom="22dp"
-                android:text="@string/HorizontalLineOr2"
+                android:text="@string/HorizontalLineOr"
                 android:textColor="@color/black"
                 android:textSize="16sp" />
         </LinearLayout>

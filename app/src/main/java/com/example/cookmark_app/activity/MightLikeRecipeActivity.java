@@ -1,23 +1,21 @@
-package com.example.cookmark_app;
-
-import android.os.Build;
-import android.os.Bundle;
-import android.view.View;
-import android.widget.ImageView;
-import android.widget.TextView;
+package com.example.cookmark_app.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import com.example.cookmark_app.R;
 import com.example.cookmark_app.adapter.SmallerRecipeListAdapter;
 import com.example.cookmark_app.model.Recipe;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 
-public class AllTrendingRecipeActivity extends AppCompatActivity {
+public class MightLikeRecipeActivity extends AppCompatActivity {
     private RecyclerView recyclerViewRecipe;
     private RecyclerView.Adapter adapterRecipeList;
     private String userId;
@@ -33,11 +31,7 @@ public class AllTrendingRecipeActivity extends AppCompatActivity {
         ImageView backToPrevious = findViewById(R.id.seeall_back_iv);
         TextView titleToolBar = findViewById(R.id.seeall_toolbar_title_tv);
 
-        titleToolBar.setText("All Trendings");
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-            Collections.sort(items, Comparator.comparingInt(Recipe::getCookmarkCount).reversed());
-        }
+        titleToolBar.setText("You might like...");
 
         initializeRecyclerView(items);
 
