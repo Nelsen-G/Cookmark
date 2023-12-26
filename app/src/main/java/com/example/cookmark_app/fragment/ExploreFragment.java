@@ -8,16 +8,15 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.SearchView;
 import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.cookmark_app.AllTrendingRecipeActivity;
-import com.example.cookmark_app.MightLikeRecipeActivity;
-import com.example.cookmark_app.QuickRecipeActivity;
+import com.example.cookmark_app.activity.AllTrendingRecipeActivity;
+import com.example.cookmark_app.activity.MightLikeRecipeActivity;
+import com.example.cookmark_app.activity.QuickRecipeActivity;
 import com.example.cookmark_app.R;
 import com.example.cookmark_app.adapter.RegularRecipeListAdapter;
 import com.example.cookmark_app.model.Ingredient;

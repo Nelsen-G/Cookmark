@@ -1,4 +1,4 @@
-package com.example.cookmark_app;
+package com.example.cookmark_app.activity;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -11,8 +11,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
+import com.example.cookmark_app.R;
 import com.example.cookmark_app.adapter.ManageRecipeAdapter;
 import com.example.cookmark_app.model.Recipe;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -24,7 +24,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ManageRecipe extends AppCompatActivity {
+public class ManageRecipeActivity extends AppCompatActivity {
     private static final String TAG = "ManageRecipe";
     private RecyclerView recyclerView;
     private ManageRecipeAdapter recipeAdapter;
@@ -49,7 +49,7 @@ public class ManageRecipe extends AppCompatActivity {
         recipeAdapter = new ManageRecipeAdapter(recipeList, new ManageRecipeAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(Recipe recipe) {
-                Intent intent = new Intent(ManageRecipe.this, EditRecipeActivity.class);
+                Intent intent = new Intent(ManageRecipeActivity.this, EditRecipeActivity.class);
                 intent.putExtra("recipeId", recipe.getRecipeId());
                 startActivity(intent);
                 finish();

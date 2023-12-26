@@ -1,4 +1,4 @@
-package com.example.cookmark_app;
+package com.example.cookmark_app.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
@@ -8,6 +8,7 @@ import androidx.fragment.app.FragmentTransaction;
 import android.os.Bundle;
 import android.view.Menu;
 
+import com.example.cookmark_app.R;
 import com.example.cookmark_app.databinding.ActivityMainBinding;
 import com.example.cookmark_app.fragment.AccountFragment;
 import com.example.cookmark_app.fragment.CookMarkedFragment;

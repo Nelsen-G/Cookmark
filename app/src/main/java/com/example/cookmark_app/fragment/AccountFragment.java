@@ -17,9 +17,9 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.fragment.app.Fragment;
 
 import com.bumptech.glide.Glide;
-import com.example.cookmark_app.About;
-import com.example.cookmark_app.Landing;
-import com.example.cookmark_app.ManageRecipe;
+import com.example.cookmark_app.activity.AboutActivity;
+import com.example.cookmark_app.activity.LandingActivity;
+import com.example.cookmark_app.activity.ManageRecipeActivity;
 import com.example.cookmark_app.R;
 import com.example.cookmark_app.dialog.EditNameDialog;
 import com.example.cookmark_app.dialog.EditPasswordDialog;
@@ -138,7 +138,7 @@ public class AccountFragment extends Fragment implements EditNameDialog.OnUserna
         manageRecipesButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getActivity(), ManageRecipe.class);
+                Intent intent = new Intent(getActivity(), ManageRecipeActivity.class);
 
                 Bundle bundle = getArguments();
                 if (bundle != null) {
@@ -154,7 +154,7 @@ public class AccountFragment extends Fragment implements EditNameDialog.OnUserna
         aboutPage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intentAbout = new Intent(getActivity(), About.class);
+                Intent intentAbout = new Intent(getActivity(), AboutActivity.class);
                 startActivity(intentAbout);
             }
         });
@@ -165,7 +165,7 @@ public class AccountFragment extends Fragment implements EditNameDialog.OnUserna
             public void onClick(View v) {
                 FirebaseAuth.getInstance().signOut();
                 showToast("You have been logged out");
-                Intent it = new Intent(getActivity(), Landing.class);
+                Intent it = new Intent(getActivity(), LandingActivity.class);
                 startActivity(it);
             }
         });

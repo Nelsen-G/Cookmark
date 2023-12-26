@@ -1,4 +1,4 @@
-package com.example.cookmark_app;
+package com.example.cookmark_app.activity;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;

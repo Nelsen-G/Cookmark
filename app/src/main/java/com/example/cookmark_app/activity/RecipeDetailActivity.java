@@ -1,10 +1,7 @@
-package com.example.cookmark_app;
+package com.example.cookmark_app.activity;
 
 import static android.content.ContentValues.TAG;
 
-import android.graphics.drawable.Drawable;
-import android.graphics.drawable.GradientDrawable;
-import android.graphics.drawable.LayerDrawable;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -16,12 +13,12 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.example.cookmark_app.R;
 import com.example.cookmark_app.adapter.TagTypeAdapter;
 import com.example.cookmark_app.model.Ingredient;
 import com.example.cookmark_app.model.Recipe;

@@ -1,4 +1,4 @@
-package com.example.cookmark_app;
+package com.example.cookmark_app.utils;
 
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
@@ -8,18 +8,23 @@ import android.content.Intent;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Build;
-import android.os.Handler;
-import android.os.Looper;
 import android.util.Log;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.core.app.NotificationCompat;
 
+import com.example.cookmark_app.activity.MainActivity;
+import com.example.cookmark_app.R;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 
-public class MyService extends FirebaseMessagingService {
+public class NotificationService extends FirebaseMessagingService {
+
+    private static final String TAG = "PushNotif";
+
+    public void onNewToken(@NonNull String token) {
+        Log.d(TAG, "Refreshed token: " + token);
+    }
     public void onMessageReceived(RemoteMessage remoteMessage) {
         System.out.println("From: " + remoteMessage.getFrom());
 
