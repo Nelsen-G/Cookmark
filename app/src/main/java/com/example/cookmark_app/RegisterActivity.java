@@ -104,23 +104,46 @@ public class RegisterActivity extends AppCompatActivity {
         });
     }
 
-    public void addNewUser(String username, String email, String password){
+    public void addNewUser(String username, String email, String password) {
         progressDialog.show();
-        String userId = UUID.randomUUID().toString();
-        User newUser = new User (userId, username, email, password);
-        db.collection("users").add(newUser).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-            @Override
-            public void onSuccess(DocumentReference documentReference) {
-                progressDialog.dismiss();
-                Toast.makeText(RegisterActivity.this, "Silahkan Login", Toast.LENGTH_SHORT).show();
-                finish();
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                Toast.makeText(getApplicationContext(), e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
-                progressDialog.dismiss();
-            }
-        });
+
+        db.collection("users")
+                .whereEqualTo("user_name", username)
+                .get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            if (task.getResult().size() > 0) {
+                                Toast.makeText(getApplicationContext(), "Username already in use. Please choose a different one.", Toast.LENGTH_SHORT).show();
+                                progressDialog.dismiss();
+                            } else {
+                                String userId = UUID.randomUUID().toString();
+                                User newUser = new User(userId, username, email, password);
+                                db.collection("users")
+                                        .add(newUser)
+                                        .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                                            @Override
+                                            public void onSuccess(DocumentReference documentReference) {
+                                                progressDialog.dismiss();
+                                                Toast.makeText(RegisterActivity.this, "Registration successful. Please log in.", Toast.LENGTH_SHORT).show();
+                                                finish();
+                                            }
+                                        })
+                                        .addOnFailureListener(new OnFailureListener() {
+                                            @Override
+                                            public void onFailure(@NonNull Exception e) {
+                                                Toast.makeText(getApplicationContext(), e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+                                                progressDialog.dismiss();
+                                            }
+                                        });
+                            }
+                        } else {
+                            Toast.makeText(getApplicationContext(), "Error: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                            progressDialog.dismiss();
+                        }
+                    }
+                });
     }
+
 }
