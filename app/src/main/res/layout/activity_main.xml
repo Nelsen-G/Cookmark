@@ -24,7 +24,7 @@
             android:background="@color/white"
 
             app:menu="@menu/toolbar_menu"
-            android:layout_marginEnd="10dp"
+            app:contentInsetStart="0dp"
             android:layout_alignParentTop="true" />
 
         <FrameLayout

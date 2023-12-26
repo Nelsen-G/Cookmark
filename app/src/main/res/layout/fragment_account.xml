@@ -6,11 +6,9 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
         android:padding="29dp"
         tools:context=".fragment.AccountFragment">
@@ -110,7 +108,7 @@
             android:fontFamily="@font/poppins_medium"
             android:gravity="start"
             android:paddingVertical="14dp"
-            android:paddingLeft="50dp"
+            android:paddingStart="50dp"
             android:text="Change profile picture              >"
             android:textAllCaps="false"
             android:textColor="@color/purple"
@@ -125,7 +123,7 @@
             android:fontFamily="@font/poppins_medium"
             android:gravity="start"
             android:paddingVertical="14dp"
-            android:paddingLeft="50dp"
+            android:paddingStart="50dp"
             android:text="Change username                     >"
             android:textAllCaps="false"
             android:textColor="@color/purple"
@@ -140,7 +138,7 @@
             android:fontFamily="@font/poppins_medium"
             android:gravity="start"
             android:paddingVertical="14dp"
-            android:paddingLeft="50dp"
+            android:paddingStart="50dp"
             android:text="Change password                     >"
             android:textAllCaps="false"
             android:textColor="@color/purple"
@@ -164,7 +162,7 @@
             android:layout_marginTop="6dp"
             android:background="@drawable/button_settings"
             android:fontFamily="@font/poppins_medium"
-            android:paddingLeft="30dp"
+            android:paddingStart="30dp"
             android:text="Manage Recipes"
             android:textAlignment="viewStart"
             android:textAllCaps="false"
@@ -191,7 +189,7 @@
             android:layout_marginTop="6dp"
             android:background="@drawable/button_about"
             android:fontFamily="@font/poppins_medium"
-            android:paddingLeft="30dp"
+            android:paddingStart="30dp"
             android:text="About Cookmark"
             android:textAlignment="viewStart"
             android:textAllCaps="false"
@@ -204,17 +202,16 @@
             app:iconSize="20dp"
             app:iconTint="@color/orange" />
 
-
         <TextView
             android:id="@+id/versionText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="30dp"
+            android:layout_marginBottom="60dp"
             android:fontFamily="@font/poppins_medium"
             android:text="Cookmark v.1"
             android:textColor="@color/text_gray"
             android:textSize="12sp" />
-
     </LinearLayout>
 </ScrollView>
