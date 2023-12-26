@@ -67,7 +67,7 @@ public class LoginActivity extends AppCompatActivity {
                                                 Toast.makeText(LoginActivity.this, "User id not valid!", Toast.LENGTH_SHORT).show();
                                             }
                                         } else {
-                                            Toast.makeText(LoginActivity.this, "User not found!", Toast.LENGTH_SHORT).show();
+                                            Toast.makeText(LoginActivity.this, "User not found or invalid credentials!", Toast.LENGTH_SHORT).show();
                                         }
                                     } else {
                                         Toast.makeText(LoginActivity.this, "Login failed. Please try again.", Toast.LENGTH_SHORT).show();

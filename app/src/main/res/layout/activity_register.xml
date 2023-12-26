@@ -100,7 +100,7 @@
             android:layout_weight="1"
             android:background="@null"
             android:fontFamily="@font/poppins_medium"
-            android:hint="Enter your Email"
+            android:hint="Enter your email"
             android:inputType="textEmailAddress"
             android:textColor="@color/black"
             android:textColorHint="#DDAAAAAA" />

@@ -4,7 +4,6 @@
     <item
         android:title="Account"
         android:id="@+id/mnAccount"
-        android:icon="@drawable/toolbar_account"
-        app:showAsAction="ifRoom"
-        />
+        android:icon="@drawable/ic_settings"
+        app:showAsAction="ifRoom" />
 </menu>

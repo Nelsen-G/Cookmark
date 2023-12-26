@@ -6,7 +6,8 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:layout_gravity="center"
-    android:padding="40dp"
+    android:gravity="center"
+    android:paddingHorizontal="40dp"
     tools:context=".LoginActivity">
 
     <TextView
@@ -28,6 +29,7 @@
         android:fontFamily="@font/poppins_medium"
         android:textColor="@color/purple"
         android:textSize="13sp"
+        android:layout_gravity="start"
         android:text="Email" />
 
     <LinearLayout
@@ -69,6 +71,7 @@
         android:fontFamily="@font/poppins_medium"
         android:textColor="@color/purple"
         android:textSize="13sp"
+        android:layout_gravity="start"
         android:text="Password" />
 
     <LinearLayout
