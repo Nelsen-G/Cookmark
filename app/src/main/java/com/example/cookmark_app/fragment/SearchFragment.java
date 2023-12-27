@@ -2,6 +2,8 @@ package com.example.cookmark_app.fragment;
 
 import android.os.Bundle;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -47,6 +49,10 @@ public class SearchFragment extends Fragment implements OnItemClickCallback {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+        AppCompatActivity activity = (AppCompatActivity) getActivity();
+        Toolbar toolbar = activity.findViewById(R.id.toolbar);
+        toolbar.setVisibility(View.VISIBLE);
 
         // fill the arraylist
         fillIngredientData();

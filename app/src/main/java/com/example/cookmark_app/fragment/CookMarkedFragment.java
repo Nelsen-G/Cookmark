@@ -3,6 +3,8 @@ package com.example.cookmark_app.fragment;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -14,6 +16,7 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 
 import com.example.cookmark_app.R;
+import com.example.cookmark_app.activity.MainActivity;
 import com.example.cookmark_app.adapter.SmallerRecipeListAdapter;
 import com.example.cookmark_app.model.Recipe;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -43,6 +46,10 @@ public class CookMarkedFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         rootView = inflater.inflate(R.layout.fragment_cook_marked, container, false);
+
+        AppCompatActivity activity = (AppCompatActivity) getActivity();
+        Toolbar toolbar = activity.findViewById(R.id.toolbar);
+        toolbar.setVisibility(View.VISIBLE);
 
         //get user_id
         Bundle bundle = getArguments();

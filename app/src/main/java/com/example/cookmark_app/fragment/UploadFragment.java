@@ -11,6 +11,8 @@ import android.os.Bundle;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -116,6 +118,10 @@ public class UploadFragment extends Fragment {
         // Inflate the layout for this fragment
 
         View view = inflater.inflate(R.layout.fragment_upload, container, false);
+
+        AppCompatActivity activity = (AppCompatActivity) getActivity();
+        Toolbar toolbar = activity.findViewById(R.id.toolbar);
+        toolbar.setVisibility(View.VISIBLE);
 
         uploadedImageView = view.findViewById(R.id.uploadedImageView);
         btnUploadRecipeImage = view.findViewById(R.id.btnUploadRecipeImage);
