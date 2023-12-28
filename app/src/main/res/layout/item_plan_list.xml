@@ -117,7 +117,7 @@
     <ImageView
         android:id="@+id/planImageIv"
         android:layout_width="104dp"
-        android:layout_height="122dp"
+        android:layout_height="123dp"
         android:layout_gravity="right"
         android:scaleType="centerCrop"
         android:src="@drawable/example_food1" />
