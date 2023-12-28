@@ -28,10 +28,12 @@ import com.example.cookmark_app.dialog.EditPasswordDialog;
 import com.google.android.material.button.MaterialButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.firestore.WriteBatch;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
@@ -179,6 +181,32 @@ public class AccountFragment extends Fragment implements EditNameDialog.OnUserna
         return view;
     }
 
+    private void updateUsernameInRecipes(String userId, String newUsername) {
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+        db.collection("recipes")
+                .whereEqualTo("userId", userId)
+                .get()
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        WriteBatch batch = db.batch();
+
+                        for (QueryDocumentSnapshot document : task.getResult()) {
+                            String recipeId = document.getId();
+                            DocumentReference recipeRef = db.collection("recipes").document(recipeId);
+
+                            batch.update(recipeRef, "userName", newUsername);
+                        }
+                    } else {
+                        Exception e = task.getException();
+                        if (e != null) {
+                            e.printStackTrace();
+                        }
+                        showToast("Failed to retrieve recipes associated with the user");
+                    }
+                });
+    }
+
     private void retrieveUserInfoFromFirestore(String uid, ImageView profilePictureImageView) {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
@@ -291,6 +319,7 @@ public class AccountFragment extends Fragment implements EditNameDialog.OnUserna
     @Override
     public void onUsernameUpdated(String newUsername) {
         userNameTxt.setText(newUsername);
+        updateUsernameInRecipes(userId, newUsername);
     }
 
     private void showToast(String message) {
