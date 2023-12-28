@@ -11,6 +11,7 @@
     <color name="white">#FFFFFFFF</color>
     <color name="disabled">#00000080</color>
     <color name="transparent">#00FFFFFF</color>
+    <color name="text_shadow">#7F000000</color>
     <color name="text_gray">#75424757</color>
 
     <color name="lightOrange">#F1C98D</color>

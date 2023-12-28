@@ -1,109 +1,233 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:layout_height="match_parent">
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/detail_toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="@color/white">
-
-        <!-- Back Button -->
-        <ImageView
-            android:id="@+id/about_back"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_back"
-            android:layout_marginStart="10dp"/>
-
-        <!-- Title -->
-        <TextView
-            android:id="@+id/manage_toolbar_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:textColor="@color/purple"
-            android:textSize="24sp"
-            android:fontFamily="@font/poppins_medium"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
-            android:ellipsize="end"
-            android:maxLines="1"
-            android:text="About"/>
-
-    </androidx.appcompat.widget.Toolbar>
-
-    <!-- App Description -->
-    <TextView
-        android:id="@+id/about_description"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="18sp"
-        android:textColor="@color/purple"
-        android:fontFamily="@font/poppins_regular"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginTop="20dp"
-        android:text="Welcome to CookMark – your go-to app for exploring delicious recipes based on the ingredients you have at home. Discover a world of culinary possibilities right in your kitchen!"/>
-
-    <!-- Divider Line -->
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_margin="20dp"
-        android:background="@android:color/darker_gray" />
-
-    <!-- Additional Information or Features -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="16sp"
-        android:textColor="@color/purple"
-        android:fontFamily="@font/poppins_regular"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
-        android:text="Key Features:"
-        android:textStyle="bold"/>
-
-    <!-- List of Features -->
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/detail_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/transparent">
+
+            <ImageView
+                android:id="@+id/about_back"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:src="@drawable/ic_back" />
+
+        </androidx.appcompat.widget.Toolbar>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="230dp"
+            android:layout_marginTop="5dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/about_background" />
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="16sp"
-            android:textColor="@color/purple"
-            android:fontFamily="@font/poppins_regular"
-            android:layout_marginTop="10dp"
-            android:text="• Explore a variety of recipes based on your available ingredients."/>
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/poppins_bold"
+            android:text="We are Cookmark!"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="32sp" />
 
         <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins_regular"
+            android:paddingHorizontal="30dp"
+            android:text="An app to search delicious recipes based on the ingredients you have at home."
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="16sp" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="103dp"
+            android:layout_marginTop="-20dp"
+            android:src="@drawable/about_wave" />
+
+        <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="16sp"
-            android:textColor="@color/purple"
-            android:fontFamily="@font/poppins_regular"
-            android:layout_marginTop="10dp"
-            android:text="• Plan your meals and create shopping lists."/>
+            android:layout_marginTop="-20dp"
+            android:background="@color/orange"
+            android:paddingStart="20dp"
+            android:paddingEnd="10dp"
+            android:paddingBottom="20dp">
 
-        <TextView
+            <LinearLayout
+                android:id="@+id/aboutDesc"
+                android:layout_width="220dp"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_medbold"
+                    android:shadowColor="@color/text_shadow"
+                    android:shadowDx="1"
+                    android:shadowDy="1"
+                    android:shadowRadius="2"
+                    android:text="Our Features"
+                    android:textColor="@color/white"
+                    android:textSize="28sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/poppins_medium"
+                    android:shadowColor="@color/text_shadow"
+                    android:shadowDx="1"
+                    android:shadowDy="1"
+                    android:shadowRadius="2"
+                    android:text="• Search recipes based on your available ingredients"
+                    android:textColor="@color/white"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/poppins_medium"
+                    android:shadowColor="@color/text_shadow"
+                    android:shadowDx="1"
+                    android:shadowDy="1"
+                    android:shadowRadius="2"
+                    android:text="• Plan your meals ahead with our recipes or yours"
+                    android:textColor="@color/white"
+                    android:textSize="16sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="60dp"
+                    android:fontFamily="@font/poppins_medium"
+                    android:shadowColor="@color/text_shadow"
+                    android:shadowDx="1"
+                    android:shadowDy="1"
+                    android:shadowRadius="2"
+                    android:text="• Explore and cookmark your favorite recipes"
+                    android:textColor="@color/white"
+                    android:textSize="16sp" />
+
+            </LinearLayout>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toEndOf="@id/aboutDesc"
+                android:src="@drawable/about_nasi" />
+        </RelativeLayout>
+
+        <ImageView
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="16sp"
-            android:textColor="@color/purple"
-            android:fontFamily="@font/poppins_regular"
-            android:layout_marginTop="10dp"
-            android:text="• Save your favorite recipes for quick access."/>
+            android:layout_height="108dp"
+            android:layout_marginTop="-90dp"
+            android:src="@drawable/about_wavepurple" />
 
-        <!-- Add more features as needed -->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="-18dp"
+            android:background="@color/purple"
+            android:paddingHorizontal="40dp"
+            android:paddingVertical="20dp"
+            android:paddingBottom="40dp">
+
+            <androidx.fragment.app.FragmentContainerView xmlns:tools="http://schemas.android.com/tools"
+                android:id="@+id/mapView"
+                android:name="com.google.android.gms.maps.SupportMapFragment"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_centerVertical="true"
+                tools:context=".MapsActivity" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toEndOf="@id/mapView"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="25dp"
+                    android:fontFamily="@font/poppins_medbold"
+                    android:shadowColor="@color/text_shadow"
+                    android:shadowDx="1"
+                    android:shadowDy="1"
+                    android:shadowRadius="2"
+                    android:text="Cookmark."
+                    android:textColor="@color/white"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="25dp"
+                    android:fontFamily="@font/poppins_regular"
+                    android:shadowColor="@color/text_shadow"
+                    android:shadowDx="1"
+                    android:shadowDy="1"
+                    android:shadowRadius="2"
+                    android:text="Jl. Jalur Sutera Bar. No.Kav. 21, RT.001/RW.004, Panunggangan, Kec. Pinang, Kota Tangerang, Banten 15143"
+                    android:textColor="@color/white"
+                    android:textSize="10sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="25dp"
+                    android:fontFamily="@font/poppins_medium"
+                    android:shadowColor="@color/text_shadow"
+                    android:shadowDx="1"
+                    android:shadowDy="1"
+                    android:shadowRadius="2"
+                    android:text="cookmarkid@gmail.com"
+                    android:textColor="@color/white"
+                    android:textSize="10sp" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="23dp"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:id="@+id/aboutIg"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:src="@drawable/about_instagram" />
+
+                    <ImageView
+                        android:id="@+id/aboutTwt"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:src="@drawable/about_twitterx" />
+
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+        </RelativeLayout>
 
     </LinearLayout>
-
-</LinearLayout>
+</ScrollView>
