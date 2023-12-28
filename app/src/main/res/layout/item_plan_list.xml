@@ -21,6 +21,7 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
             android:orientation="horizontal"
             android:gravity="center_vertical">
 
@@ -35,18 +36,19 @@
                 android:id="@+id/planTimeTv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Cook At 10:00 Am"
-                android:textSize="10dp"
+                android:text="Cook at 10:00 AM"
+                android:textSize="12sp"
                 android:fontFamily="@font/poppins_medbold"/>
         </LinearLayout>
 
         <TextView
             android:id="@+id/recipeNameTv"
-            android:layout_width="250dp"
+            android:layout_width="210dp"
             android:layout_height="wrap_content"
             android:text="Chicken Cordon Bleu"
             android:fontFamily="@font/poppins_medbold"
-            android:textSize="16dp"
+            android:textSize="14sp"
+            android:textColor="@color/purple"
             android:layout_marginVertical="2dp"
             android:ellipsize="end"
             android:maxLines="1" />
@@ -62,6 +64,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Lunch"
+                android:textSize="11sp"
+                android:paddingVertical="5dp"
+                android:fontFamily="@font/poppins_medbold"
                 android:background="@drawable/background_ellipse"
                 android:textColor="@color/white"
                 android:paddingHorizontal="10dp" />
@@ -69,7 +74,7 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginHorizontal="20dp"
+                android:layout_marginHorizontal="8dp"
                 android:gravity="center_vertical">
 
                 <ImageView
@@ -82,6 +87,7 @@
                     android:id="@+id/servingTv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_medium"
                     android:text="1-2 Servings"
                     android:textSize="10dp"/>
             </LinearLayout>
@@ -101,10 +107,19 @@
                     android:id="@+id/durationTv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_medium"
                     android:text="30 min"
                     android:textSize="10dp"/>
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>
+
+    <ImageView
+        android:id="@+id/planImageIv"
+        android:layout_width="104dp"
+        android:layout_height="123dp"
+        android:layout_gravity="right"
+        android:scaleType="centerCrop"
+        android:src="@drawable/example_food1" />
 
 </androidx.cardview.widget.CardView>

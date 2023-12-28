@@ -108,6 +108,7 @@ public class PlanFragment extends Fragment {
 
     private void initializeAddPlanButton(int buttonId) {
         addPlanBtn = rootView.findViewById(R.id.addPlanBtn);
+        addPlanBtn.setBackgroundTintList(getResources().getColorStateList(R.color.purple));
 
         addPlanBtn.setOnClickListener(new View.OnClickListener() {
             @Override

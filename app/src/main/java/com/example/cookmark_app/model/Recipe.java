@@ -22,9 +22,12 @@ public class Recipe implements Serializable {
     private String recipeURL;
     private int cookmarkCount;
     private int totalMinutes;
+    private String userName;
 
-    public Recipe(String recipeId, String userId, String recipeImage, String recipeName, int hours, int minutes, String foodType,
-                  int servings, ArrayList<Ingredient> ingredientList, String cookingSteps, String recipeURL, int cookmarkCount, int totalMinutes) {
+
+    public Recipe(String recipeId, String userId, String recipeImage, String recipeName, int hours, int minutes,
+                  String foodType, int servings, ArrayList<Ingredient> ingredientList, String cookingSteps,
+                  String recipeURL, int cookmarkCount, String userName) {
         this.recipeId = recipeId;
         this.userId = userId;
         this.recipeImage = recipeImage;
@@ -37,7 +40,8 @@ public class Recipe implements Serializable {
         this.cookingSteps = cookingSteps;
         this.recipeURL = recipeURL;
         this.cookmarkCount = cookmarkCount;
-        this.totalMinutes = totalMinutes;
+        this.totalMinutes = (hours * 60) + minutes;
+        this.userName = userName;
     }
 
     public Recipe() {
@@ -181,11 +185,15 @@ public class Recipe implements Serializable {
     }
 
     public int getTotalMinutes() {
-        return totalMinutes;
+        return (hours * 60) + minutes;
     }
 
-    public void setTotalMinutes(int totalMinutes) {
-        this.totalMinutes = totalMinutes;
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 }
 

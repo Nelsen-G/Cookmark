@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -71,7 +72,7 @@ public class TagTypeAdapter extends RecyclerView.Adapter<TagTypeAdapter.TagViewH
 
     static class TagViewHolder extends RecyclerView.ViewHolder {
         TextView tagTextView;
-        ConstraintLayout tagLayout;
+        CardView tagLayout;
 
         public TagViewHolder(@NonNull View itemView) {
             super(itemView);
