@@ -36,6 +36,9 @@ import com.example.cookmark_app.adapter.CustomSpinnerAdapter;
 import com.example.cookmark_app.adapter.IngredientAdapter;
 import com.example.cookmark_app.model.Ingredient;
 import com.example.cookmark_app.model.Recipe;
+import com.google.android.gms.tasks.Task;
+import com.google.android.gms.tasks.TaskCompletionSource;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -105,7 +108,7 @@ public class UploadFragment extends Fragment {
     private Button btnUploadRecipe;
     private String selectedSpinnerItem, imagePath;
     private Uri imageUri;
-    private String userId, recipeId, recipeName, cookingSteps, recipeURL;
+    private String userId, userName, recipeId, recipeName, cookingSteps, recipeURL;
     private StorageReference imageRef;
 
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -191,7 +194,13 @@ public class UploadFragment extends Fragment {
         Bundle bundle = getArguments();
         if (bundle != null) {
             userId = bundle.getString("user_id");
-            Log.d("Upload Fragment -> ", "User ID: " + userId);
+
+            getUserNameById(userId).addOnCompleteListener(userNameTask -> {
+                if (userNameTask.isSuccessful()) {
+                    userName = userNameTask.getResult();
+                }
+            });
+            Log.d("Upload Fragment -> ", "User ID: " + userId + " User Name: " + userName);
         }
 
         btnUploadRecipe = view.findViewById(R.id.btnUploadRecipe);
@@ -269,6 +278,31 @@ public class UploadFragment extends Fragment {
         return view;
     }
 
+    private Task<String> getUserNameById(String userId) {
+        TaskCompletionSource<String> tcs = new TaskCompletionSource<>();
+
+        db.collection("users")
+                .whereEqualTo("user_id", userId)
+                .get()
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        if (!task.getResult().isEmpty()) {
+                            DocumentSnapshot document = task.getResult().getDocuments().get(0);
+                            userName = document.getString("user_name");
+                            tcs.setResult(userName);
+                        } else {
+                            Log.e("Upload Fragment -> ", "User document not found.");
+                            tcs.setException(new Exception("User document not found."));
+                        }
+                    } else {
+                        Log.e("Upload Fragment -> ", "Error getting user document: ", task.getException());
+                        tcs.setException(task.getException());
+                    }
+                });
+
+        return tcs.getTask();
+    }
+
     private void showUpdateConfirmationDialog(){
         Dialog dialog = new Dialog(requireContext());
         dialog.setContentView(R.layout.custom_dialog);
@@ -297,7 +331,7 @@ public class UploadFragment extends Fragment {
                                 String imageUrl = uri.toString();
 
                                 Recipe newRecipe = new Recipe(recipeId, userId, imageUrl, recipeName, hours, minutes, selectedSpinnerItem,
-                                        servings, ingredientList, cookingSteps, recipeURL, 0, 0);
+                                        servings, ingredientList, cookingSteps, recipeURL, 0, userName);
 
 //                                    Map<String, Object> recipeData = new HashMap<>();
 //                                    recipeData.put("image", imageUrl);

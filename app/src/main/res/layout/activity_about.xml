@@ -41,27 +41,26 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="18sp"
-        android:textColor="@android:color/black"
+        android:textColor="@color/purple"
         android:fontFamily="@font/poppins_regular"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
         android:layout_marginTop="20dp"
-        android:text="Welcome to CookMark – your go-to app for exploring delicious recipes based on the ingredients you have at home. Discover a world of culinary possibilities right in your kitchen."/>
+        android:text="Welcome to CookMark – your go-to app for exploring delicious recipes based on the ingredients you have at home. Discover a world of culinary possibilities right in your kitchen!"/>
 
     <!-- Divider Line -->
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@android:color/darker_gray"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="20dp"/>
+        android:layout_margin="20dp"
+        android:background="@android:color/darker_gray" />
 
     <!-- Additional Information or Features -->
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textSize="16sp"
-        android:textColor="@android:color/black"
+        android:textColor="@color/purple"
         android:fontFamily="@font/poppins_regular"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
@@ -80,7 +79,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="16sp"
-            android:textColor="@android:color/black"
+            android:textColor="@color/purple"
             android:fontFamily="@font/poppins_regular"
             android:layout_marginTop="10dp"
             android:text="• Explore a variety of recipes based on your available ingredients."/>
@@ -89,7 +88,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="16sp"
-            android:textColor="@android:color/black"
+            android:textColor="@color/purple"
             android:fontFamily="@font/poppins_regular"
             android:layout_marginTop="10dp"
             android:text="• Plan your meals and create shopping lists."/>
@@ -98,7 +97,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="16sp"
-            android:textColor="@android:color/black"
+            android:textColor="@color/purple"
             android:fontFamily="@font/poppins_regular"
             android:layout_marginTop="10dp"
             android:text="• Save your favorite recipes for quick access."/>

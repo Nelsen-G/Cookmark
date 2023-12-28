@@ -2,11 +2,15 @@ package com.example.cookmark_app.activity;
 
 import static android.content.ContentValues.TAG;
 
+import android.app.Dialog;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -63,6 +67,8 @@ public class RecipeDetailActivity extends AppCompatActivity {
             TextView recipeServings = findViewById(R.id.detail_servings_tv);
             TextView recipeCookingSteps = findViewById(R.id.detail_steps_tv);
             TextView recipeUrl = findViewById(R.id.detail_url_tv);
+            TextView recipeUploader = findViewById(R.id.detail_uploader_tv);
+
             ImageView recipePhoto = findViewById(R.id.detail_photo_iv);
             ImageView recipeCookmarkIcon = findViewById(R.id.detail_cookmark);
 
@@ -81,6 +87,7 @@ public class RecipeDetailActivity extends AppCompatActivity {
             recipeServings.setText(String.valueOf(recipe.getServings()) + " Servings");
             recipeCookingSteps.setText(recipe.getCookingSteps());
             recipeUrl.setText(recipe.getRecipeURL());
+            recipeUploader.setText(recipe.getUserName());
 
             if (recipe.getRecipeImage() != null) {
                 Glide.with(this)
@@ -121,6 +128,12 @@ public class RecipeDetailActivity extends AppCompatActivity {
                     finish();
                 }
             });
+            recipeUrl.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    showVisitURLWebsiteDialog(String.valueOf(recipeUrl.getText()));
+                }
+            });
 
         }
 
@@ -138,6 +151,34 @@ public class RecipeDetailActivity extends AppCompatActivity {
         tagContainer.setLayoutParams(layoutParams);
     }
 
+    private void showVisitURLWebsiteDialog(String url){
+        Dialog dialog = new Dialog(RecipeDetailActivity.this);
+        dialog.setContentView(R.layout.custom_dialog);
+        TextView dialogTitle = dialog.findViewById(R.id.dialogTitle);
+        TextView dialogContent = dialog.findViewById(R.id.dialogContent);
+        Button btnNo = dialog.findViewById(R.id.btnNo);
+        Button btnYes = dialog.findViewById(R.id.btnYes);
+
+        dialogTitle.setText("Feeling tempted?");
+        dialogContent.setText("You will be redirected to an external site using the link");
+
+        btnNo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+
+        btnYes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(String.valueOf(url)));
+                startActivity(intent);
+            }
+        });
+
+        dialog.show();
+    }
 
     private void loadRecipeDetails(String recipeId) {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -161,6 +202,7 @@ public class RecipeDetailActivity extends AppCompatActivity {
                         String recipeURL = document.getString("recipeURL");
                         String foodtype = document.getString("selectedSpinnerItem");
                         String ingredientsAsString = document.getString("ingredientListAsString");
+                        String userName = document.getString("userName");
 
                         recipe.setRecipeName(recipeName);
                         recipe.setHours(hours);
@@ -171,6 +213,7 @@ public class RecipeDetailActivity extends AppCompatActivity {
                         recipe.setIngredientListAsString(ingredientsAsString);
                         recipe.setRecipeImage(document.getString("image"));
                         recipe.setFoodType(foodtype);
+                        recipe.setUserName(userName);
                     } else {
                         Log.d(TAG, "No such document with id of : " + recipeId);
                     }

@@ -5,12 +5,14 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.cookmark_app.R;
 import com.example.cookmark_app.model.MealPlan;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -61,6 +63,7 @@ public class PlanListAdapter extends RecyclerView.Adapter<PlanListAdapter.ViewHo
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         private TextView planTimeTv, recipeNameTv, recipeTypeTv, servingTv, durationTv;
+        private ImageView planImageIv;
         private int cardLayoutType;
         private FirebaseFirestore db = FirebaseFirestore.getInstance();
 
@@ -73,6 +76,7 @@ public class PlanListAdapter extends RecyclerView.Adapter<PlanListAdapter.ViewHo
             recipeTypeTv = itemView.findViewById(R.id.recipeTypeTv);
             servingTv = itemView.findViewById(R.id.servingTv);
             durationTv = itemView.findViewById(R.id.durationTv);
+            planImageIv = itemView.findViewById(R.id.planImageIv);
         }
 
         public void bindData(MealPlan plan) {
@@ -105,19 +109,32 @@ public class PlanListAdapter extends RecyclerView.Adapter<PlanListAdapter.ViewHo
                                     }
                                     servingTv.setText(servings + " servings");
 
+                                    int hours = 0;
                                     int minutes = 0;
+                                    Long hoursLong = document.getLong("hours");
                                     Long minutesLong = document.getLong("minutes");
-                                    if (minutesLong != null) {
-                                        minutes = servingsLong.intValue();
+                                    if (minutesLong != null || hoursLong != null) {
+                                        minutes = minutesLong.intValue();
+                                        hours = hoursLong.intValue();
                                     }
 
-                                    if(minutes <= 60){
-                                        durationTv.setText(minutes + " minutes");
+                                    if (hoursLong == 0) {
+                                        durationTv.setText(minutes + " min");
+                                    } else {
+                                        int totalMinutes = (hours * 60) + minutes;
+                                        durationTv.setText(totalMinutes + " min");
                                     }
-                                    else{
-                                        minutes /= 60;
-                                        durationTv.setText(minutes + " hour(s)");
-                                    }
+
+                                    String image = "";
+                                    image = document.getString("image");
+                                    int placeholderImage = R.drawable.img_placeholder;
+
+                                    Log.d("TAG", "Image URL: " + image);
+
+                                    Glide.with(planImageIv.getContext())
+                                            .load(image)
+                                            .placeholder(placeholderImage)
+                                            .into(planImageIv);
                                 }
                             }
                         }

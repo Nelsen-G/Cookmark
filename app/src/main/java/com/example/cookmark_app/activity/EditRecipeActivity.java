@@ -33,6 +33,7 @@ import com.example.cookmark_app.model.Ingredient;
 import com.example.cookmark_app.model.Recipe;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.gms.tasks.TaskCompletionSource;
 import com.google.common.reflect.TypeToken;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -51,7 +52,7 @@ import java.util.UUID;
 
 public class EditRecipeActivity extends AppCompatActivity {
     private IngredientAdapter ingredientAdapter;
-    private String selectedSpinnerItem, imageUrl, recipeId, recipeName, cookingSteps, recipeURL;
+    private String selectedSpinnerItem, imageUrl, recipeId, recipeName, cookingSteps, recipeURL, userName;
     private ArrayList<Ingredient> ingredients;
     private ActivityResultLauncher<Intent> pickImageLauncher;
     private Uri imageUri;
@@ -343,6 +344,30 @@ public class EditRecipeActivity extends AppCompatActivity {
                         existingRecipe.setIngredientListAsString(new Gson().toJson(ingredients));
                         existingRecipe.setCookingSteps(cookingSteps);
                         existingRecipe.setRecipeURL(recipeURL);
+                        String currentUserId = existingRecipe.getUserId();
+                        getUserNameById(currentUserId).addOnCompleteListener(userNameTask -> {
+                            if (userNameTask.isSuccessful()) {
+                                String userName = userNameTask.getResult();
+                                existingRecipe.setUserName(userName);
+
+                                db.collection("recipes")
+                                        .document(document.getId())
+                                        .set(existingRecipe)
+                                        .addOnSuccessListener(aVoid -> {
+                                            Log.d(TAG, "Recipe updated successfully");
+                                            showToast("Recipe updated successfully");
+                                            Intent intent = new Intent(EditRecipeActivity.this, ManageRecipeActivity.class);
+                                            startActivity(intent);
+                                        })
+                                        .addOnFailureListener(e -> {
+                                            Log.e(TAG, "Error updating recipe", e);
+                                            showToast("Error updating recipe");
+                                        });
+                            } else {
+                                Log.e(TAG, "Error getting user name", userNameTask.getException());
+                                showToast("Error getting user name");
+                            }
+                        });
 
                         db.collection("recipes")
                                 .document(document.getId())
@@ -365,6 +390,31 @@ public class EditRecipeActivity extends AppCompatActivity {
                 });
     }
 
+    private Task<String> getUserNameById(String userId) {
+        TaskCompletionSource<String> tcs = new TaskCompletionSource<>();
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+        db.collection("users")
+                .whereEqualTo("user_id", userId)
+                .get()
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        if (!task.getResult().isEmpty()) {
+                            DocumentSnapshot document = task.getResult().getDocuments().get(0);
+                            userName = document.getString("user_name");
+                            tcs.setResult(userName);
+                        } else {
+                            Log.e("Upload Fragment -> ", "User document not found.");
+                            tcs.setException(new Exception("User document not found."));
+                        }
+                    } else {
+                        Log.e("Upload Fragment -> ", "Error getting user document: ", task.getException());
+                        tcs.setException(task.getException());
+                    }
+                });
+
+        return tcs.getTask();
+    }
 
     private String getImageFileNameFromUrl(String imageUrl) {
         Uri uri = Uri.parse(imageUrl);

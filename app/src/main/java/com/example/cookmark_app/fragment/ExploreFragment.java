@@ -59,9 +59,9 @@ public class ExploreFragment extends Fragment {
             Log.d("PlanFragment -> ", "User ID: " + userId);
         }
 
-        initializeRecyclerView(rootView, R.id.cardView1);
-        initializeRecyclerView(rootView, R.id.cardView2);
-        initializeRecyclerView(rootView, R.id.cardView3);
+        initializeRecyclerView(rootView, R.id.cardView1, getTopTrendingRecipesQuery());
+        initializeRecyclerView(rootView, R.id.cardView2, getQuickRecipesQuery());
+        initializeRecyclerView(rootView, R.id.cardView3, getMightLikeRecipesQuery());
 
         setSeeAllClickListener(rootView, R.id.seeAll1, AllTrendingRecipeActivity.class);
         setSeeAllClickListener(rootView, R.id.seeAll2, QuickRecipeActivity.class);
@@ -70,7 +70,7 @@ public class ExploreFragment extends Fragment {
         return rootView;
     }
 
-    private void initializeRecyclerView(View rootView, int recyclerViewId) {
+    private void initializeRecyclerView(View rootView, int recyclerViewId, Query query) {
         items = new ArrayList<>();
         ingredients = new ArrayList<>();
 
@@ -86,29 +86,17 @@ public class ExploreFragment extends Fragment {
         adapterRecipeList = new RegularRecipeListAdapter(items, getChildFragmentManager(), userId);
         recyclerViewRecipe.setAdapter(adapterRecipeList);
 
-        connectToDatabase(items, adapterRecipeList, recyclerViewId);
+        connectToDatabase(items, adapterRecipeList, recyclerViewId, query);
 
     }
 
-    private void connectToDatabase(ArrayList<Recipe> items, RecyclerView.Adapter adapterRecipeList, int recyclerViewId) {
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-
-        Query query = db.collection("recipes");
-
-        if (recyclerViewId == R.id.cardView1) {
-            query = query.orderBy("cookmarkCount", Query.Direction.DESCENDING);
-        }
-
+    private void connectToDatabase(ArrayList<Recipe> items, RecyclerView.Adapter adapterRecipeList, int recyclerViewId, Query query) {
         query.get()
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
                         items.clear();
                         for (QueryDocumentSnapshot document : task.getResult()) {
-
                             Recipe recipe = document.toObject(Recipe.class);
-                            int totalMinutes = (recipe.getHours() * 60) + recipe.getMinutes();
-                            recipe.setTotalMinutes(totalMinutes);
-
                             items.add(recipe);
                         }
                         if (recyclerViewId == R.id.cardView2) {
@@ -141,6 +129,18 @@ public class ExploreFragment extends Fragment {
         Intent intent = new Intent(getActivity(), targetActivity);
         intent.putExtra("items", items);
         startActivity(intent);
+    }
+
+    private Query getTopTrendingRecipesQuery() {
+        return FirebaseFirestore.getInstance().collection("recipes").orderBy("cookmarkCount", Query.Direction.DESCENDING);
+    }
+
+    private Query getQuickRecipesQuery() {
+        return FirebaseFirestore.getInstance().collection("recipes").orderBy("totalMinutes");
+    }
+
+    private Query getMightLikeRecipesQuery() {
+        return FirebaseFirestore.getInstance().collection("recipes");
     }
 
 }
