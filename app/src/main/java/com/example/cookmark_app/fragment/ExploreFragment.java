@@ -40,6 +40,7 @@ public class ExploreFragment extends Fragment {
     private ArrayList<Recipe> items;
     private ArrayList<Ingredient> ingredients;
     private String userId;
+    private boolean isExploreFragment = true;
 
     public ExploreFragment() {}
 
@@ -59,7 +60,7 @@ public class ExploreFragment extends Fragment {
             Log.d("PlanFragment -> ", "User ID: " + userId);
         }
 
-        initializeRecyclerView(rootView, R.id.cardView1, getTopTrendingRecipesQuery());
+        initializeRecyclerView(rootView, R.id.cardView1, getAllTrendingRecipesQuery());
         initializeRecyclerView(rootView, R.id.cardView2, getQuickRecipesQuery());
         initializeRecyclerView(rootView, R.id.cardView3, getMightLikeRecipesQuery());
 
@@ -99,11 +100,6 @@ public class ExploreFragment extends Fragment {
                             Recipe recipe = document.toObject(Recipe.class);
                             items.add(recipe);
                         }
-                        if (recyclerViewId == R.id.cardView2) {
-                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                                Collections.sort(items, Comparator.comparingInt(Recipe::getTotalMinutes));
-                            }
-                        }
                         adapterRecipeList.notifyDataSetChanged();
                     } else {
                         Exception e = task.getException();
@@ -120,6 +116,7 @@ public class ExploreFragment extends Fragment {
         seeAllTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                isExploreFragment = false;
                 createAndStartIntent(targetActivity);
             }
         });
@@ -131,16 +128,28 @@ public class ExploreFragment extends Fragment {
         startActivity(intent);
     }
 
-    private Query getTopTrendingRecipesQuery() {
-        return FirebaseFirestore.getInstance().collection("recipes").orderBy("cookmarkCount", Query.Direction.DESCENDING);
+    private Query getAllTrendingRecipesQuery() {
+        Query query = FirebaseFirestore.getInstance().collection("recipes").orderBy("cookmarkCount", Query.Direction.DESCENDING);
+        if (isExploreFragment) {
+            return query.limit(8); // Set item card limit to 8 on explore page
+        }
+        return query;
     }
 
     private Query getQuickRecipesQuery() {
-        return FirebaseFirestore.getInstance().collection("recipes").orderBy("totalMinutes");
+        Query query = FirebaseFirestore.getInstance().collection("recipes").orderBy("totalMinutes");
+        if (isExploreFragment) {
+            return query.limit(8); // Set item card limit to 8 on explore page
+        }
+        return query;
     }
 
     private Query getMightLikeRecipesQuery() {
-        return FirebaseFirestore.getInstance().collection("recipes");
+        Query query = FirebaseFirestore.getInstance().collection("recipes");
+        if (isExploreFragment) {
+            return query.limit(8); // Set item card limit to 8 on explore page
+        }
+        return query;
     }
 
 }
