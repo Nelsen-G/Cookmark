@@ -97,7 +97,6 @@ public class PlanFragment extends Fragment {
         calendarView = rootView.findViewById(calendarViewId);
         calendarView.setMinDate(System.currentTimeMillis() - 1000);
 
-
         calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
             public void onSelectedDayChange(@NonNull CalendarView view, int year, int month, int dayOfMonth) {
@@ -219,7 +218,6 @@ public class PlanFragment extends Fragment {
                 Date date = calendar.getTime();
                 updateCurrDateTv(date);
                 updateMealPlanList();
-
             }
         });
         mealPlanDialog.show(getChildFragmentManager(), "dialog");

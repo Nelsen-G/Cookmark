@@ -27,19 +27,16 @@
                 android:gravity="center"
                 android:background="@color/purple">
 
-                <EditText
-                    android:id="@+id/searchBarEt"
+                <SearchView
+                    android:id="@+id/searchBar"
                     android:layout_width="350dp"
                     android:layout_height="wrap_content"
                     android:inputType="text"
-                    android:hint="Tahu bulat..."
                     android:fontFamily="@font/poppins_regular"
                     android:textSize="16sp"
-                    android:paddingVertical="5dp"
-                    android:paddingHorizontal="20dp"
-                    android:textColor="@color/white"
+                    android:textColor="@color/black"
                     android:textColorHint="@color/greyHint"
-                    android:background="@drawable/background_searchbar"/>
+                    android:background="@drawable/background_searchbar" />
 
             </LinearLayout>
 
