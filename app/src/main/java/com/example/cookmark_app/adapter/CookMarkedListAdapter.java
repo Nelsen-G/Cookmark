@@ -34,14 +34,14 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 
-public class SmallerRecipeListAdapter extends RecyclerView.Adapter<SmallerRecipeListAdapter.ViewHolder> {
+public class CookMarkedListAdapter extends RecyclerView.Adapter<CookMarkedListAdapter.ViewHolder> {
     private ArrayList<Recipe> items;
     private Context context;
     private FragmentManager fragmentManager;
     private CookmarkStatusManager cookmarkStatusManager;
     private String userId;
 
-    public SmallerRecipeListAdapter(ArrayList<Recipe> items, FragmentManager fragmentManager, String userId) {
+    public CookMarkedListAdapter(ArrayList<Recipe> items, FragmentManager fragmentManager, String userId) {
         this.items = items;
         this.fragmentManager = fragmentManager;
         this.cookmarkStatusManager = CookmarkStatusManager.getInstance();
@@ -50,14 +50,14 @@ public class SmallerRecipeListAdapter extends RecyclerView.Adapter<SmallerRecipe
 
     @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public CookMarkedListAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View inflate = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_recipe_list_smaller, parent, false);
         context = parent.getContext();
-        return new ViewHolder(inflate, viewType);
+        return new CookMarkedListAdapter.ViewHolder(inflate, viewType);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull CookMarkedListAdapter.ViewHolder holder, int position) {
         holder.bindData(items.get(position));
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -80,6 +80,7 @@ public class SmallerRecipeListAdapter extends RecyclerView.Adapter<SmallerRecipe
         return items.size();
     }
 
+    //awalnya static
     public class ViewHolder extends RecyclerView.ViewHolder {
         private TextView cookmarksTxt, titleTxt, durationTxt, servingsTxt, foodtypeTxt;
         private ImageView recipePhoto, cookmarkIcon;
@@ -124,11 +125,12 @@ public class SmallerRecipeListAdapter extends RecyclerView.Adapter<SmallerRecipe
                         if (cookmarkIcon.getDrawable().getConstantState().equals(cookmarkedDrawable.getConstantState())) {
                             deleteCookMark(recipe.getRecipeId(), position);
                         } else if (cookmarkIcon.getDrawable().getConstantState().equals(uncookmarkedDrawable.getConstantState())) {
-                            addCookMark(recipe, position);
+                            addCookMark(recipe);
                         }
 
                         notifyDataSetChanged();
                         notifyItemChanged(position);
+                        initializeCookMarkIcon(recipe);
                     }
                 }
             });
@@ -144,7 +146,7 @@ public class SmallerRecipeListAdapter extends RecyclerView.Adapter<SmallerRecipe
                     .into(recipePhoto);
         }
 
-        private void initializeCookMarkIcon(Recipe recipe){
+        private void initializeCookMarkIcon(Recipe recipe) {
             db.collection("cookmarks")
                     .whereEqualTo("userid", userId)
                     .whereEqualTo("recipeid", recipe.getRecipeId())
@@ -152,14 +154,12 @@ public class SmallerRecipeListAdapter extends RecyclerView.Adapter<SmallerRecipe
                     .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                         @Override
                         public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                            if(task.isSuccessful()){
+                            if (task.isSuccessful()) {
                                 for (QueryDocumentSnapshot document : task.getResult()) {
-                                    if (document != null) {
-                                        cookmarkIcon.setImageResource(R.drawable.ic_cookmarked);
-                                    } else {
-                                        cookmarkIcon.setImageResource(R.drawable.ic_uncookmarked);
-                                    }
+                                    cookmarkIcon.setImageResource(R.drawable.ic_cookmarked);
+                                    return;
                                 }
+                                cookmarkIcon.setImageResource(R.drawable.ic_uncookmarked);
                             }
                         }
                     });
@@ -178,12 +178,14 @@ public class SmallerRecipeListAdapter extends RecyclerView.Adapter<SmallerRecipe
                                     if (document != null) {
                                         db.collection("cookmarks")
                                                 .document(document.getId())
-                                                .delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                .delete()
+                                                .addOnSuccessListener(new OnSuccessListener<Void>() {
                                                     @Override
                                                     public void onSuccess(Void unused) {
-                                                        cookmarkIcon.setImageResource(R.drawable.ic_uncookmarked);
-                                                        String toastMessage = "Oopss you've already uncookmark a recipe";
+                                                        String toastMessage = "Oppss you've already uncookmark a recipe";
                                                         Toast.makeText(itemView.getContext(), toastMessage, Toast.LENGTH_SHORT).show();
+                                                        items.remove(position);
+                                                        notifyDataSetChanged();
                                                     }
                                                 });
                                     }
@@ -213,13 +215,6 @@ public class SmallerRecipeListAdapter extends RecyclerView.Adapter<SmallerRecipe
                                                     @Override
                                                     public void onSuccess(Void aVoid) {
                                                         Log.d("TAG", cookmarkCount + "");
-
-                                                        int currentCookmark = items.get(position).getCookmarkCount();
-                                                        if(currentCookmark > 0){
-                                                            items.get(position).setCookmarkCount(currentCookmark-1);
-                                                        }
-                                                        notifyDataSetChanged();
-                                                        notifyItemChanged(position);
                                                     }
                                                 })
                                                 .addOnFailureListener(new OnFailureListener() {
@@ -235,7 +230,7 @@ public class SmallerRecipeListAdapter extends RecyclerView.Adapter<SmallerRecipe
                     });
         }
 
-        private void addCookMark(Recipe recipe, int position) {
+        private void addCookMark(Recipe recipe) {
             Cookmark newCookMark = new Cookmark(userId, recipe.getRecipeId());
 
             //add to cookmarks
@@ -244,9 +239,10 @@ public class SmallerRecipeListAdapter extends RecyclerView.Adapter<SmallerRecipe
                     .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                         @Override
                         public void onSuccess(DocumentReference documentReference) {
-                            cookmarkIcon.setImageResource(R.drawable.ic_cookmarked);
                             String toastMessage = "Cookmarked " + recipe.getRecipeName();
                             Toast.makeText(itemView.getContext(), toastMessage, Toast.LENGTH_SHORT).show();
+                            items.add(recipe);
+                            notifyDataSetChanged();
                         }
                     })
                     .addOnFailureListener(new OnFailureListener() {
@@ -277,11 +273,7 @@ public class SmallerRecipeListAdapter extends RecyclerView.Adapter<SmallerRecipe
                                                     @Override
                                                     public void onSuccess(Void aVoid) {
                                                         Log.d("TAG", cookmarkCount + "");
-
-                                                        int currentCookmark = items.get(position).getCookmarkCount();
-                                                        items.get(position).setCookmarkCount(currentCookmark+1);
                                                         notifyDataSetChanged();
-                                                        notifyItemChanged(position);
                                                     }
                                                 })
                                                 .addOnFailureListener(new OnFailureListener() {
@@ -306,4 +298,3 @@ public class SmallerRecipeListAdapter extends RecyclerView.Adapter<SmallerRecipe
         cookmarkStatusManager.setCookmarkStatus(recipeId, isCookmarked);
     }
 }
-
