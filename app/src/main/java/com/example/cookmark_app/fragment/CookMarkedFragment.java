@@ -13,7 +13,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
+import android.widget.SearchView;
+import android.widget.Toast;
 
 import com.example.cookmark_app.R;
 import com.example.cookmark_app.adapter.CookMarkedListAdapter;
@@ -24,6 +27,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
+import java.security.Key;
 import java.util.ArrayList;
 
 public class CookMarkedFragment extends Fragment {
@@ -34,7 +38,7 @@ public class CookMarkedFragment extends Fragment {
     private String userId;
     private ArrayList<Recipe> items = new ArrayList<>();;
     View rootView;
-    EditText searchBar;
+    SearchView searchBar;
 
     public CookMarkedFragment() {
         // Required empty public constructor
@@ -64,7 +68,42 @@ public class CookMarkedFragment extends Fragment {
     }
 
     private void initializeSearchBar(){
-        searchBar = rootView.findViewById(R.id.searchBarEt);
+        searchBar = rootView.findViewById(R.id.searchBar);
+
+        searchBar.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                String recipeName = query;
+
+                ArrayList<Recipe> searchResult = new ArrayList<>();
+                for(Recipe recipe : items){
+                    if(recipe.getRecipeName().toLowerCase().contains(query.toLowerCase())){
+                        searchResult.add(recipe);
+                    }
+                }
+
+                if(searchResult.size() > 0){
+                    CookMarkedListAdapter resultAdapter = new CookMarkedListAdapter(searchResult, getChildFragmentManager(), userId);
+                    recyclerViewRecipe.setAdapter(resultAdapter);
+                    resultAdapter.notifyDataSetChanged();
+                }
+                else{
+                    Toast.makeText(rootView.getContext(), "There is no " + query + " in your cookmarked list yet!", Toast.LENGTH_SHORT).show();
+                }
+
+                Log.d("TAG", "onQueryTextSubmit: " + query);
+                return true;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                if (newText.isEmpty()) {
+                    recyclerViewRecipe.setAdapter(adapterCookMarkList);
+                    adapterCookMarkList.notifyDataSetChanged();
+                }
+                return false;
+            }
+        });
     }
 
     private void initializeRecyclerView() {

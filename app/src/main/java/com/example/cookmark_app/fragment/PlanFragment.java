@@ -97,7 +97,6 @@ public class PlanFragment extends Fragment {
         calendarView = rootView.findViewById(calendarViewId);
         calendarView.setMinDate(System.currentTimeMillis() - 1000);
 
-
         calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
             public void onSelectedDayChange(@NonNull CalendarView view, int year, int month, int dayOfMonth) {
@@ -168,13 +167,14 @@ public class PlanFragment extends Fragment {
 
                                 MealPlan mealPlan = new MealPlan(userId, prepareDate, prepareTime, recipeId);
                                 items.add(mealPlan);
-                                adapterPlanList.notifyDataSetChanged();
                             }
 
                             if (items.size() == 0) {
                                 recyclerViewPlan.setVisibility(View.GONE);
                                 emptyMsgTv.setVisibility(View.VISIBLE);
                             } else {
+                                adapterPlanList = new PlanListAdapter(items, getChildFragmentManager());
+                                recyclerViewPlan.setAdapter(adapterPlanList);
                                 recyclerViewPlan.setVisibility(View.VISIBLE);
                                 emptyMsgTv.setVisibility(View.GONE);
                             }
@@ -219,7 +219,6 @@ public class PlanFragment extends Fragment {
                 Date date = calendar.getTime();
                 updateCurrDateTv(date);
                 updateMealPlanList();
-
             }
         });
         mealPlanDialog.show(getChildFragmentManager(), "dialog");
