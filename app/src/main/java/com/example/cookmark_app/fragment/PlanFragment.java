@@ -1,5 +1,7 @@
 package com.example.cookmark_app.fragment;
 
+import android.app.ProgressDialog;
+import android.graphics.Color;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -9,6 +11,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,6 +22,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.cookmark_app.R;
+import com.example.cookmark_app.activity.RegisterActivity;
 import com.example.cookmark_app.adapter.PlanListAdapter;
 import com.example.cookmark_app.dialog.MealPlanDialog;
 import com.example.cookmark_app.model.Ingredient;
@@ -53,6 +57,7 @@ public class PlanFragment extends Fragment {
 
     private String userId;
     private View rootView;
+    private ProgressDialog progressDialog;
 
     public PlanFragment() {
         // Required empty public constructor
@@ -63,6 +68,10 @@ public class PlanFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         rootView = inflater.inflate(R.layout.fragment_plan, container, false);
+
+        progressDialog = new ProgressDialog(this.getContext());
+        progressDialog.setTitle("Loading");
+        progressDialog.setMessage("Loading...");
 
         AppCompatActivity activity = (AppCompatActivity) getActivity();
         Toolbar toolbar = activity.findViewById(R.id.toolbar);
@@ -86,6 +95,8 @@ public class PlanFragment extends Fragment {
 
     private void initializeCalendarView(int calendarViewId) {
         calendarView = rootView.findViewById(calendarViewId);
+        calendarView.setMinDate(System.currentTimeMillis() - 1000);
+
 
         calendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
@@ -119,6 +130,7 @@ public class PlanFragment extends Fragment {
     }
 
     private void updateMealPlanList() {
+        progressDialog.show();
         items.clear();
         // Get meal plan list for the selected date from Firebase
         Date selectedDate = calendar.getTime();
@@ -132,9 +144,11 @@ public class PlanFragment extends Fragment {
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        progressDialog.dismiss();
+
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
-                                String recipeid = document.getString("recipeid");
+                                String recipeId = document.getString("recipeid");
                                 String prepareTimeStr = document.getString("prepareTime");
 
                                 DateTimeFormatter inputFormatter = null;
@@ -152,7 +166,7 @@ public class PlanFragment extends Fragment {
                                     e.printStackTrace();
                                 }
 
-                                MealPlan mealPlan = new MealPlan(userId, prepareDate, prepareTime, recipeid);
+                                MealPlan mealPlan = new MealPlan(userId, prepareDate, prepareTime, recipeId);
                                 items.add(mealPlan);
                                 adapterPlanList.notifyDataSetChanged();
                             }
@@ -197,6 +211,19 @@ public class PlanFragment extends Fragment {
 
     private void openPlanFormDialog() {
         MealPlanDialog mealPlanDialog = new MealPlanDialog(userId, calendar);
+        mealPlanDialog.setOnOptionsMenuClosedListener(new MealPlanDialog.OnOptionsMenuClosedListener() {
+            @Override
+            public void onOptionsMenuClosed() {
+                Log.d("Coba", "Masuk");
+
+                Date date = calendar.getTime();
+                updateCurrDateTv(date);
+                updateMealPlanList();
+
+            }
+        });
         mealPlanDialog.show(getChildFragmentManager(), "dialog");
     }
+
+
 }

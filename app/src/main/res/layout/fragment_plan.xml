@@ -23,13 +23,21 @@
                 android:background="@color/purple"
                 android:paddingBottom="10dp">
 
-                <CalendarView
+<!--                <CalendarView-->
+<!--                    android:id="@+id/calendarView"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:weekDayTextAppearance="@style/CalendarWeekAppearance"-->
+<!--                    android:dateTextAppearance="@style/CalendarDateAppearance"-->
+<!--                    android:theme="@style/CalenderViewCustom" />-->
+
+                <com.example.cookmark_app.utils.CustomCalendarView
                     android:id="@+id/calendarView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
                     android:weekDayTextAppearance="@style/CalendarWeekAppearance"
-                    android:dateTextAppearance="@style/CalendarDateAppearance"
-                    android:theme="@style/CalenderViewCustom" />
+                    android:theme="@style/CalenderViewCustom"/>
 
             </LinearLayout>
 
