@@ -16,8 +16,7 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 
 import com.example.cookmark_app.R;
-import com.example.cookmark_app.activity.MainActivity;
-import com.example.cookmark_app.adapter.SmallerRecipeListAdapter;
+import com.example.cookmark_app.adapter.CookMarkedListAdapter;
 import com.example.cookmark_app.model.Recipe;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -30,7 +29,7 @@ import java.util.ArrayList;
 public class CookMarkedFragment extends Fragment {
 
     private RecyclerView recyclerViewRecipe;
-    private RecyclerView.Adapter adapterRecipeList;
+    private RecyclerView.Adapter adapterCookMarkList;
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private String userId;
     private ArrayList<Recipe> items = new ArrayList<>();;
@@ -75,8 +74,8 @@ public class CookMarkedFragment extends Fragment {
         //update data items
         updateCookMarkedList();
 
-        adapterRecipeList = new SmallerRecipeListAdapter(items, getChildFragmentManager(), userId);
-        recyclerViewRecipe.setAdapter(adapterRecipeList);
+        adapterCookMarkList = new CookMarkedListAdapter(items, getChildFragmentManager(), userId);
+        recyclerViewRecipe.setAdapter(adapterCookMarkList);
     }
 
     private void updateCookMarkedList(){
@@ -110,7 +109,7 @@ public class CookMarkedFragment extends Fragment {
                             Recipe recipe = document.toObject(Recipe.class);
                             items.add(recipe);
                         }
-                        adapterRecipeList.notifyDataSetChanged();
+                        adapterCookMarkList.notifyDataSetChanged();
                     } else {
                         Exception e = task.getException();
                         if (e != null) {

@@ -123,14 +123,13 @@ public class RegularRecipeListAdapter extends RecyclerView.Adapter<RegularRecipe
                         Drawable uncookmarkedDrawable = ContextCompat.getDrawable(context, R.drawable.ic_uncookmarked);
 
                         if (cookmarkIcon.getDrawable().getConstantState().equals(cookmarkedDrawable.getConstantState())) {
-                            deleteCookMark(recipe.getRecipeId());
+                            deleteCookMark(recipe.getRecipeId(), position);
                         } else if (cookmarkIcon.getDrawable().getConstantState().equals(uncookmarkedDrawable.getConstantState())) {
-                            addCookMark(recipe);
+                            addCookMark(recipe, position);
                         }
 
                         notifyDataSetChanged();
                         notifyItemChanged(position);
-                        initializeCookMarkIcon(recipe);
                     }
                 }
             });
@@ -157,17 +156,17 @@ public class RegularRecipeListAdapter extends RecyclerView.Adapter<RegularRecipe
                                 for (QueryDocumentSnapshot document : task.getResult()) {
                                     if (document != null) {
                                         cookmarkIcon.setImageResource(R.drawable.ic_cookmarked);
-                                        return;
                                     }
-                                    cookmarkIcon.setImageResource(R.drawable.ic_uncookmarked);
-                                    return;
+                                    else{
+                                        cookmarkIcon.setImageResource(R.drawable.ic_uncookmarked);
+                                    }
                                 }
                             }
                         }
                     });
         }
 
-        private void deleteCookMark(String recipeid) {
+        private void deleteCookMark(String recipeid, int position) {
             db.collection("cookmarks")
                     .whereEqualTo("userid", userId)
                     .whereEqualTo("recipeid", recipeid)
@@ -178,12 +177,16 @@ public class RegularRecipeListAdapter extends RecyclerView.Adapter<RegularRecipe
                             if (task.isSuccessful()) {
                                 for (QueryDocumentSnapshot document : task.getResult()) {
                                     if (document != null) {
-                                        cookmarkIcon.setImageResource(R.drawable.ic_uncookmarked);
                                         db.collection("cookmarks")
                                                 .document(document.getId())
-                                                .delete();
-                                        String toastMessage = "Oopss you've already uncookmark a recipe";
-                                        Toast.makeText(itemView.getContext(), toastMessage, Toast.LENGTH_SHORT).show();
+                                                .delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                    @Override
+                                                    public void onSuccess(Void unused) {
+                                                        cookmarkIcon.setImageResource(R.drawable.ic_uncookmarked);
+                                                        String toastMessage = "Oopss you've already uncookmark a recipe";
+                                                        Toast.makeText(itemView.getContext(), toastMessage, Toast.LENGTH_SHORT).show();
+                                                    }
+                                                });
                                     }
                                 }
                             }
@@ -211,6 +214,13 @@ public class RegularRecipeListAdapter extends RecyclerView.Adapter<RegularRecipe
                                                 @Override
                                                 public void onSuccess(Void aVoid) {
                                                     Log.d("TAG", cookmarkCount + "");
+
+                                                    int currentCookmark = items.get(position).getCookmarkCount();
+                                                    if(currentCookmark > 0){
+                                                        items.get(position).setCookmarkCount(currentCookmark-1);
+                                                    }
+                                                    notifyDataSetChanged();
+                                                    notifyItemChanged(position);
                                                 }
                                             })
                                             .addOnFailureListener(new OnFailureListener() {
@@ -226,7 +236,7 @@ public class RegularRecipeListAdapter extends RecyclerView.Adapter<RegularRecipe
                     });
         }
 
-        private void addCookMark(Recipe recipe) {
+        private void addCookMark(Recipe recipe, int position) {
             Cookmark newCookMark = new Cookmark(userId, recipe.getRecipeId());
 
             //add to cookmarks
@@ -268,6 +278,11 @@ public class RegularRecipeListAdapter extends RecyclerView.Adapter<RegularRecipe
                                                 @Override
                                                 public void onSuccess(Void aVoid) {
                                                     Log.d("TAG", cookmarkCount + "");
+
+                                                    int currentCookmark = items.get(position).getCookmarkCount();
+                                                    items.get(position).setCookmarkCount(currentCookmark+1);
+                                                    notifyDataSetChanged();
+                                                    notifyItemChanged(position);
                                                 }
                                             })
                                             .addOnFailureListener(new OnFailureListener() {
