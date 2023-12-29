@@ -40,7 +40,7 @@ public class ExploreFragment extends Fragment {
     private ArrayList<Recipe> items;
     private ArrayList<Ingredient> ingredients;
     private String userId;
-    private boolean isExploreFragment = true;
+    private FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     public ExploreFragment() {}
 
@@ -116,7 +116,6 @@ public class ExploreFragment extends Fragment {
         seeAllTextView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                isExploreFragment = false;
                 createAndStartIntent(targetActivity);
             }
         });
@@ -129,27 +128,15 @@ public class ExploreFragment extends Fragment {
     }
 
     private Query getAllTrendingRecipesQuery() {
-        Query query = FirebaseFirestore.getInstance().collection("recipes").orderBy("cookmarkCount", Query.Direction.DESCENDING);
-        if (isExploreFragment) {
-            return query.limit(8); // Set item card limit to 8 on explore page
-        }
-        return query;
+        return db.collection("recipes").orderBy("cookmarkCount", Query.Direction.DESCENDING).limit(10);
     }
 
     private Query getQuickRecipesQuery() {
-        Query query = FirebaseFirestore.getInstance().collection("recipes").orderBy("totalMinutes");
-        if (isExploreFragment) {
-            return query.limit(8); // Set item card limit to 8 on explore page
-        }
-        return query;
+        return db.collection("recipes").orderBy("totalMinutes").limit(10);
     }
 
     private Query getMightLikeRecipesQuery() {
-        Query query = FirebaseFirestore.getInstance().collection("recipes");
-        if (isExploreFragment) {
-            return query.limit(8); // Set item card limit to 8 on explore page
-        }
-        return query;
+        return db.collection("recipes").limit(10);
     }
 
 }
