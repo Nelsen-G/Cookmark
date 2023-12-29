@@ -19,9 +19,13 @@ android {
     }
 
     buildTypes {
+        debug {
+            manifestPlaceholders = [ MAPS_API_KEY:"AIzaSyD4bckX1lRU4BT4pdOkS2WrOiS_8V-0Mhc"]
+        }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            manifestPlaceholders = [ MAPS_API_KEY:"AIzaSyD4bckX1lRU4BT4pdOkS2WrOiS_8V"]
         }
     }
     compileOptions {
@@ -30,6 +34,9 @@ android {
     }
     viewBinding {
         enabled = true
+    }
+    buildFeatures {
+        viewBinding = true
     }
     buildToolsVersion '30.0.3'
 }

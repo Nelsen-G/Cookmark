@@ -54,6 +54,8 @@ public class MealPlanDialog extends AppCompatDialogFragment {
 
     private int jam, menit;
 
+    private OnOptionsMenuClosedListener onOptionsMenuClosedListener;
+
     public MealPlanDialog(String userId, Calendar calendar) {
         this.userId = userId;
         this.calendar = calendar;
@@ -72,6 +74,7 @@ public class MealPlanDialog extends AppCompatDialogFragment {
                 .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int i) {
+                        optionsMenuClosed();
                     }
                 })
                 .setPositiveButton("Save", new DialogInterface.OnClickListener() {
@@ -116,6 +119,7 @@ public class MealPlanDialog extends AppCompatDialogFragment {
                                         }
                                     });
                         }
+                        optionsMenuClosed();
                     }
                 });
 
@@ -224,5 +228,20 @@ public class MealPlanDialog extends AppCompatDialogFragment {
 
     private void showToast(String message) {
         Toast.makeText(rootView.getContext(), message, Toast.LENGTH_SHORT).show();
+    }
+
+    public interface OnOptionsMenuClosedListener {
+        void onOptionsMenuClosed();
+    }
+
+    public void setOnOptionsMenuClosedListener(OnOptionsMenuClosedListener listener) {
+        this.onOptionsMenuClosedListener = listener;
+    }
+
+    // Call this method when the options menu is closed
+    private void optionsMenuClosed() {
+        if (onOptionsMenuClosedListener != null) {
+            onOptionsMenuClosedListener.onOptionsMenuClosed();
+        }
     }
 }

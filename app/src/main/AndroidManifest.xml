@@ -15,9 +15,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Cookmark_App"
         tools:targetApi="31">
-        <meta-data
-            android:name="com.google.android.geo.API_KEY"
-            android:value="${MAPS_API_KEY}" />
 
         <activity
             android:name=".activity.MightLikeRecipeActivity"
@@ -92,6 +89,8 @@
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="${MAPS_API_KEY}"/>
     </application>
-
 </manifest>
