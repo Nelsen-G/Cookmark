@@ -12,7 +12,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.SearchView;
+import android.widget.TextView;
 
 import com.example.cookmark_app.R;
 import com.example.cookmark_app.dialog.SearchRecipePopup;
@@ -38,6 +40,8 @@ public class SearchFragment extends Fragment implements OnItemClickCallback {
     private View rootView;
 
     private SearchRecipePopup popup;
+
+    private TextView seeSelected;
     public SearchFragment() {
         // Required empty public constructor
     }
@@ -141,6 +145,16 @@ public class SearchFragment extends Fragment implements OnItemClickCallback {
         // pass selected ingredient into popup
         popup = new SearchRecipePopup(getContext(), selectedIngredients);
 
+        // when see selected ingredient clicked, it will show popup
+        seeSelected = rootView.findViewById(R.id.buttonSeeSelected);
+        seeSelected.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                popup = new SearchRecipePopup(getContext(), selectedIngredients);
+                popup.show();
+            }
+        });
+
         return rootView;
 
     }
@@ -220,6 +234,7 @@ public class SearchFragment extends Fragment implements OnItemClickCallback {
             Log.d("search", "You have selected this ingredient");
         }
 
+        popup = new SearchRecipePopup(getContext(), selectedIngredients);
         popup.show();
     }
 
