@@ -204,30 +204,26 @@ public class SmallerRecipeListAdapter extends RecyclerView.Adapter<SmallerRecipe
                                     if (document != null) {
                                         Long cookmarkCountLong = document.getLong("cookmarkCount");
                                         int cookmarkCount = cookmarkCountLong.intValue() - 1;
-
-                                        // Update cookmarkCount value in the recipe document
-                                        db.collection("recipes")
-                                                .document(document.getId())
-                                                .update("cookmarkCount", cookmarkCount)
-                                                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                                                    @Override
-                                                    public void onSuccess(Void aVoid) {
-                                                        Log.d("TAG", cookmarkCount + "");
-
-                                                        int currentCookmark = items.get(position).getCookmarkCount();
-                                                        if(currentCookmark > 0){
-                                                            items.get(position).setCookmarkCount(currentCookmark-1);
+                                        if(cookmarkCount >= 0) {
+                                            // Update cookmarkCount value in the recipe document
+                                            db.collection("recipes")
+                                                    .document(document.getId())
+                                                    .update("cookmarkCount", cookmarkCount)
+                                                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                        @Override
+                                                        public void onSuccess(Void aVoid) {
+                                                            items.get(position).setCookmarkCount(cookmarkCount);
+                                                            notifyDataSetChanged();
+                                                            notifyItemChanged(position);
                                                         }
-                                                        notifyDataSetChanged();
-                                                        notifyItemChanged(position);
-                                                    }
-                                                })
-                                                .addOnFailureListener(new OnFailureListener() {
-                                                    @Override
-                                                    public void onFailure(@NonNull Exception e) {
-                                                        Log.e("TAG", "Error updating cookmarkCount", e);
-                                                    }
-                                                });
+                                                    })
+                                                    .addOnFailureListener(new OnFailureListener() {
+                                                        @Override
+                                                        public void onFailure(@NonNull Exception e) {
+                                                            Log.e("TAG", "Error updating cookmarkCount", e);
+                                                        }
+                                                    });
+                                        }
                                     }
                                 }
                             }
@@ -276,10 +272,7 @@ public class SmallerRecipeListAdapter extends RecyclerView.Adapter<SmallerRecipe
                                                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                                                     @Override
                                                     public void onSuccess(Void aVoid) {
-                                                        Log.d("TAG", cookmarkCount + "");
-
-                                                        int currentCookmark = items.get(position).getCookmarkCount();
-                                                        items.get(position).setCookmarkCount(currentCookmark+1);
+                                                        items.get(position).setCookmarkCount(cookmarkCount);
                                                         notifyDataSetChanged();
                                                         notifyItemChanged(position);
                                                     }

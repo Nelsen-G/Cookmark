@@ -1,5 +1,6 @@
 package com.example.cookmark_app.activity;
 
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
@@ -43,6 +44,10 @@ public class AllTrendingRecipeActivity extends AppCompatActivity {
         backToPrevious.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent intent = new Intent(AllTrendingRecipeActivity.this, MainActivity.class);
+                intent.putExtra("user_id", userId);
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
                 finish();
             }
         });

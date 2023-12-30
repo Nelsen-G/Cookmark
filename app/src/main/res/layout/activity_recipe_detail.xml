@@ -189,15 +189,15 @@
                 app:layout_constraintStart_toEndOf="@+id/detail_servings"
                 app:layout_constraintTop_toBottomOf="@+id/detail_foodtype_tv" />
 
-            <ImageView
-                android:id="@+id/detail_cookmark"
-                android:layout_width="80dp"
-                android:layout_height="80dp"
-                android:layout_marginTop="140dp"
-                android:layout_marginEnd="20dp"
-                android:src="@drawable/ic_uncookmarked"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+<!--            <ImageView-->
+<!--                android:id="@+id/detail_cookmark"-->
+<!--                android:layout_width="80dp"-->
+<!--                android:layout_height="80dp"-->
+<!--                android:layout_marginTop="140dp"-->
+<!--                android:layout_marginEnd="20dp"-->
+<!--                android:src="@drawable/ic_uncookmarked"-->
+<!--                app:layout_constraintEnd_toEndOf="parent"-->
+<!--                app:layout_constraintTop_toTopOf="parent" />-->
 
             <TextView
                 android:id="@+id/detail_ingredient"
