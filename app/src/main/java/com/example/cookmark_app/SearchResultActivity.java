@@ -1,4 +1,4 @@
-package com.example.cookmark_app.activity;
+package com.example.cookmark_app;
 
 import android.content.Intent;
 import android.os.Bundle;

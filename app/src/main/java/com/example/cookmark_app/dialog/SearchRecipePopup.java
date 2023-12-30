@@ -3,10 +3,13 @@ package com.example.cookmark_app.dialog;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.view.Gravity;
+import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.Button;
@@ -17,11 +20,14 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.cookmark_app.R;
+import com.example.cookmark_app.SearchResultActivity;
 import com.example.cookmark_app.adapter.TagTypeAdapter;
 import com.example.cookmark_app.interfaces.OnItemClickCallback;
 import com.example.cookmark_app.model.Ingredient;
+import com.example.cookmark_app.model.Recipe;
 
 import java.util.ArrayList;
+import java.util.List;
 
 // a popup to show what ingredients that user selected
 public class SearchRecipePopup extends Dialog implements OnItemClickCallback {
@@ -51,6 +57,15 @@ public class SearchRecipePopup extends Dialog implements OnItemClickCallback {
 
         Button ingreSearchBtn = findViewById(R.id.buttonSearchRecipe);
         // if button is clicked, it will redirect to search result
+        ingreSearchBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getContext(), SearchResultActivity.class);
+                intent.putExtra("selectedIngredients", selectedIngredients);
+                getContext().startActivity(intent);
+                dismiss();
+            }
+        });
 
 
         getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
@@ -65,6 +80,11 @@ public class SearchRecipePopup extends Dialog implements OnItemClickCallback {
         // it will delete the selected ingredient
         selectedIngredients.remove(ingredient);
         tagTypeAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void onItemClicked(Recipe recipe) {
+        // no usage
     }
 
     public ArrayList<Ingredient> getSelectedIngredients() {
