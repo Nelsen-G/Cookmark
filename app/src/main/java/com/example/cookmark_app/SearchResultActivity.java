@@ -101,7 +101,6 @@ public class SearchResultActivity extends AppCompatActivity implements OnItemCli
     }
 
     private void getRecipeData() {
-        // ini nanti diganti
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
         db.collection("recipes")
