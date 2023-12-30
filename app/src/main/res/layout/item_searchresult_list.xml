@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:background="@drawable/button_field"
+    android:layout_marginBottom="14sp"
+    tools:context=".MainActivity">
+
+    <!-- Recipe Image -->
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        app:cardCornerRadius="20sp">
+
+        <ImageView
+            android:id="@+id/recipeImageSR"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:src="@drawable/img_placeholder" />
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <!-- Recipe info -->
+    <LinearLayout
+        android:id="@+id/recipeDetailsLayoutSR"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:paddingTop="8sp"
+        android:paddingBottom="4sp"
+        android:layout_marginStart="16dp">
+
+        <!-- Recipe Name -->
+        <TextView
+            android:id="@+id/recipeNameSR"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Recipe Name"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:fontFamily="@font/poppins_medium"
+
+            />
+
+        <!-- Recipe Type -->
+        <TextView
+            android:id="@+id/recipeTypeSR"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Recipe Type"
+            android:textSize="12sp"
+            android:fontFamily="@font/poppins_medium"
+            android:background="@drawable/button_field"
+            android:backgroundTint="@color/orange"
+            android:textColor="@color/white"
+            android:paddingLeft="5sp"
+            android:paddingRight="5sp"
+            android:paddingTop="2sp"
+            android:paddingBottom="2sp"/>
+
+        <!-- Cookmark -->
+        <TextView
+            android:id="@+id/cookmarkCountSR"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="_ cookmarked"
+            android:textSize="14sp"
+            android:fontFamily="@font/poppins_medium"
+            android:layout_marginTop="2sp"
+            android:layout_marginBottom="2sp"/>
+
+        <!-- Servings -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="2sp"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+            <ImageView
+                android:layout_width="20sp"
+                android:layout_height="20sp"
+                android:src="@drawable/ic_cutlery"/>
+
+            <TextView
+                android:id="@+id/servingsCountSR"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3sp"
+                android:layout_marginStart="2sp"
+                android:text="Servings: _"
+                android:fontFamily="@font/poppins_medium"
+                android:textSize="14sp"/>
+        </LinearLayout>
+
+        <!-- Duration -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="2sp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="20sp"
+                android:layout_height="20sp"
+                android:src="@drawable/ic_duration"/>
+
+            <TextView
+                android:id="@+id/hoursSR"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3sp"
+                android:layout_marginStart="2sp"
+                android:text="Duration: _ h "
+                android:fontFamily="@font/poppins_medium"
+                android:textSize="14sp"/>
+
+            <TextView
+                android:id="@+id/minutesSR"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="3sp"
+                android:layout_marginStart="2sp"
+                android:text="_ m"
+                android:fontFamily="@font/poppins_medium"
+                android:textSize="14sp"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <!-- Edit -->
+    <ImageView
+        android:id="@+id/cookmarkButtonSR"
+        android:layout_marginTop="100sp"
+        android:layout_marginRight="17sp"
+        android:layout_width="36sp"
+        android:layout_height="36sp"
+        android:src="@drawable/ic_uncookmarked_borderdark" />
+
+</LinearLayout>
