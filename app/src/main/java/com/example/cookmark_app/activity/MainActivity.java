@@ -6,6 +6,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 
 import com.example.cookmark_app.R;
@@ -22,11 +23,13 @@ public class MainActivity extends AppCompatActivity {
 
     ActivityMainBinding binding;
 
+    String userId;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        String userId = getIntent().getStringExtra("user_id");
+        userId = getIntent().getStringExtra("user_id");
 
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
@@ -65,6 +68,13 @@ public class MainActivity extends AppCompatActivity {
         searchBtn.setOnClickListener(item -> {
             replaceFragment(new SearchFragment(), userId);
         });
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+
+
     }
 
     private void replaceFragment(Fragment fragment, String userId){

@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
@@ -17,6 +18,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.cookmark_app.activity.AllTrendingRecipeActivity;
+import com.example.cookmark_app.activity.MainActivity;
 import com.example.cookmark_app.activity.MightLikeRecipeActivity;
 import com.example.cookmark_app.activity.QuickRecipeActivity;
 import com.example.cookmark_app.R;
@@ -88,7 +90,7 @@ public class ExploreFragment extends Fragment {
         recyclerViewRecipe.setAdapter(adapterRecipeList);
 
         connectToDatabase(items, adapterRecipeList, recyclerViewId, query);
-
+        adapterRecipeList.notifyDataSetChanged();
     }
 
     private void connectToDatabase(ArrayList<Recipe> items, RecyclerView.Adapter adapterRecipeList, int recyclerViewId, Query query) {
@@ -123,7 +125,7 @@ public class ExploreFragment extends Fragment {
 
     private void createAndStartIntent(Class<? extends Activity> targetActivity) {
         Intent intent = new Intent(getActivity(), targetActivity);
-        intent.putExtra("items", items);
+        intent.putExtra("user_id", userId);
         startActivity(intent);
     }
 

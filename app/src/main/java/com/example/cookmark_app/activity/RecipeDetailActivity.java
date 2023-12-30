@@ -70,7 +70,7 @@ public class RecipeDetailActivity extends AppCompatActivity {
             TextView recipeUploader = findViewById(R.id.detail_uploader_tv);
 
             ImageView recipePhoto = findViewById(R.id.detail_photo_iv);
-            ImageView recipeCookmarkIcon = findViewById(R.id.detail_cookmark);
+            //ImageView recipeCookmarkIcon = findViewById(R.id.detail_cookmark);
 
             int placeholderImage = R.drawable.img_placeholder;
 
@@ -109,19 +109,19 @@ public class RecipeDetailActivity extends AppCompatActivity {
 
             boolean currentCookmarkStatus = CookmarkStatusManager.getInstance().getCookmarkStatus(recipe.getRecipeId());
 
-            recipeCookmarkIcon.setImageResource(currentCookmarkStatus ? R.drawable.ic_cookmarked : R.drawable.ic_uncookmarked);
-            recipeCookmarkIcon.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    boolean newCookmarkStatus = !currentCookmarkStatus;
-                    CookmarkStatusManager.getInstance().setCookmarkStatus(recipe.getRecipeId(), newCookmarkStatus);
-
-                    recipeCookmarkIcon.setImageResource(newCookmarkStatus ? R.drawable.ic_cookmarked : R.drawable.ic_uncookmarked);
-
-                    String toastMessage = newCookmarkStatus ? "Cookmarked " + recipe.getRecipeName() : "Uncookmarked " + recipe.getRecipeName();
-                    Toast.makeText(RecipeDetailActivity.this, toastMessage, Toast.LENGTH_SHORT).show();
-                }
-            });
+//            recipeCookmarkIcon.setImageResource(currentCookmarkStatus ? R.drawable.ic_cookmarked : R.drawable.ic_uncookmarked);
+//            recipeCookmarkIcon.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    boolean newCookmarkStatus = !currentCookmarkStatus;
+//                    CookmarkStatusManager.getInstance().setCookmarkStatus(recipe.getRecipeId(), newCookmarkStatus);
+//
+//                    recipeCookmarkIcon.setImageResource(newCookmarkStatus ? R.drawable.ic_cookmarked : R.drawable.ic_uncookmarked);
+//
+//                    String toastMessage = newCookmarkStatus ? "Cookmarked " + recipe.getRecipeName() : "Uncookmarked " + recipe.getRecipeName();
+//                    Toast.makeText(RecipeDetailActivity.this, toastMessage, Toast.LENGTH_SHORT).show();
+//                }
+//            });
             backToPrevious.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
