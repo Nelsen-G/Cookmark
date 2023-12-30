@@ -20,7 +20,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.cookmark_app.R;
-import com.example.cookmark_app.SearchResultActivity;
+import com.example.cookmark_app.activity.SearchResultActivity;
 import com.example.cookmark_app.adapter.TagTypeAdapter;
 import com.example.cookmark_app.interfaces.OnItemClickCallback;
 import com.example.cookmark_app.model.Ingredient;
