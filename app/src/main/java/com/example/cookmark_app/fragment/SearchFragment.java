@@ -17,6 +17,7 @@ import com.example.cookmark_app.dialog.SearchRecipePopup;
 import com.example.cookmark_app.adapter.TagTypeAdapter;
 import com.example.cookmark_app.interfaces.OnItemClickCallback;
 import com.example.cookmark_app.model.Ingredient;
+import com.example.cookmark_app.model.Recipe;
 
 import java.util.ArrayList;
 
@@ -214,5 +215,10 @@ public class SearchFragment extends Fragment implements OnItemClickCallback {
         }
 
         popup.show();
+    }
+
+    @Override
+    public void onItemClicked(Recipe recipe) {
+        // no usage
     }
 }

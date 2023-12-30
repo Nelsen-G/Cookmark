@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".ManageRecipe">
+    tools:context=".SearchResultActivity">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/detail_toolbar"
@@ -36,7 +36,7 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="300dp">
+        android:layout_height="100dp">
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/ingreSearchRv"
             android:layout_width="match_parent"
@@ -46,7 +46,17 @@
             android:clipToPadding="false"
             android:scrollbars="vertical"
             />
+
     </ScrollView>
+
+<!--    untuk add ingredient-->
+    <Button
+        android:id="@+id/addIngredientBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/orange"
+        android:background="@drawable/background_orangeborderbtn"
+        android:text="+" />
 
     <ScrollView
         android:layout_width="match_parent"

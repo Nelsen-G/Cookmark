@@ -33,6 +33,9 @@
             android:name=".ManageRecipe"
             android:exported="false" />
         <activity
+            android:name=".SearchResultActivity"
+            android:exported="false" />
+        <activity
             android:name=".RegisterActivity"
             android:exported="false">
             <meta-data
