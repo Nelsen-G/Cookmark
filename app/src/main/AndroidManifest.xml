@@ -84,9 +84,6 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
-        <activity
-            android:name=".activity.SearchResultActivity"
-            android:exported="false" />
         <service
             android:name=".utils.NotificationService"
             android:exported="false">

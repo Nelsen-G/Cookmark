@@ -19,7 +19,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.load.resource.bitmap.GranularRoundedCorners;
 import com.example.cookmark_app.R;
-import com.example.cookmark_app.RecipeDetailActivity;
+import com.example.cookmark_app.activity.RecipeDetailActivity;
 import com.example.cookmark_app.interfaces.OnItemClickCallback;
 import com.example.cookmark_app.model.Cookmark;
 import com.example.cookmark_app.model.Recipe;
