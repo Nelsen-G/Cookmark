@@ -24,11 +24,13 @@ import com.example.cookmark_app.interfaces.OnItemClickCallback;
 import com.example.cookmark_app.model.Cookmark;
 import com.example.cookmark_app.model.Recipe;
 import com.example.cookmark_app.utils.CookmarkStatusManager;
+import com.example.cookmark_app.utils.CurrentUser;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
@@ -52,6 +54,7 @@ public class SearchResultRecipeAdapter extends RecyclerView.Adapter<SearchResult
         this.onItemClickCallback = onItemClickCallback;
         this.recipes = recipes;
         this.cookmarkStatusManager = CookmarkStatusManager.getInstance();
+        this.userId = CurrentUser.getInstance().getUserId();
     }
 
     @NonNull
@@ -98,7 +101,7 @@ public class SearchResultRecipeAdapter extends RecyclerView.Adapter<SearchResult
         cookmarkStatusManager.setCookmarkStatus(recipeId, isCookmarked);
     }
 
-    public static class SearchResultRecipeHolder extends RecyclerView.ViewHolder{
+    public class SearchResultRecipeHolder extends RecyclerView.ViewHolder{
         private ImageView recipeImageView;
         private TextView recipeNameTextView;
         private TextView recipeTypeTextView;
@@ -107,6 +110,8 @@ public class SearchResultRecipeAdapter extends RecyclerView.Adapter<SearchResult
         private TextView hoursTextView;
         private TextView minutesTextView;
         private ImageView cookmarkButton;
+
+        FirebaseFirestore db = FirebaseFirestore.getInstance();
 
         public SearchResultRecipeHolder(@NonNull View itemView) {
             super(itemView);
@@ -140,171 +145,164 @@ public class SearchResultRecipeAdapter extends RecyclerView.Adapter<SearchResult
             cookmarkButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-//                    int position = getAdapterPosition();
-//                    if (position != RecyclerView.NO_POSITION) {
-//                        recipes.get(position);
-//
-//                        Drawable cookmarkedDrawable = ContextCompat.getDrawable(context, R.drawable.ic_cookmarked);
-//                        Drawable uncookmarkedDrawable = ContextCompat.getDrawable(context, R.drawable.ic_uncookmarked);
-//
-//                        if (cookmarkIcon.getDrawable().getConstantState().equals(cookmarkedDrawable.getConstantState())) {
-//                            deleteCookMark(recipe.getRecipeId());
-//                        } else if (cookmarkIcon.getDrawable().getConstantState().equals(uncookmarkedDrawable.getConstantState())) {
-//                            addCookMark(recipe);
-//                        }
-//
-//                        notifyDataSetChanged();
-//                        notifyItemChanged(position);
-//                        initializeCookMarkIcon(recipe);
-//                    }
+                    int position = getAdapterPosition();
+                    if (position != RecyclerView.NO_POSITION) {
+                        recipes.get(position);
+
+                        Drawable cookmarkedDrawable = ContextCompat.getDrawable(context, R.drawable.ic_cookmarked);
+                        Drawable uncookmarkedDrawable = ContextCompat.getDrawable(context, R.drawable.ic_uncookmarked);
+
+                        if (cookmarkButton.getDrawable().getConstantState().equals(cookmarkedDrawable.getConstantState())) {
+                            deleteCookMark(recipe.getRecipeId());
+                        } else if (cookmarkButton.getDrawable().getConstantState().equals(uncookmarkedDrawable.getConstantState())) {
+                            addCookMark(recipe);
+                        }
+
+                        notifyDataSetChanged();
+                        notifyItemChanged(position);
+                        initializeCookMarkIcon(recipe);
+                    }
                 }
             });
-            String imageUrl = recipe.getRecipeImage();
-            int placeholderImage = R.drawable.img_placeholder;
 
-//            Glide.with(itemView.getContext())
-//                    .load(imageUrl)
-//                    .placeholder(placeholderImage)
-//                    .transform(new GranularRoundedCorners(20, 20, 0, 0))
-//                    .into(recipePhoto);
         }
 
         private void initializeCookMarkIcon(Recipe recipe){
-//            db.collection("cookmarks")
-//                    .whereEqualTo("userid", userId)
-//                    .whereEqualTo("recipeid", recipe.getRecipeId())
-//                    .get()
-//                    .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-//                        @Override
-//                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
-//                            if(task.isSuccessful()){
-//                                for (QueryDocumentSnapshot document : task.getResult()) {
-//                                    cookmarkIcon.setImageResource(R.drawable.ic_cookmarked);
-//                                    return;
-//                                }
-//                                cookmarkIcon.setImageResource(R.drawable.ic_uncookmarked);
-//                            }
-//                        }
-//                    });
+            db.collection("cookmarks")
+                    .whereEqualTo("userid", userId)
+                    .whereEqualTo("recipeid", recipe.getRecipeId())
+                    .get()
+                    .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                            if(task.isSuccessful()){
+                                for (QueryDocumentSnapshot document : task.getResult()) {
+                                    cookmarkButton.setImageResource(R.drawable.ic_cookmarked);
+                                    return;
+                                }
+                                cookmarkButton.setImageResource(R.drawable.ic_uncookmarked);
+                            }
+                        }
+                    });
         }
 
         private void deleteCookMark(String recipeid){
-//            db.collection("cookmarks")
-//                    .whereEqualTo("userid", userId)
-//                    .whereEqualTo("recipeid", recipeid)
-//                    .get()
-//                    .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-//                        @Override
-//                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
-//                            if(task.isSuccessful()){
-//                                for (QueryDocumentSnapshot document : task.getResult()) {
-//                                    if(document != null){
-//                                        db.collection("cookmarks")
-//                                                .document(document.getId())
-//                                                .delete()
-//                                                .addOnSuccessListener(new OnSuccessListener<Void>() {
-//                                                    @Override
-//                                                    public void onSuccess(Void unused) {
-//                                                        String toastMessage = "Oppss you've already uncookmark a recipe";
-//                                                        Toast.makeText(itemView.getContext(), toastMessage, Toast.LENGTH_SHORT).show();
-//                                                    }
-//                                                });
-//                                    }
-//                                }
-//                            }
-//                        }
-//                    });
-//
-//            //decrease cookmarked value of recipe
-//            db.collection("recipes")
-//                    .whereEqualTo("id", recipeid)
-//                    .get()
-//                    .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-//                        @Override
-//                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
-//                            if(task.isSuccessful()){
-//                                for (QueryDocumentSnapshot document : task.getResult()) {
-//                                    if(document != null){
-//                                        Long cookmarkCountLong = document.getLong("cookmarkCount");
-//                                        int cookmarkCount = cookmarkCountLong.intValue() - 1;
-//
-//                                        // Update cookmarkCount value in the recipe document
-//                                        db.collection("recipes")
-//                                                .document(document.getId())
-//                                                .update("cookmarkCount", cookmarkCount)
-//                                                .addOnSuccessListener(new OnSuccessListener<Void>() {
-//                                                    @Override
-//                                                    public void onSuccess(Void aVoid) {
-//                                                        Log.d("TAG", cookmarkCount + "");
-//                                                    }
-//                                                })
-//                                                .addOnFailureListener(new OnFailureListener() {
-//                                                    @Override
-//                                                    public void onFailure(@NonNull Exception e) {
-//                                                        Log.e("TAG", "Error updating cookmarkCount", e);
-//                                                    }
-//                                                });
-//                                    }
-//                                }
-//                            }
-//                        }
-//                    });
+            db.collection("cookmarks")
+                    .whereEqualTo("userid", userId)
+                    .whereEqualTo("recipeid", recipeid)
+                    .get()
+                    .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                            if(task.isSuccessful()){
+                                for (QueryDocumentSnapshot document : task.getResult()) {
+                                    if(document != null){
+                                        db.collection("cookmarks")
+                                                .document(document.getId())
+                                                .delete()
+                                                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                    @Override
+                                                    public void onSuccess(Void unused) {
+                                                        String toastMessage = "Oppss you've already uncookmark a recipe";
+                                                        Toast.makeText(itemView.getContext(), toastMessage, Toast.LENGTH_SHORT).show();
+                                                    }
+                                                });
+                                    }
+                                }
+                            }
+                        }
+                    });
+
+            //decrease cookmarked value of recipe
+            db.collection("recipes")
+                    .whereEqualTo("id", recipeid)
+                    .get()
+                    .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                            if(task.isSuccessful()){
+                                for (QueryDocumentSnapshot document : task.getResult()) {
+                                    if(document != null){
+                                        Long cookmarkCountLong = document.getLong("cookmarkCount");
+                                        int cookmarkCount = cookmarkCountLong.intValue() - 1;
+
+                                        // Update cookmarkCount value in the recipe document
+                                        db.collection("recipes")
+                                                .document(document.getId())
+                                                .update("cookmarkCount", cookmarkCount)
+                                                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                    @Override
+                                                    public void onSuccess(Void aVoid) {
+                                                        Log.d("TAG", cookmarkCount + "");
+                                                    }
+                                                })
+                                                .addOnFailureListener(new OnFailureListener() {
+                                                    @Override
+                                                    public void onFailure(@NonNull Exception e) {
+                                                        Log.e("TAG", "Error updating cookmarkCount", e);
+                                                    }
+                                                });
+                                    }
+                                }
+                            }
+                        }
+                    });
         }
 
         private void addCookMark(Recipe recipe){
-//            Cookmark newCookMark = new Cookmark(userId, recipe.getRecipeId());
-//
-//            //add to cookmarks
-//            db.collection("cookmarks")
-//                    .add(newCookMark)
-//                    .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-//                        @Override
-//                        public void onSuccess(DocumentReference documentReference) {
-//                            String toastMessage = "Cookmarked " + recipe.getRecipeName();
-//                            Toast.makeText(itemView.getContext(), toastMessage, Toast.LENGTH_SHORT).show();
-//                        }
-//                    })
-//                    .addOnFailureListener(new OnFailureListener() {
-//                        @Override
-//                        public void onFailure(@NonNull Exception e) {
-//                            Log.w("TAG", "Error adding document", e);
-//                        }
-//                    });
-//
-//            //increase cookmarked value of recipe
-//            db.collection("recipes")
-//                    .whereEqualTo("id", recipe.getRecipeId())
-//                    .get()
-//                    .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-//                        @Override
-//                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
-//                            if(task.isSuccessful()){
-//                                for (QueryDocumentSnapshot document : task.getResult()) {
-//                                    if(document != null){
-//                                        Long cookmarkCountLong = document.getLong("cookmarkCount");
-//                                        int cookmarkCount = cookmarkCountLong.intValue() + 1;
-//
-//                                        // Update cookmarkCount value in the recipe document
-//                                        db.collection("recipes")
-//                                                .document(document.getId())
-//                                                .update("cookmarkCount", cookmarkCount)
-//                                                .addOnSuccessListener(new OnSuccessListener<Void>() {
-//                                                    @Override
-//                                                    public void onSuccess(Void aVoid) {
-//                                                        Log.d("TAG", cookmarkCount + "");
-//                                                    }
-//                                                })
-//                                                .addOnFailureListener(new OnFailureListener() {
-//                                                    @Override
-//                                                    public void onFailure(@NonNull Exception e) {
-//                                                        Log.e("TAG", "Error updating cookmarkCount", e);
-//                                                    }
-//                                                });
-//                                    }
-//                                }
-//                            }
-//                        }
-//                    });
+            Cookmark newCookMark = new Cookmark(userId, recipe.getRecipeId());
+
+            //add to cookmarks
+            db.collection("cookmarks")
+                    .add(newCookMark)
+                    .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                        @Override
+                        public void onSuccess(DocumentReference documentReference) {
+                            String toastMessage = "Cookmarked " + recipe.getRecipeName();
+                            Toast.makeText(itemView.getContext(), toastMessage, Toast.LENGTH_SHORT).show();
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Log.w("TAG", "Error adding document", e);
+                        }
+                    });
+
+            //increase cookmarked value of recipe
+            db.collection("recipes")
+                    .whereEqualTo("id", recipe.getRecipeId())
+                    .get()
+                    .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                            if(task.isSuccessful()){
+                                for (QueryDocumentSnapshot document : task.getResult()) {
+                                    if(document != null){
+                                        Long cookmarkCountLong = document.getLong("cookmarkCount");
+                                        int cookmarkCount = cookmarkCountLong.intValue() + 1;
+
+                                        // Update cookmarkCount value in the recipe document
+                                        db.collection("recipes")
+                                                .document(document.getId())
+                                                .update("cookmarkCount", cookmarkCount)
+                                                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                    @Override
+                                                    public void onSuccess(Void aVoid) {
+                                                        Log.d("TAG", cookmarkCount + "");
+                                                    }
+                                                })
+                                                .addOnFailureListener(new OnFailureListener() {
+                                                    @Override
+                                                    public void onFailure(@NonNull Exception e) {
+                                                        Log.e("TAG", "Error updating cookmarkCount", e);
+                                                    }
+                                                });
+                                    }
+                                }
+                            }
+                        }
+                    });
         }
 
     }
