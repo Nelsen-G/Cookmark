@@ -10,6 +10,7 @@ import android.widget.Toast;
 
 import com.example.cookmark_app.R;
 import com.example.cookmark_app.databinding.ActivityLoginBinding;
+import com.example.cookmark_app.utils.CurrentUser;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -57,6 +58,10 @@ public class LoginActivity extends AppCompatActivity {
 
                                                 Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                                                 intent.putExtra("user_id", userId);
+
+                                                // put current user in singleton
+                                                CurrentUser.getInstance().setUserId(userId);
+
                                                 startActivity(intent);
                                             } else {
                                                 Toast.makeText(LoginActivity.this, "User id not valid!", Toast.LENGTH_SHORT).show();
