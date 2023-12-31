@@ -47,6 +47,24 @@ public class Recipe implements Serializable {
     public Recipe() {
     }
 
+    // constructor for deep copy
+    public Recipe(Recipe other) {
+        this.recipeId = other.getRecipeId();
+        this.userId = other.getUserId();
+        this.recipeImage = other.getRecipeImage();
+        this.recipeName = other.getRecipeName();
+        this.hours = other.getHours();
+        this.minutes = other.getMinutes();
+        this.foodType = other.getFoodType();
+        this.servings = other.getServings();
+        this.ingredientList = other.ingredientList;
+        this.cookingSteps = other.getCookingSteps();
+        this.recipeURL = other.getRecipeURL();
+        this.cookmarkCount = other.getCookmarkCount();
+        this.totalMinutes = (hours * 60) + minutes;
+        this.userName = other.getUserName();
+    }
+
     @PropertyName("id")
     public String getRecipeId() {
         return recipeId;

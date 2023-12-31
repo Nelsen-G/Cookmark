@@ -2,10 +2,12 @@ package com.example.cookmark_app.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.SearchView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -30,6 +32,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -42,9 +45,12 @@ public class SearchResultActivity extends AppCompatActivity {
 
     private RecyclerView rvIngredients;
     private RecyclerView rvRecipes;
+
+    private SearchView recipeSearchView;
     private SearchResultRecipeAdapter searchResultAdapter;
     private TagTypeAdapter tagTypeAdapter;
     private ArrayList<Recipe> recipeList;
+    private ArrayList<Recipe> allRecipe;
     private ArrayList<Ingredient> ingredientList;
     private ArrayList<Ingredient> selectedIngredients;
 
@@ -71,6 +77,7 @@ public class SearchResultActivity extends AppCompatActivity {
 
         recipeList = new ArrayList<>();
         ingredientList = new ArrayList<>();
+        allRecipe = new ArrayList<>();
 
         rvIngredients = findViewById(R.id.ingreSearchRv);
         rvRecipes = findViewById(R.id.searchResultRv);
@@ -97,6 +104,40 @@ public class SearchResultActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 finish();
+            }
+        });
+
+        // search bar for searching recipe
+        recipeSearchView = findViewById(R.id.recipeSearchBar);
+        recipeSearchView.clearFocus();
+
+        recipeSearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+
+            @Override
+            public boolean onQueryTextSubmit(String s) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String s) {
+                if(TextUtils.isEmpty(s)) {
+                    // copy the backup array to the recipeList
+                    for (Recipe rec : recipeList) {
+                        allRecipe.add(new Recipe(rec));  // Assuming Ingredient has a copy constructor
+                    }
+                    updateAdapter(allRecipe);
+                }
+                else {
+                    ArrayList<Recipe> filteredRecipe = new ArrayList<>();
+                    for (Recipe r : recipeList) {
+                        if (r.getRecipeName().toLowerCase().contains(s.toLowerCase())) {
+                            filteredRecipe.add(r);
+                        }
+                    }
+                    updateAdapter(filteredRecipe);
+                }
+
+                return true;
             }
         });
     }
@@ -129,6 +170,11 @@ public class SearchResultActivity extends AppCompatActivity {
                                    return Integer.compare(count2, count1);
                                }
                             });
+
+                            // copy all data to another array for backup
+                            for (Recipe rec : recipes) {
+                                allRecipe.add(new Recipe(rec));
+                            }
                             updateAdapter(recipes);
                         } else {
                             Log.w("search result", "Error fetch", task.getException());
