@@ -238,8 +238,4 @@ public class SearchFragment extends Fragment implements OnItemClickCallback {
         popup.show();
     }
 
-    @Override
-    public void onItemClicked(Recipe recipe) {
-        // no usage
-    }
 }
