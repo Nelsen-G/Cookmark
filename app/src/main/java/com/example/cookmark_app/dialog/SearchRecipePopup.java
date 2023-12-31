@@ -82,10 +82,7 @@ public class SearchRecipePopup extends Dialog implements OnItemClickCallback {
         tagTypeAdapter.notifyDataSetChanged();
     }
 
-    @Override
-    public void onItemClicked(Recipe recipe) {
-        // no usage
-    }
+
 
     public ArrayList<Ingredient> getSelectedIngredients() {
         return selectedIngredients;

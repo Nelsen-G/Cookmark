@@ -37,7 +37,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-public class SearchResultActivity extends AppCompatActivity implements OnItemClickCallback {
+public class SearchResultActivity extends AppCompatActivity {
 
 
     private RecyclerView rvIngredients;
@@ -51,7 +51,6 @@ public class SearchResultActivity extends AppCompatActivity implements OnItemCli
     private Button addIngredientBtn;
     private FirebaseFirestore db;
 
-    private OnItemClickCallback onItemClickCallback;
 
     public SearchResultActivity() {
 
@@ -81,12 +80,13 @@ public class SearchResultActivity extends AppCompatActivity implements OnItemCli
         Intent intent = getIntent();
         selectedIngredients = (ArrayList<Ingredient>) intent.getSerializableExtra("selectedIngredients");
 
-        tagTypeAdapter = new TagTypeAdapter(selectedIngredients, this);
+        // kalo tag diklik gabisa apa2
+        tagTypeAdapter = new TagTypeAdapter(selectedIngredients);
         rvIngredients.setLayoutManager(new GridLayoutManager(this, 2));
         rvIngredients.setAdapter(tagTypeAdapter);
 
         getRecipeData();
-        searchResultAdapter = new SearchResultRecipeAdapter(onItemClickCallback, recipeList);
+        searchResultAdapter = new SearchResultRecipeAdapter(recipeList);
         // recipe recycler view
         rvRecipes.setLayoutManager(new LinearLayoutManager(this));
         rvRecipes.setAdapter(searchResultAdapter);
@@ -196,13 +196,4 @@ public class SearchResultActivity extends AppCompatActivity implements OnItemCli
         searchResultAdapter.notifyDataSetChanged();
     }
 
-    @Override
-    public void onItemClicked(Ingredient ingredient) {
-        // when ingredient item is clicked
-    }
-
-    @Override
-    public void onItemClicked(Recipe recipe) {
-        // when recipe item is clicked
-    }
 }

@@ -20,7 +20,6 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.load.resource.bitmap.GranularRoundedCorners;
 import com.example.cookmark_app.R;
 import com.example.cookmark_app.activity.RecipeDetailActivity;
-import com.example.cookmark_app.interfaces.OnItemClickCallback;
 import com.example.cookmark_app.model.Cookmark;
 import com.example.cookmark_app.model.Recipe;
 import com.example.cookmark_app.utils.CookmarkStatusManager;
@@ -41,17 +40,15 @@ import java.util.List;
 // ini buat per itemnya
 public class SearchResultRecipeAdapter extends RecyclerView.Adapter<SearchResultRecipeAdapter.SearchResultRecipeHolder>{
 
-    // for handling click
-    private OnItemClickCallback onItemClickCallback;
     private ArrayList<Recipe> recipes;
 
     private Context context;
     private CookmarkStatusManager cookmarkStatusManager;
 
+    // for adding cookmark for that user
     private String userId;
 
-    public SearchResultRecipeAdapter(OnItemClickCallback onItemClickCallback, ArrayList<Recipe> recipes) {
-        this.onItemClickCallback = onItemClickCallback;
+    public SearchResultRecipeAdapter(ArrayList<Recipe> recipes) {
         this.recipes = recipes;
         this.cookmarkStatusManager = CookmarkStatusManager.getInstance();
         this.userId = CurrentUser.getInstance().getUserId();
