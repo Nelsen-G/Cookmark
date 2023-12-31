@@ -54,6 +54,7 @@
             android:clickable="true"
             android:focusable="true"
             android:fontFamily="@font/poppins_medium"
+            android:layout_gravity="center"
             android:text="See Selected Ingredients"
             android:textColor="@color/purple"
             android:textSize="14sp" />
