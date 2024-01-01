@@ -27,7 +27,6 @@ public class TagTypeAdapter extends RecyclerView.Adapter<TagTypeAdapter.TagViewH
         this.onItemClickCallback = onItemClickCallback;
     }
 
-    // ada yg bisa diklik, ada yg nggak, makanya constuctornya dibedain
     public TagTypeAdapter(ArrayList<Ingredient> tagList) {
         this.tagList = tagList;
     }
@@ -44,19 +43,14 @@ public class TagTypeAdapter extends RecyclerView.Adapter<TagTypeAdapter.TagViewH
         Ingredient ingredient = tagList.get(position);
         holder.tagTextView.setText(ingredient.getName());
 
-        // if tag type is clicked
-        // ada yg bisa diklik, ada yg nggak
-        if(onItemClickCallback != null) {
-            holder.tagLayout.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    // get clicked ingredient
+        holder.tagLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (onItemClickCallback != null) {
                     onItemClickCallback.onItemClicked(ingredient);
                 }
-            });
-        }
-
-
+            }
+        });
     }
 
     @Override

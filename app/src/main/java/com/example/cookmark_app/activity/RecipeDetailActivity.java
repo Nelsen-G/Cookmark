@@ -6,14 +6,11 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -24,6 +21,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.cookmark_app.R;
 import com.example.cookmark_app.adapter.TagTypeAdapter;
+import com.example.cookmark_app.interfaces.OnItemClickCallback;
 import com.example.cookmark_app.model.Ingredient;
 import com.example.cookmark_app.model.Recipe;
 import com.example.cookmark_app.utils.CookmarkStatusManager;
@@ -37,7 +35,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RecipeDetailActivity extends AppCompatActivity {
+public class RecipeDetailActivity extends AppCompatActivity implements OnItemClickCallback {
     private Recipe recipe;
     private TagTypeAdapter tagAdapter;
 
@@ -103,7 +101,7 @@ public class RecipeDetailActivity extends AppCompatActivity {
             if (ingredientsList != null) {
                 StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
                 tagContainer.setLayoutManager(layoutManager);
-                tagAdapter = new TagTypeAdapter(new ArrayList<>(ingredientsList));
+                tagAdapter = new TagTypeAdapter(new ArrayList<>(ingredientsList), this);
                 tagContainer.setAdapter(tagAdapter);
             }
 
@@ -136,19 +134,15 @@ public class RecipeDetailActivity extends AppCompatActivity {
             });
 
         }
-
     }
 
-    private void adjustTagContainerWidth(RecyclerView tagContainer) {
-        DisplayMetrics displayMetrics = new DisplayMetrics();
-        getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
-        int parentWidth = displayMetrics.widthPixels;
-        int newWidth = (int) (parentWidth * 0.3);
-
-        ViewGroup.LayoutParams layoutParams = tagContainer.getLayoutParams();
-        layoutParams.width = newWidth;
-        layoutParams.height = ViewGroup.LayoutParams.WRAP_CONTENT;  // Set height to wrap_content
-        tagContainer.setLayoutParams(layoutParams);
+    @Override
+    public void onItemClicked(Ingredient ingredient) {
+        Intent intent = new Intent(this, SearchResultActivity.class);
+        ArrayList<Ingredient> selectedIngredients = new ArrayList<>();
+        selectedIngredients.add(ingredient);
+        intent.putExtra("selectedIngredients", selectedIngredients);
+        startActivity(intent);
     }
 
     private void showVisitURLWebsiteDialog(String url){

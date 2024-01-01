@@ -219,8 +219,6 @@ public class SearchFragment extends Fragment implements OnItemClickCallback {
         for(String s : dummy5) {
             ingredients5.add(new Ingredient(s));
         }
-
-
     }
 
     @Override
