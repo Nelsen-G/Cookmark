@@ -5,24 +5,21 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ScrollView;
 import android.widget.SearchView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.cookmark_app.R;
-import com.example.cookmark_app.adapter.ManageRecipeAdapter;
-import com.example.cookmark_app.adapter.SearchResultRecipeAdapter;
 import com.example.cookmark_app.adapter.SmallerRecipeListAdapter;
 import com.example.cookmark_app.adapter.TagTypeAdapter;
-import com.example.cookmark_app.fragment.SearchFragment;
-import com.example.cookmark_app.interfaces.OnItemClickCallback;
 import com.example.cookmark_app.model.Ingredient;
 import com.example.cookmark_app.model.Recipe;
 import com.example.cookmark_app.utils.CurrentUser;
@@ -35,10 +32,8 @@ import com.google.firebase.firestore.QuerySnapshot;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -46,6 +41,7 @@ import java.util.List;
 public class SearchResultActivity extends AppCompatActivity {
     private RecyclerView rvIngredients, rvRecipes;
     private TextView titleToolBar;
+    private ScrollView ingreScrollView;
 
     private SearchView recipeSearchView;
     private SmallerRecipeListAdapter searchResultAdapter;
@@ -72,6 +68,7 @@ public class SearchResultActivity extends AppCompatActivity {
 
         ImageView backToPrevious = findViewById(R.id.searchResultBack);
         titleToolBar = findViewById(R.id.searchResultTitleToolbar);
+        ingreScrollView = findViewById(R.id.ingreScrollView);
 
         backToPrevious.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -83,7 +80,6 @@ public class SearchResultActivity extends AppCompatActivity {
         rvIngredients = findViewById(R.id.ingreSearchRv);
         rvRecipes = findViewById(R.id.searchResultRv);
 
-
         // ingredient recycler view
         Intent intent = getIntent();
         selectedIngredients = (ArrayList<Ingredient>) intent.getSerializableExtra("selectedIngredients");
@@ -92,6 +88,8 @@ public class SearchResultActivity extends AppCompatActivity {
         tagTypeAdapter = new TagTypeAdapter(selectedIngredients);
         rvIngredients.setLayoutManager(new GridLayoutManager(this, 2));
         rvIngredients.setAdapter(tagTypeAdapter);
+        tagTypeAdapter.notifyDataSetChanged();
+        setupIngreScrollViewHeight(tagTypeAdapter.getItemCount());
 
         getRecipeData();
         searchResultAdapter = new SmallerRecipeListAdapter(recipeList, getSupportFragmentManager(), CurrentUser.getInstance().getUserId());
@@ -141,6 +139,13 @@ public class SearchResultActivity extends AppCompatActivity {
                 return true;
             }
         });
+    }
+
+    private void setupIngreScrollViewHeight(int ingredientItemCount) {
+        int newHeight = ingredientItemCount <= 2 ? (int) getResources().getDimension(R.dimen.scroll_view_height_small) : (int) getResources().getDimension(R.dimen.scroll_view_height_large);
+        ViewGroup.LayoutParams params = ingreScrollView.getLayoutParams();
+        params.height = newHeight;
+        ingreScrollView.setLayoutParams(params);
     }
 
     private void getRecipeData() {
