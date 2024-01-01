@@ -51,6 +51,7 @@
             android:id="@+id/buttonSeeSelected"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
             android:clickable="true"
             android:focusable="true"
             android:fontFamily="@font/poppins_medium"
@@ -75,8 +76,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:layout_marginLeft="21dp"
-                    android:layout_marginRight="21dp">
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp">
 
                     <TextView
                         android:id="@+id/searchSubtitle1"
@@ -87,8 +88,8 @@
                         android:textSize="24sp"
                         android:textColor="@color/purple"
                         android:gravity="left"
-                        android:layout_marginTop="38dp"
-                        android:layout_marginBottom="20dp"
+                        android:layout_marginStart="7dp"
+                        android:layout_marginTop="25dp"
                         />
 
                     <androidx.recyclerview.widget.RecyclerView
@@ -103,15 +104,15 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:layout_marginLeft="21dp"
-                    android:layout_marginRight="21dp">
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp">
 
                     <TextView
                         android:id="@+id/searchSubtitle2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="38dp"
-                        android:layout_marginBottom="20dp"
+                        android:layout_marginTop="25dp"
+                        android:layout_marginStart="7dp"
                         android:fontFamily="@font/poppins_medium"
                         android:gravity="left"
                         android:text="Meat"
@@ -130,8 +131,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:layout_marginLeft="21dp"
-                    android:layout_marginRight="21dp">
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp">
 
                     <TextView
                         android:id="@+id/searchSubtitle3"
@@ -142,8 +143,8 @@
                         android:textSize="24sp"
                         android:textColor="@color/purple"
                         android:gravity="left"
-                        android:layout_marginTop="38dp"
-                        android:layout_marginBottom="20dp"
+                        android:layout_marginTop="25dp"
+                        android:layout_marginStart="7dp"
                         />
 
                     <androidx.recyclerview.widget.RecyclerView
@@ -158,8 +159,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:layout_marginLeft="21dp"
-                    android:layout_marginRight="21dp">
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp">
 
                     <TextView
                         android:id="@+id/searchSubtitle4"
@@ -170,8 +171,8 @@
                         android:textSize="24sp"
                         android:textColor="@color/purple"
                         android:gravity="left"
-                        android:layout_marginTop="38dp"
-                        android:layout_marginBottom="20dp"
+                        android:layout_marginTop="25dp"
+                        android:layout_marginStart="7dp"
                         />
 
                     <androidx.recyclerview.widget.RecyclerView
@@ -186,8 +187,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
-                    android:layout_marginLeft="21dp"
-                    android:layout_marginRight="21dp">
+                    android:layout_marginBottom="100dp"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="15dp">
 
                     <TextView
                         android:id="@+id/searchSubtitle5"
@@ -198,8 +200,8 @@
                         android:textSize="24sp"
                         android:textColor="@color/purple"
                         android:gravity="left"
-                        android:layout_marginTop="38dp"
-                        android:layout_marginBottom="20dp"
+                        android:layout_marginTop="25dp"
+                        android:layout_marginStart="7dp"
                         />
 
                     <androidx.recyclerview.widget.RecyclerView
@@ -210,9 +212,6 @@
 
                 </LinearLayout>
             </LinearLayout>
-
-
         </ScrollView>
     </LinearLayout>
-
 </FrameLayout>

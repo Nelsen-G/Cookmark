@@ -194,28 +194,28 @@ public class SearchFragment extends Fragment implements OnItemClickCallback {
 
         // meat
         ingredients2 = new ArrayList<>();
-        String[] dummy2 = {"Chicken", "Beef", "Pork", "Lamb", "Bacon", "Sausages", "Ground Beef", "Ham", "Duck", "Egg"};
+        String[] dummy2 = {"Chicken", "Beef", "Pork", "Lamb", "Bacon", "Sausage", "Ground Beef", "Ham", "Duck", "Egg"};
         for(String s : dummy2) {
             ingredients2.add(new Ingredient(s));
         }
 
         // vegetables
         ingredients3 = new ArrayList<>();
-        String[] dummy3 = {"Sawi", "Water Spinach", "Eggplant", "Potato", "Carrot", "Long Beans", "Tomato", "Chili", "Shallots", "Garlic", "Kaffir Lime Leaves", "Bay Leaves", "Sereh", "Chayote Squash"};
+        String[] dummy3 = {"Spinach", "Eggplant", "Potato", "Carrot", "Cabbage", "Tomato", "Chili", "Shallot", "Garlic", "Onion", "Bay Leaves", "Sereh", "Chayote Squash", "Paprika"};
         for(String s : dummy3) {
             ingredients3.add(new Ingredient(s));
         }
 
         // seafood
         ingredients4 = new ArrayList<>();
-        String[] dummy4 = {"Fish", "Shrimp", "Crab", "Squid", "Clams", "Sardines", "Anchovies", "Tuna", "Scallops", "Mussels"};
+        String[] dummy4 = {"Salmon", "Shrimp", "Crab", "Squid", "Clam", "Sardine", "Anchovy", "Tuna", "Scallop", "Mussel"};
         for(String s : dummy4) {
             ingredients4.add(new Ingredient(s));
         }
 
         // others
         ingredients5 = new ArrayList<>();
-        String[] dummy5 = {"Tofu", "Tempeh", "Noodles", "Rice", "Bread", "Pasta", "Soy Sauce", "Honey", "Vinegar", "Broths"};
+        String[] dummy5 = {"Tofu", "Tempeh", "Noodle", "Rice", "Bread", "Pasta", "Soy Sauce", "Honey", "Vinegar", "Sesame Oil"};
         for(String s : dummy5) {
             ingredients5.add(new Ingredient(s));
         }

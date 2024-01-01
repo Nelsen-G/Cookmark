@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.SearchView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,11 +19,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.cookmark_app.R;
 import com.example.cookmark_app.adapter.ManageRecipeAdapter;
 import com.example.cookmark_app.adapter.SearchResultRecipeAdapter;
+import com.example.cookmark_app.adapter.SmallerRecipeListAdapter;
 import com.example.cookmark_app.adapter.TagTypeAdapter;
 import com.example.cookmark_app.fragment.SearchFragment;
 import com.example.cookmark_app.interfaces.OnItemClickCallback;
 import com.example.cookmark_app.model.Ingredient;
 import com.example.cookmark_app.model.Recipe;
+import com.example.cookmark_app.utils.CurrentUser;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -41,18 +44,14 @@ import java.util.Comparator;
 import java.util.List;
 
 public class SearchResultActivity extends AppCompatActivity {
-
-
-    private RecyclerView rvIngredients;
-    private RecyclerView rvRecipes;
+    private RecyclerView rvIngredients, rvRecipes;
+    private TextView titleToolBar;
 
     private SearchView recipeSearchView;
-    private SearchResultRecipeAdapter searchResultAdapter;
+    private SmallerRecipeListAdapter searchResultAdapter;
     private TagTypeAdapter tagTypeAdapter;
-    private ArrayList<Recipe> recipeList;
-    private ArrayList<Recipe> allRecipe;
-    private ArrayList<Ingredient> ingredientList;
-    private ArrayList<Ingredient> selectedIngredients;
+    private ArrayList<Recipe> recipeList, allRecipe;
+    private ArrayList<Ingredient> ingredientList, selectedIngredients;
 
     private Button addIngredientBtn;
     private FirebaseFirestore db;
@@ -67,17 +66,19 @@ public class SearchResultActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_searchresult);
 
-        ImageView backToPrevious = findViewById(R.id.manage_back);
+        recipeList = new ArrayList<>();
+        ingredientList = new ArrayList<>();
+        allRecipe = new ArrayList<>();
+
+        ImageView backToPrevious = findViewById(R.id.searchResultBack);
+        titleToolBar = findViewById(R.id.searchResultTitleToolbar);
+
         backToPrevious.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
             }
         });
-
-        recipeList = new ArrayList<>();
-        ingredientList = new ArrayList<>();
-        allRecipe = new ArrayList<>();
 
         rvIngredients = findViewById(R.id.ingreSearchRv);
         rvRecipes = findViewById(R.id.searchResultRv);
@@ -93,9 +94,9 @@ public class SearchResultActivity extends AppCompatActivity {
         rvIngredients.setAdapter(tagTypeAdapter);
 
         getRecipeData();
-        searchResultAdapter = new SearchResultRecipeAdapter(recipeList);
+        searchResultAdapter = new SmallerRecipeListAdapter(recipeList, getSupportFragmentManager(), CurrentUser.getInstance().getUserId());
         // recipe recycler view
-        rvRecipes.setLayoutManager(new LinearLayoutManager(this));
+        rvRecipes.setLayoutManager(new GridLayoutManager(this, 2));
         rvRecipes.setAdapter(searchResultAdapter);
 
         // add button
@@ -170,17 +171,34 @@ public class SearchResultActivity extends AppCompatActivity {
                                    return Integer.compare(count2, count1);
                                }
                             });
-
-                            // copy all data to another array for backup
-                            for (Recipe rec : recipes) {
-                                allRecipe.add(new Recipe(rec));
-                            }
-                            updateAdapter(recipes);
+                            updateRecipeList(recipes);
                         } else {
                             Log.w("search result", "Error fetch", task.getException());
                         }
                     }
                 });
+    }
+
+    private void updateRecipeList(List<Recipe> recipes) {
+        allRecipe.clear();
+        allRecipe.addAll(recipes);
+        int numOfMatchedRecipes = countMatchedRecipes(allRecipe, selectedIngredients);
+        if (numOfMatchedRecipes == 0 || numOfMatchedRecipes == 1) {
+            titleToolBar.setText("Result (" + numOfMatchedRecipes + ")");
+        } else {
+            titleToolBar.setText("Results (" + numOfMatchedRecipes + ")");
+        }
+        updateAdapter(recipes);
+    }
+
+    private int countMatchedRecipes(List<Recipe> recipes, List<Ingredient> selectedIngredients) {
+        int count = 0;
+        for (Recipe recipe : recipes) {
+            if (countMatchedIngredients(recipe, selectedIngredients) > 0) {
+                count++;
+            }
+        }
+        return count;
     }
 
     private int countMatchedIngredients(Recipe recipe, List<Ingredient> selectedIngredients) {

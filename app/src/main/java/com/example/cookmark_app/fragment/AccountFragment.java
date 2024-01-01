@@ -197,6 +197,14 @@ public class AccountFragment extends Fragment implements EditNameDialog.OnUserna
 
                             batch.update(recipeRef, "userName", newUsername);
                         }
+
+                        batch.commit().addOnCompleteListener(commitTask -> {
+                            if (commitTask.isSuccessful()) {
+                                showToast("Username updated successfully in recipes");
+                            } else {
+                                showToast("Failed to update username in recipes");
+                            }
+                        });
                     } else {
                         Exception e = task.getException();
                         if (e != null) {
