@@ -4,13 +4,13 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
 import com.example.cookmark_app.R;
 import com.example.cookmark_app.databinding.ActivityLoginBinding;
-import com.example.cookmark_app.utils.CurrentUser;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -57,10 +57,11 @@ public class LoginActivity extends AppCompatActivity {
                                                 Toast.makeText(LoginActivity.this, "Login successful!", Toast.LENGTH_SHORT).show();
 
                                                 Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                                                intent.putExtra("user_id", userId);
 
-                                                // put current user in singleton
-                                                CurrentUser.getInstance().setUserId(userId);
+                                                SharedPreferences sp = getSharedPreferences("Login", MODE_PRIVATE);
+                                                SharedPreferences.Editor Ed = sp.edit();
+                                                Ed.putString("userid", userId);
+                                                Ed.commit();
 
                                                 startActivity(intent);
                                             } else {
@@ -77,6 +78,7 @@ public class LoginActivity extends AppCompatActivity {
                 }
             }
         });
+
 
         binding.registerBtn.setOnClickListener(new View.OnClickListener() {
             @Override
