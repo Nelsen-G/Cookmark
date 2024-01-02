@@ -38,13 +38,27 @@
             android:text=""/>
     </androidx.appcompat.widget.Toolbar>
 
+    <android.widget.SearchView
+        android:id="@+id/seeall_searchbar"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:queryHint="Search Trending Recipe"
+        android:background="@drawable/background_bar"
+        android:layout_margin="16sp"
+        android:outlineProvider="background"
+        android:drawableStart="@drawable/ic_search"
+        android:drawablePadding="10dp"
+        android:iconifiedByDefault="false"
+        android:queryBackground="@android:color/transparent"
+        app:layout_constraintTop_toBottomOf="@+id/seeall_toolbar"/>
+
     <ScrollView
         android:id="@+id/seeall_scrollView"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginBottom="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/seeall_toolbar">
+        app:layout_constraintTop_toBottomOf="@+id/seeall_searchbar">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/seeall_constraintLayout"
