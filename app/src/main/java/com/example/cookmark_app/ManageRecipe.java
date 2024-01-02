@@ -7,11 +7,16 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+<<<<<<< Updated upstream:app/src/main/java/com/example/cookmark_app/ManageRecipe.java
 import android.widget.TextView;
+=======
+import android.widget.SearchView;
+>>>>>>> Stashed changes:app/src/main/java/com/example/cookmark_app/activity/ManageRecipeActivity.java
 
 import com.example.cookmark_app.adapter.ManageRecipeAdapter;
 import com.example.cookmark_app.model.Recipe;
@@ -28,8 +33,10 @@ public class ManageRecipe extends AppCompatActivity {
     private static final String TAG = "ManageRecipe";
     private RecyclerView recyclerView;
     private ManageRecipeAdapter recipeAdapter;
-    private List<Recipe> recipeList;
+    private List<Recipe> recipeList, originalRecipeList;
     private FirebaseFirestore db;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,6 +69,35 @@ public class ManageRecipe extends AppCompatActivity {
         getRecipeData();
 
 
+        SearchView recipeSearchView = findViewById(R.id.recipeSearchBar);
+        recipeSearchView.clearFocus();
+
+        originalRecipeList = new ArrayList<>();
+        recipeSearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+
+            @Override
+            public boolean onQueryTextSubmit(String s) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String s) {
+                if (TextUtils.isEmpty(s)) {
+                    updateAdapter(originalRecipeList);
+                } else {
+                    ArrayList<Recipe> filteredRecipe = new ArrayList<>();
+                    for (Recipe r : originalRecipeList) {
+                        if (r.getRecipeName().toLowerCase().contains(s.toLowerCase())) {
+                            filteredRecipe.add(r);
+                        }
+                    }
+                    updateAdapter(filteredRecipe);
+                }
+
+                return true;
+            }
+        });
+
     }
 
     private void getRecipeData() {
@@ -83,6 +119,9 @@ public class ManageRecipe extends AppCompatActivity {
                                 Recipe recipe = document.toObject(Recipe.class);
                                 recipes.add(recipe);
                             }
+
+                            recipeList.addAll(recipes);
+                            originalRecipeList.addAll(recipes);
 
                             updateAdapter(recipes);
                         } else {

@@ -34,12 +34,27 @@
             android:text="Manage Recipe"/>
     </androidx.appcompat.widget.Toolbar>
 
+    <android.widget.SearchView
+        android:id="@+id/recipeSearchBar"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentStart="true"
+        android:layout_centerVertical="true"
+        android:queryHint="Search Recipe"
+        android:background="@drawable/background_bar"
+        android:layout_margin="16sp"
+        android:outlineProvider="background"
+        android:drawableStart="@drawable/ic_search"
+        android:drawablePadding="10dp"
+        android:iconifiedByDefault="false"
+        android:queryBackground="@android:color/transparent"/>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewRecipe"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:layout_margin="8dp"
+        android:layout_margin="16dp"
         android:clipToPadding="false"
         android:scrollbars="vertical"
         />
