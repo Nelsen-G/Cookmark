@@ -9,19 +9,19 @@
     tools:context=".activity.SearchResultActivity">
 
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/detail_toolbar"
+        android:id="@+id/searchResultToolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="@color/white">
 
         <ImageView
-            android:id="@+id/manage_back"
+            android:id="@+id/searchResultBack"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_back"/>
 
         <TextView
-            android:id="@+id/manage_toolbar_title"
+            android:id="@+id/searchResultTitleToolbar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -32,31 +32,56 @@
             android:layout_marginEnd="20dp"
             android:ellipsize="end"
             android:maxLines="1"
-            android:text="Manage Recipe"/>
+            android:text="Result (0)"/>
     </androidx.appcompat.widget.Toolbar>
-    <!-- Search bar -->
-    <android.widget.SearchView
-        android:id="@+id/recipeSearchBar"
+
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:queryHint="Search Recipe"
-        android:background="@drawable/background_searchbar"
-        android:layout_gravity="top"
-        android:padding="8dp"
-        android:layout_marginEnd="48dp"
-        android:layout_marginStart="48dp"
-        android:layout_marginTop="8dp"
-        android:outlineProvider="background"
-        android:backgroundTint="@android:color/white"
-        android:drawableLeft="@drawable/ic_search"
-        android:drawablePadding="10dp"
-        android:iconifiedByDefault="false"
-        android:queryBackground="@android:color/transparent"
-        />
+        android:orientation="horizontal">
+
+        <android.widget.SearchView
+            android:id="@+id/recipeSearchBar"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:queryHint="Search Recipe"
+            android:background="@drawable/background_bar"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="85dp"
+            android:outlineProvider="background"
+            android:drawableStart="@drawable/ic_search"
+            android:drawablePadding="10dp"
+            android:iconifiedByDefault="false"
+            android:queryBackground="@android:color/transparent"/>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/addIngredientBtn"
+            android:layout_width="55dp"
+            android:layout_height="45dp"
+            android:layout_marginEnd="16dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
+            android:gravity="center"
+            android:background="@drawable/button_addingredient"
+            android:fontFamily="@font/poppins_medium"
+            android:text="+"
+            android:textAlignment="center"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            app:backgroundTint="@color/orange"/>
+    </RelativeLayout>
 
     <ScrollView
+        android:id="@+id/ingreScrollView"
         android:layout_width="match_parent"
-        android:layout_height="100dp">
+        android:layout_height="125dp"
+        android:layout_marginBottom="10dp">
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/ingreSearchRv"
             android:layout_width="match_parent"
@@ -64,42 +89,21 @@
             android:layout_weight="1"
             android:layout_margin="8dp"
             android:clipToPadding="false"
-            android:scrollbars="vertical"
-            />
-
+            android:scrollbars="vertical" />
     </ScrollView>
-
-<!--    untuk add ingredient-->
-
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/addIngredientBtn"
-        android:layout_width="155dp"
-        android:layout_height="40dp"
-        android:layout_gravity="center"
-        android:background="@drawable/button_addingredient"
-        android:fontFamily="@font/poppins_medium"
-        android:text="+"
-        android:textAlignment="center"
-        android:textAllCaps="false"
-        android:textColor="@color/orange"
-        android:textSize="20sp"
-        app:backgroundTint="@color/white"
-        app:backgroundTintMode="multiply" />
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_marginBottom="20dp">
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/searchResultRv"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_margin="8dp"
+            android:layout_gravity="center_horizontal"
             android:clipToPadding="false"
-            android:scrollbars="vertical"
-            />
+            android:scrollbars="vertical" />
     </ScrollView>
-
 
 </LinearLayout>

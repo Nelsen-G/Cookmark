@@ -16,14 +16,13 @@
         android:textSize="24sp"
         android:textColor="@color/purple"
         android:gravity="left"
-        android:layout_marginTop="38dp"
-        android:layout_marginBottom="20dp"
-        />
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="32dp" />
 
     <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="200dp">
+        android:layout_height="220dp">
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvIngredientSearch"
             android:layout_width="match_parent"
@@ -32,14 +31,12 @@
 
     </ScrollView>
 
-
-
     <Button
         android:id="@+id/buttonSearchRecipe"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="10dp"
         android:layout_marginEnd="16dp"
         android:fontFamily="@font/poppins_bold"
         android:background="@drawable/button_register"

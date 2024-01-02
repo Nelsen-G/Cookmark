@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="card_margin">8dp</dimen>
+    <dimen name="scroll_view_height_small">63dp</dimen>
+    <dimen name="scroll_view_height_large">125dp</dimen>
 
     <!--
 Refer to App Widget Documentation for margin information
