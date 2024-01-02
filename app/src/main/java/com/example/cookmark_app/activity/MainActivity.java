@@ -36,23 +36,23 @@ public class MainActivity extends AppCompatActivity {
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        replaceFragment(new ExploreFragment(), userId);
+        replaceFragment(new ExploreFragment());
         binding.bottomNavigation.setBackground(null);
 
         binding.bottomNavigationView.setOnItemSelectedListener(item -> {
             switch(item.getItemId()){
 
                 case R.id.mnExplore:
-                    replaceFragment(new ExploreFragment(), userId);
+                    replaceFragment(new ExploreFragment());
                     break;
                 case R.id.mnPlan:
-                    replaceFragment(new PlanFragment(), userId);
+                    replaceFragment(new PlanFragment());
                     break;
                 case R.id.mnUpload:
-                    replaceFragment(new UploadFragment(), userId);
+                    replaceFragment(new UploadFragment());
                     break;
                 case R.id.mnCookmarked:
-                    replaceFragment(new CookMarkedFragment(), userId);
+                    replaceFragment(new CookMarkedFragment());
                     break;
             }
             return true;
@@ -61,29 +61,24 @@ public class MainActivity extends AppCompatActivity {
         binding.toolbar.setOnMenuItemClickListener(item -> {
             int id = item.getItemId();
             if(id == R.id.mnAccount){
-                replaceFragment(new AccountFragment(), userId);
+                replaceFragment(new AccountFragment());
             }
             return true;
         });
 
         FloatingActionButton searchBtn = findViewById(R.id.mnSearch);
         searchBtn.setOnClickListener(item -> {
-            replaceFragment(new SearchFragment(), userId);
+            replaceFragment(new SearchFragment());
         });
     }
 
     @Override
     protected void onRestart() {
         super.onRestart();
-
-
+        refresh();
     }
 
-    private void replaceFragment(Fragment fragment, String userId){
-        Bundle bundle = new Bundle();
-        bundle.putString("user_id", userId);
-        fragment.setArguments(bundle);
-
+    private void replaceFragment(Fragment fragment){
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.activity_layout, fragment);
@@ -94,5 +89,13 @@ public class MainActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.toolbar_menu, menu);
         return true;
+    }
+
+    private void refresh() {
+        finish();
+        overridePendingTransition(0, 0);
+        startActivity(getIntent());
+        overridePendingTransition(0, 0);
+        Log.d("TAG", "onRestart: aaa");
     }
 }

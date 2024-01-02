@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -65,10 +66,10 @@ public class AccountFragment extends Fragment implements EditNameDialog.OnUserna
         Toolbar toolbar = activity.findViewById(R.id.toolbar);
         toolbar.setVisibility(View.GONE);
 
-        Bundle bundle = getArguments();
-        if (bundle != null) {
-            userId = bundle.getString("user_id");
-        }
+        //get user_id
+        SharedPreferences sp1 = getActivity().getSharedPreferences("Login", Context.MODE_PRIVATE);
+        userId = sp1.getString("userid", null);
+        Log.d("TAG", "accountFragment: " + userId);
 
         profileSettingsTxt = view.findViewById(R.id.profileSettings);
         userNameTxt = view.findViewById(R.id.userName);

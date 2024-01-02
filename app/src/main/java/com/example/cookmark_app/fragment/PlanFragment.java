@@ -1,6 +1,8 @@
 package com.example.cookmark_app.fragment;
 
 import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 
@@ -78,11 +80,9 @@ public class PlanFragment extends Fragment {
         toolbar.setVisibility(View.VISIBLE);
 
         //get user_id
-        Bundle bundle = getArguments();
-        if (bundle != null) {
-            userId = bundle.getString("user_id");
-            Log.d("PlanFragment -> ", "User ID: " + userId);
-        }
+        SharedPreferences sp1 = getActivity().getSharedPreferences("Login", Context.MODE_PRIVATE);
+        userId = sp1.getString("userid", null);
+        Log.d("TAG", "planFragment: " + userId);
 
         initializeCalendarView(R.id.calendarView);
         initializeCurrentDay(R.id.currentDay);

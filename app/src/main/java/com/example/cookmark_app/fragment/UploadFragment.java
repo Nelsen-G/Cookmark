@@ -4,7 +4,9 @@ import static android.content.ContentValues.TAG;
 
 import android.app.Activity;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
@@ -190,18 +192,18 @@ public class UploadFragment extends Fragment {
             }
         });
 
+        //get user_id
+        SharedPreferences sp1 = getActivity().getSharedPreferences("Login", Context.MODE_PRIVATE);
+        userId = sp1.getString("userid", null);
+        Log.d("TAG", "uploadFragment: " + userId);
 
-        Bundle bundle = getArguments();
-        if (bundle != null) {
-            userId = bundle.getString("user_id");
+        getUserNameById(userId).addOnCompleteListener(userNameTask -> {
+            if (userNameTask.isSuccessful()) {
+                userName = userNameTask.getResult();
+            }
+        });
+        Log.d("Upload Fragment -> ", "User ID: " + userId + " User Name: " + userName);
 
-            getUserNameById(userId).addOnCompleteListener(userNameTask -> {
-                if (userNameTask.isSuccessful()) {
-                    userName = userNameTask.getResult();
-                }
-            });
-            Log.d("Upload Fragment -> ", "User ID: " + userId + " User Name: " + userName);
-        }
 
         btnUploadRecipe = view.findViewById(R.id.btnUploadRecipe);
 

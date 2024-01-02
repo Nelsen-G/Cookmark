@@ -1,5 +1,7 @@
 package com.example.cookmark_app.fragment;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -16,6 +18,7 @@ import android.view.ViewGroup;
 import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
 import android.widget.SearchView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.cookmark_app.R;
@@ -39,6 +42,7 @@ public class CookMarkedFragment extends Fragment {
     private ArrayList<Recipe> items = new ArrayList<>();;
     View rootView;
     SearchView searchBar;
+    TextView notFoundTv;
 
     public CookMarkedFragment() {
         // Required empty public constructor
@@ -55,14 +59,14 @@ public class CookMarkedFragment extends Fragment {
         toolbar.setVisibility(View.VISIBLE);
 
         //get user_id
-        Bundle bundle = getArguments();
-        if (bundle != null) {
-            userId = bundle.getString("user_id");
-            Log.d("PlanFragment -> ", "User ID: " + userId);
-        }
+        SharedPreferences sp1 = getActivity().getSharedPreferences("Login", Context.MODE_PRIVATE);
+        userId = sp1.getString("userid", null);
+        Log.d("TAG", "cookMarkedFragment: " + userId);
 
         initializeSearchBar();
         initializeRecyclerView();
+        notFoundTv = rootView.findViewById(R.id.notFoundTv);
+        notFoundTv.setVisibility(View.INVISIBLE);
 
         return rootView;
     }
@@ -73,33 +77,29 @@ public class CookMarkedFragment extends Fragment {
         searchBar.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
-                String recipeName = query;
-
-                ArrayList<Recipe> searchResult = new ArrayList<>();
-                for(Recipe recipe : items){
-                    if(recipe.getRecipeName().toLowerCase().contains(query.toLowerCase())){
-                        searchResult.add(recipe);
-                    }
-                }
-
-                if(searchResult.size() > 0){
-                    CookMarkedListAdapter resultAdapter = new CookMarkedListAdapter(searchResult, getChildFragmentManager(), userId);
-                    recyclerViewRecipe.setAdapter(resultAdapter);
-                    resultAdapter.notifyDataSetChanged();
-                }
-                else{
-                    Toast.makeText(rootView.getContext(), "There is no " + query + " in your cookmarked list yet!", Toast.LENGTH_SHORT).show();
-                }
-
-                Log.d("TAG", "onQueryTextSubmit: " + query);
-                return true;
+                return false;
             }
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                if (newText.isEmpty()) {
-                    recyclerViewRecipe.setAdapter(adapterCookMarkList);
-                    adapterCookMarkList.notifyDataSetChanged();
+                String recipeName = newText;
+
+                ArrayList<Recipe> searchResult = new ArrayList<>();
+                for(Recipe recipe : items){
+                    if(recipe.getRecipeName().toLowerCase().contains(recipeName.toLowerCase())){
+                        searchResult.add(recipe);
+                    }
+                }
+
+                CookMarkedListAdapter resultAdapter = new CookMarkedListAdapter(searchResult, getChildFragmentManager(), userId);
+                recyclerViewRecipe.setAdapter(resultAdapter);
+                resultAdapter.notifyDataSetChanged();
+
+                if(searchResult.size() > 0){
+                    notFoundTv.setVisibility(View.INVISIBLE);
+                }
+                else{
+                    notFoundTv.setVisibility(View.VISIBLE);
                 }
                 return false;
             }
