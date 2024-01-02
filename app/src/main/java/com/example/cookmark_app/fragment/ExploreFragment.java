@@ -1,7 +1,9 @@
 package com.example.cookmark_app.fragment;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -56,11 +58,15 @@ public class ExploreFragment extends Fragment {
         toolbar.setVisibility(View.VISIBLE);
 
         //get user_id
-        Bundle bundle = getArguments();
-        if (bundle != null) {
-            userId = bundle.getString("user_id");
-            Log.d("PlanFragment -> ", "User ID: " + userId);
-        }
+        SharedPreferences sp1 = getActivity().getSharedPreferences("Login", Context.MODE_PRIVATE);
+        userId = sp1.getString("userid", null);
+        Log.d("TAG", "exploreFragment: " + userId);
+
+//        Bundle bundle = getArguments();
+//        if (bundle != null) {
+//            userId = bundle.getString("user_id");
+//            Log.d("PlanFragment -> ", "User ID: " + userId);
+//        }
 
         initializeRecyclerView(rootView, R.id.cardView1, getAllTrendingRecipesQuery());
         initializeRecyclerView(rootView, R.id.cardView2, getQuickRecipesQuery());
@@ -125,7 +131,7 @@ public class ExploreFragment extends Fragment {
 
     private void createAndStartIntent(Class<? extends Activity> targetActivity) {
         Intent intent = new Intent(getActivity(), targetActivity);
-        intent.putExtra("user_id", userId);
+//        intent.putExtra("user_id", userId);
         startActivity(intent);
     }
 

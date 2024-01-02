@@ -94,7 +94,7 @@ public class SearchResultActivity extends AppCompatActivity {
         getRecipeData();
         SharedPreferences sp1 = this.getSharedPreferences("Login", MODE_PRIVATE);
         String userid=sp1.getString("userid", null);
-        searchResultAdapter = new SmallerRecipeListAdapter(recipeList, getSupportFragmentManager(), userid);
+        searchResultAdapter = new SmallerRecipeListAdapter(recipeList, getSupportFragmentManager(), userid, this);
         // recipe recycler view
         rvRecipes.setLayoutManager(new GridLayoutManager(this, 2));
         rvRecipes.setAdapter(searchResultAdapter);

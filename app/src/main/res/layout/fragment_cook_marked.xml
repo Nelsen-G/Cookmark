@@ -32,11 +32,16 @@
                     android:layout_width="350dp"
                     android:layout_height="wrap_content"
                     android:inputType="text"
+                    android:queryHint="Search CookMarked Recipe"
                     android:fontFamily="@font/poppins_regular"
                     android:textSize="16sp"
                     android:textColor="@color/black"
                     android:textColorHint="@color/greyHint"
-                    android:background="@drawable/background_searchbar" />
+                    android:background="@drawable/background_searchbar"
+                    android:queryBackground="@android:color/transparent"
+                    android:backgroundTint="@android:color/white"
+                    android:iconifiedByDefault="false"
+                    />
 
             </LinearLayout>
 
@@ -47,6 +52,13 @@
                 android:gravity="center_horizontal"
                 android:layout_marginTop="20dp"
                 android:layout_marginBottom="90dp">
+
+                <TextView
+                    android:id="@+id/notFoundTv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Recipe not found in your Cook Marked!"
+                    android:textAlignment="center"/>
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/cookmarkRecylerView"
