@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -34,8 +35,8 @@ public class ManageRecipeActivity extends AppCompatActivity {
     private ManageRecipeAdapter recipeAdapter;
     private List<Recipe> recipeList, originalRecipeList;
     private FirebaseFirestore db;
-
     private LinearLayout emptyLayout;
+    String userId;
 
     private final ActivityResultLauncher<Intent> editRecipeLauncher = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(),
@@ -130,7 +131,8 @@ public class ManageRecipeActivity extends AppCompatActivity {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
         Intent intent = getIntent();
-        String userId = intent.getStringExtra("user_id");
+        SharedPreferences sp1 = this.getSharedPreferences("Login", MODE_PRIVATE);
+        userId = sp1.getString("userid", null);
 
         db.collection("recipes")
                 .whereEqualTo("userId", userId)

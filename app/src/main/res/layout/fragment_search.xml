@@ -32,7 +32,7 @@
             android:id="@+id/ingredientSearchBar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:queryHint="Search Ingredient"
+            android:queryHint="Search Ingredient..."
             android:background="@drawable/background_searchbar"
             android:layout_gravity="top"
             android:padding="8dp"

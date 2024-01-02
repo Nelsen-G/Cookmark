@@ -40,7 +40,7 @@
         android:layout_height="50dp"
         android:layout_alignParentStart="true"
         android:layout_centerVertical="true"
-        android:queryHint="Search Recipe"
+        android:queryHint="Search Your Uploaded Recipe..."
         android:background="@drawable/background_bar"
         android:layout_margin="16sp"
         android:outlineProvider="background"
@@ -56,8 +56,7 @@
         android:layout_weight="1"
         android:layout_margin="16dp"
         android:clipToPadding="false"
-        android:scrollbars="vertical"
-        />
+        android:scrollbars="vertical" />
 
     <LinearLayout
         android:id="@+id/emptyLayout"
@@ -65,8 +64,7 @@
         android:layout_height="500sp"
         android:paddingTop="200sp"
         android:orientation="vertical"
-        android:layout_gravity="center"
-      >
+        android:layout_gravity="center">
 
         <ImageView
             android:layout_width="150sp"
