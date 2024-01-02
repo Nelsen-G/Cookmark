@@ -12,11 +12,11 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-<<<<<<< Updated upstream:app/src/main/java/com/example/cookmark_app/ManageRecipe.java
+
 import android.widget.TextView;
-=======
+
 import android.widget.SearchView;
->>>>>>> Stashed changes:app/src/main/java/com/example/cookmark_app/activity/ManageRecipeActivity.java
+
 
 import com.example.cookmark_app.adapter.ManageRecipeAdapter;
 import com.example.cookmark_app.model.Recipe;
