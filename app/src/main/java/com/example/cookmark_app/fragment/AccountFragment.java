@@ -1,7 +1,9 @@
 package com.example.cookmark_app.fragment;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -174,6 +176,13 @@ public class AccountFragment extends Fragment implements EditNameDialog.OnUserna
                 FirebaseAuth.getInstance().signOut();
                 showToast("You have been logged out");
                 Intent it = new Intent(getActivity(), LandingActivity.class);
+
+                // clear local user id data
+                SharedPreferences sharedPreferences = requireContext().getSharedPreferences("Login", Context.MODE_PRIVATE);
+                SharedPreferences.Editor Ed = sharedPreferences.edit();
+                Ed.putString("userid", null);
+                Ed.commit();
+
                 startActivity(it);
             }
         });

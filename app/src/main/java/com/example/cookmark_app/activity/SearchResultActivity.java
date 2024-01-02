@@ -1,6 +1,7 @@
 package com.example.cookmark_app.activity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -22,7 +23,6 @@ import com.example.cookmark_app.adapter.SmallerRecipeListAdapter;
 import com.example.cookmark_app.adapter.TagTypeAdapter;
 import com.example.cookmark_app.model.Ingredient;
 import com.example.cookmark_app.model.Recipe;
-import com.example.cookmark_app.utils.CurrentUser;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -92,7 +92,9 @@ public class SearchResultActivity extends AppCompatActivity {
         setupIngreScrollViewHeight(tagTypeAdapter.getItemCount());
 
         getRecipeData();
-        searchResultAdapter = new SmallerRecipeListAdapter(recipeList, getSupportFragmentManager(), CurrentUser.getInstance().getUserId());
+        SharedPreferences sp1 = this.getSharedPreferences("Login", MODE_PRIVATE);
+        String userid=sp1.getString("userid", null);
+        searchResultAdapter = new SmallerRecipeListAdapter(recipeList, getSupportFragmentManager(), userid);
         // recipe recycler view
         rvRecipes.setLayoutManager(new GridLayoutManager(this, 2));
         rvRecipes.setAdapter(searchResultAdapter);
@@ -139,6 +141,7 @@ public class SearchResultActivity extends AppCompatActivity {
                 return true;
             }
         });
+
     }
 
     private void setupIngreScrollViewHeight(int ingredientItemCount) {
