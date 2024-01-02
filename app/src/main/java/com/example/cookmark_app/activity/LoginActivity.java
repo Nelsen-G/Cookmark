@@ -32,8 +32,8 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                String email = binding.editTextEmail.getText().toString();
-                String password = binding.editTextPassword.getText().toString();
+                String email = binding.editTextEmail.getText().toString().trim();
+                String password = binding.editTextPassword.getText().toString().trim();
 
                 // validasi input
                 if(email.equals("") || password.equals("")){

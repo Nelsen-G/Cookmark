@@ -47,10 +47,10 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // Handle Sign Up button click
-                String username = binding.editTextUsername.getText().toString();
-                String email = binding.editTextEmail.getText().toString();
-                String password = binding.editTextPassword.getText().toString();
-                String confirmPassword = binding.editTextConfirmPassword.getText().toString();
+                String username = binding.editTextUsername.getText().toString().trim();
+                String email = binding.editTextEmail.getText().toString().trim();
+                String password = binding.editTextPassword.getText().toString().trim();
+                String confirmPassword = binding.editTextConfirmPassword.getText().toString().trim();
 
                 // validasi input
                 String message = "";
