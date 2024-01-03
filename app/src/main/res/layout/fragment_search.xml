@@ -70,8 +70,6 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <!-- RecyclerViews and their corresponding subtitles -->
-                <!-- Repeat the following block for each set of subtitle and RecyclerView -->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -111,13 +109,14 @@
                         android:id="@+id/searchSubtitle2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:text="Meat"
+                        android:fontFamily="@font/poppins_medium"
+                        android:textSize="24sp"
+                        android:textColor="@color/purple"
+                        android:gravity="left"
                         android:layout_marginTop="25dp"
                         android:layout_marginStart="7dp"
-                        android:fontFamily="@font/poppins_medium"
-                        android:gravity="left"
-                        android:text="Meat"
-                        android:textColor="@color/purple"
-                        android:textSize="24sp" />
+                        />
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/rvIngredientsData2"
@@ -126,6 +125,7 @@
                         android:layout_weight="1" />
 
                 </LinearLayout>
+
 
                 <LinearLayout
                     android:layout_width="match_parent"
