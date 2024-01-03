@@ -108,6 +108,7 @@ public class MealPlanDialog extends AppCompatDialogFragment {
                                                 }
 
                                                 uploadMealPlantoFirebase(userId, selectedDate, selectedTime, recipeid);
+                                                optionsMenuClosed();
                                                 return;
                                             }
                                             showToast("Recipe not found!");
@@ -119,13 +120,19 @@ public class MealPlanDialog extends AppCompatDialogFragment {
                                         }
                                     });
                         }
-                        optionsMenuClosed();
                     }
                 });
 
         initializeViewElement();
         initializeRecipeNamesList();
         initializeAdapter();
+
+//        builder.setOnDismissListener(new DialogInterface.OnDismissListener() {
+//            @Override
+//            public void onDismiss(DialogInterface dialog) {
+//                optionsMenuClosed();
+//            }
+//        });
 
         return builder.create();
     }
