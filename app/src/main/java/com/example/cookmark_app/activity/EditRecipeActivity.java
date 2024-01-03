@@ -326,69 +326,63 @@ public class EditRecipeActivity extends AppCompatActivity {
     }
 
     private void updateRecipeDetails(String recipeName, int hours, int minutes, int servings, ArrayList<Ingredient> ingredients, String cookingSteps, String recipeURL) {
-
         FirebaseFirestore db = FirebaseFirestore.getInstance();
+
         db.collection("recipes")
                 .whereEqualTo("id", recipeId)
                 .get()
-                .addOnSuccessListener(queryDocumentSnapshots -> {
-                    for (QueryDocumentSnapshot document : queryDocumentSnapshots) {
-                        Recipe existingRecipe = document.toObject(Recipe.class);
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        for (QueryDocumentSnapshot document : task.getResult()) {
+                            Recipe existingRecipe = document.toObject(Recipe.class);
 
-                        existingRecipe.setRecipeImage(imageUrl);
-                        existingRecipe.setRecipeName(recipeName);
-                        existingRecipe.setHours(hours);
-                        existingRecipe.setMinutes(minutes);
-                        existingRecipe.setFoodType(selectedSpinnerItem);
-                        existingRecipe.setServings(servings);
-                        existingRecipe.setIngredientListAsString(new Gson().toJson(ingredients));
-                        existingRecipe.setCookingSteps(cookingSteps);
-                        existingRecipe.setRecipeURL(recipeURL);
-                        String currentUserId = existingRecipe.getUserId();
-                        getUserNameById(currentUserId).addOnCompleteListener(userNameTask -> {
-                            if (userNameTask.isSuccessful()) {
-                                String userName = userNameTask.getResult();
-                                existingRecipe.setUserName(userName);
+                            existingRecipe.setRecipeImage(imageUrl);
+                            existingRecipe.setRecipeName(recipeName);
+                            existingRecipe.setHours(hours);
+                            existingRecipe.setMinutes(minutes);
+                            existingRecipe.setFoodType(selectedSpinnerItem);
+                            existingRecipe.setServings(servings);
+                            existingRecipe.setIngredientListAsString(new Gson().toJson(ingredients));
+                            existingRecipe.setCookingSteps(cookingSteps);
+                            existingRecipe.setRecipeURL(recipeURL);
 
-                                db.collection("recipes")
-                                        .document(document.getId())
-                                        .set(existingRecipe)
-                                        .addOnSuccessListener(aVoid -> {
-                                            Log.d(TAG, "Recipe updated successfully");
-                                            showToast("Recipe updated successfully");
-                                            Intent intent = new Intent(EditRecipeActivity.this, ManageRecipeActivity.class);
-                                            startActivity(intent);
-                                        })
-                                        .addOnFailureListener(e -> {
-                                            Log.e(TAG, "Error updating recipe", e);
-                                            showToast("Error updating recipe");
-                                        });
-                            } else {
-                                Log.e(TAG, "Error getting user name", userNameTask.getException());
-                                showToast("Error getting user name");
-                            }
-                        });
+                            String currentUserId = existingRecipe.getUserId();
+                            getUserNameById(currentUserId).addOnCompleteListener(userNameTask -> {
+                                if (userNameTask.isSuccessful()) {
+                                    String userName = userNameTask.getResult();
+                                    existingRecipe.setUserName(userName);
 
-                        db.collection("recipes")
-                                .document(document.getId())
-                                .set(existingRecipe)
-                                .addOnSuccessListener(aVoid -> {
-                                    Log.d(TAG, "Recipe updated successfully");
-                                    showToast("Recipe updated successfully");
-                                    Intent intent = new Intent(EditRecipeActivity.this, ManageRecipeActivity.class);
-                                    startActivity(intent);
-                                })
-                                .addOnFailureListener(e -> {
-                                    Log.e(TAG, "Error updating recipe", e);
-                                    showToast("Error updating recipe");
-                                });
+                                    db.collection("recipes")
+                                            .document(document.getId())
+                                            .set(existingRecipe)
+                                            .addOnSuccessListener(aVoid -> {
+                                                Log.d(TAG, "Recipe updated successfully");
+                                                showToast("Recipe updated successfully");
+                                                startActivityToManageRecipe();
+                                            })
+                                            .addOnFailureListener(e -> {
+                                                Log.e(TAG, "Error updating recipe", e);
+                                                showToast("Error updating recipe");
+                                            });
+                                } else {
+                                    Log.e(TAG, "Error getting user name", userNameTask.getException());
+                                    showToast("Error getting user name");
+                                }
+                            });
+                        }
+                    } else {
+                        Log.e(TAG, "Error getting documents: ", task.getException());
+                        showToast("Error getting documents");
                     }
-                })
-                .addOnFailureListener(e -> {
-                    Log.e(TAG, "Error getting documents: ", e);
-                    showToast("Error getting documents");
                 });
     }
+
+    private void startActivityToManageRecipe() {
+        Intent intent = new Intent();
+        setResult(RESULT_OK, intent);
+        finish();
+    }
+
 
     private Task<String> getUserNameById(String userId) {
         TaskCompletionSource<String> tcs = new TaskCompletionSource<>();

@@ -1,5 +1,6 @@
 package com.example.cookmark_app.adapter;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
@@ -37,15 +38,17 @@ import java.util.ArrayList;
 public class SmallerRecipeListAdapter extends RecyclerView.Adapter<SmallerRecipeListAdapter.ViewHolder> {
     private ArrayList<Recipe> items;
     private Context context;
+    private Activity activity;
     private FragmentManager fragmentManager;
     private CookmarkStatusManager cookmarkStatusManager;
     private String userId;
 
-    public SmallerRecipeListAdapter(ArrayList<Recipe> items, FragmentManager fragmentManager, String userId) {
+    public SmallerRecipeListAdapter(ArrayList<Recipe> items, FragmentManager fragmentManager, String userId, Activity activity) {
         this.items = items;
         this.fragmentManager = fragmentManager;
         this.cookmarkStatusManager = CookmarkStatusManager.getInstance();
         this.userId = userId;
+        this.activity = activity;
     }
 
     @NonNull
@@ -129,6 +132,7 @@ public class SmallerRecipeListAdapter extends RecyclerView.Adapter<SmallerRecipe
 
                         notifyDataSetChanged();
                         notifyItemChanged(position);
+                        refresh();
                     }
                 }
             });
@@ -297,6 +301,14 @@ public class SmallerRecipeListAdapter extends RecyclerView.Adapter<SmallerRecipe
 
     private void setCookmarkStatus(String recipeId, boolean isCookmarked) {
         cookmarkStatusManager.setCookmarkStatus(recipeId, isCookmarked);
+    }
+
+    private void refresh(){
+        activity.finish();
+        activity.overridePendingTransition(0, 0);
+        activity.startActivity(activity.getIntent());
+        activity.overridePendingTransition(0, 0);
+        Log.d("TAG", "onRestart: aaa");
     }
 }
 

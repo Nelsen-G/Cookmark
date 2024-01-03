@@ -1,16 +1,21 @@
 package com.example.cookmark_app.activity;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.SearchView;
 
 import com.example.cookmark_app.R;
 import com.example.cookmark_app.adapter.ManageRecipeAdapter;
@@ -28,13 +33,25 @@ public class ManageRecipeActivity extends AppCompatActivity {
     private static final String TAG = "ManageRecipe";
     private RecyclerView recyclerView;
     private ManageRecipeAdapter recipeAdapter;
-    private List<Recipe> recipeList;
+    private List<Recipe> recipeList, originalRecipeList;
     private FirebaseFirestore db;
+    private LinearLayout emptyLayout;
+    String userId;
+
+    private final ActivityResultLauncher<Intent> editRecipeLauncher = registerForActivityResult(
+            new ActivityResultContracts.StartActivityForResult(),
+            result -> {
+                if (result.getResultCode() == RESULT_OK) {
+                    getRecipeData();
+                }
+            }
+    );
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_manage_recipe);
-
+        emptyLayout = findViewById(R.id.emptyLayout);
+        recyclerView = findViewById(R.id.recyclerViewRecipe);
         ImageView backToPrevious = findViewById(R.id.manage_back);
         backToPrevious.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -43,7 +60,6 @@ public class ManageRecipeActivity extends AppCompatActivity {
             }
         });
 
-        recyclerView = findViewById(R.id.recyclerViewRecipe);
         recipeList = new ArrayList<>();
 
         recipeAdapter = new ManageRecipeAdapter(recipeList, new ManageRecipeAdapter.OnItemClickListener() {
@@ -51,8 +67,9 @@ public class ManageRecipeActivity extends AppCompatActivity {
             public void onItemClick(Recipe recipe) {
                 Intent intent = new Intent(ManageRecipeActivity.this, EditRecipeActivity.class);
                 intent.putExtra("recipeId", recipe.getRecipeId());
-                startActivity(intent);
-                finish();
+                editRecipeLauncher.launch(intent);
+//                startActivity(intent);
+//                finish();
             }
         });
 
@@ -61,14 +78,61 @@ public class ManageRecipeActivity extends AppCompatActivity {
 
         getRecipeData();
 
+        SearchView recipeSearchView = findViewById(R.id.recipeSearchBar);
+        recipeSearchView.clearFocus();
 
+        originalRecipeList = new ArrayList<>();
+        recipeSearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+
+            @Override
+            public boolean onQueryTextSubmit(String s) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String s) {
+                if (TextUtils.isEmpty(s)) {
+                    updateAdapter(originalRecipeList);
+                } else {
+                    ArrayList<Recipe> filteredRecipe = new ArrayList<>();
+                    for (Recipe r : originalRecipeList) {
+                        if (r.getRecipeName().toLowerCase().contains(s.toLowerCase())) {
+                            filteredRecipe.add(r);
+                        }
+                    }
+                    updateAdapter(filteredRecipe);
+                }
+
+                return true;
+            }
+        });
+
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        getRecipeData();
+    }
+
+    private void updateEmptyLayoutVisibility() {
+
+        if (recipeList.isEmpty()) {
+            emptyLayout.setVisibility(View.VISIBLE);
+            recyclerView.setVisibility(View.GONE);
+        } else {
+            emptyLayout.setVisibility(View.GONE);
+            recyclerView.setVisibility(View.VISIBLE);
+        }
     }
 
     private void getRecipeData() {
         FirebaseFirestore db = FirebaseFirestore.getInstance();
 
         Intent intent = getIntent();
-        String userId = intent.getStringExtra("user_id");
+        SharedPreferences sp1 = this.getSharedPreferences("Login", MODE_PRIVATE);
+        userId = sp1.getString("userid", null);
 
         db.collection("recipes")
                 .whereEqualTo("userId", userId)
@@ -84,7 +148,15 @@ public class ManageRecipeActivity extends AppCompatActivity {
                                 recipes.add(recipe);
                             }
 
+                            originalRecipeList.clear();
+                            originalRecipeList.addAll(recipes);
+
+                            recipeList.clear();
+                            recipeList.addAll(recipes);
                             updateAdapter(recipes);
+
+                            updateEmptyLayoutVisibility();
+
                         } else {
                             Log.w(TAG, "Error");
                         }
@@ -96,17 +168,7 @@ public class ManageRecipeActivity extends AppCompatActivity {
         recipeList.clear();
         recipeList.addAll(recipes);
         recipeAdapter.notifyDataSetChanged();
-
-        LinearLayout emptyLayout = findViewById(R.id.emptyLayout);
-        RecyclerView recyclerView = findViewById(R.id.recyclerViewRecipe);
-        if (recipes.isEmpty()) {
-            emptyLayout.setVisibility(View.VISIBLE);
-            recyclerView.setVisibility(View.GONE);
-
-        } else {
-            emptyLayout.setVisibility(View.GONE);
-            recyclerView.setVisibility(View.VISIBLE);
-        }
+        updateEmptyLayoutVisibility();
     }
 
 }
