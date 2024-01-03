@@ -52,9 +52,6 @@ public class MightLikeRecipeActivity extends AppCompatActivity {
         backToPrevious.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MightLikeRecipeActivity.this, MainActivity.class);
-                intent.putExtra("loadFragment", "explore");
-                startActivity(intent);
                 finish();
             }
         });

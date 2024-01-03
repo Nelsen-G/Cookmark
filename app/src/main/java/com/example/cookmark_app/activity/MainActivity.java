@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         SharedPreferences sp1 = this.getSharedPreferences("Login", MODE_PRIVATE);
-        userId=sp1.getString("userid", null);
+        userId = sp1.getString("userid", null);
 
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
         binding.bottomNavigation.setBackground(null);
 
         binding.bottomNavigationView.setOnItemSelectedListener(item -> {
-            switch(item.getItemId()){
+            switch (item.getItemId()) {
 
                 case R.id.mnExplore:
                     replaceFragment(new ExploreFragment());
@@ -60,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
 
         binding.toolbar.setOnMenuItemClickListener(item -> {
             int id = item.getItemId();
-            if(id == R.id.mnAccount){
+            if (id == R.id.mnAccount) {
                 replaceFragment(new AccountFragment());
             }
             return true;
@@ -79,11 +79,11 @@ public class MainActivity extends AppCompatActivity {
                 replaceFragment(new AccountFragment());
             } else if (fragmentToLoad.equals("search")) {
                 replaceFragment(new SearchFragment());
-            } else if (fragmentToLoad.equals("cookmark")){
+            } else if (fragmentToLoad.equals("cookmark")) {
                 replaceFragment(new CookMarkedFragment());
-            } else if (fragmentToLoad.equals("plan")){
+            } else if (fragmentToLoad.equals("plan")) {
                 replaceFragment(new PlanFragment());
-            } else if (fragmentToLoad.equals("explore")){
+            } else if (fragmentToLoad.equals("explore")) {
                 replaceFragment(new ExploreFragment());
             } else {
                 replaceFragment(new ExploreFragment());
@@ -94,7 +94,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private void replaceFragment(Fragment fragment){
+    private void replaceFragment(Fragment fragment) {
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.activity_layout, fragment);
@@ -106,3 +106,4 @@ public class MainActivity extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.toolbar_menu, menu);
         return true;
     }
+}
