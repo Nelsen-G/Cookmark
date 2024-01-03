@@ -185,37 +185,49 @@ public class SearchFragment extends Fragment implements OnItemClickCallback {
     }
 
     private void fillIngredientData() {
+
         // dairy
         ingredients1 = new ArrayList<>();
-        String[] dummy1 = {"Butter", "Milk", "Heavy Cream", "Whipping Cream", "Yogurt", "Cream Cheese", "Cheddar Cheese", "Mozzarella Cheese"};
+        String[] dummy1 = {"Butter", "Buttermilk", "Cheddar Cheese", "Dairy Free Chocolate Chips", "Heavy Cream", "Mascarpone Cheese",
+                "Milk", "Sour Cream", "Whipping Cream", "Parmesan"};
         for(String s : dummy1) {
             ingredients1.add(new Ingredient(s));
         }
 
         // meat
         ingredients2 = new ArrayList<>();
-        String[] dummy2 = {"Chicken", "Beef", "Pork", "Lamb", "Bacon", "Sausage", "Ground Beef", "Ham", "Duck", "Egg"};
+        String[] dummy2 = {"Bacon", "Beef", "Chicken", "Ham", "Oxtail", "Pork", "Steak"};
         for(String s : dummy2) {
             ingredients2.add(new Ingredient(s));
         }
 
         // vegetables
         ingredients3 = new ArrayList<>();
-        String[] dummy3 = {"Spinach", "Eggplant", "Potato", "Carrot", "Cabbage", "Tomato", "Chili", "Shallot", "Garlic", "Onion", "Bay Leaves", "Sereh", "Chayote Squash", "Paprika"};
+        String[] dummy3 = {"Avocado", "Broccoli", "Carrot", "Cabbage", "Celery", "Cilantro", "Fried Shallot",
+                "Garlic", "Ginger", "Green Onion", "Lemon", "Mushroom", "Onion", "Oregano", "Parsley", "Potato", "Paprika",
+                "Red Bell Pepper", "Scallion", "Shiitake Mushroom", "Spinach", "Tomato"};
         for(String s : dummy3) {
             ingredients3.add(new Ingredient(s));
         }
 
         // seafood
         ingredients4 = new ArrayList<>();
-        String[] dummy4 = {"Salmon", "Shrimp", "Crab", "Squid", "Clam", "Sardine", "Anchovy", "Tuna", "Scallop", "Mussel"};
+        String[] dummy4 = {"Calamari", "Prawn", "Salmon", "Shrimp"};
         for(String s : dummy4) {
             ingredients4.add(new Ingredient(s));
         }
 
         // others
         ingredients5 = new ArrayList<>();
-        String[] dummy5 = {"Tofu", "Tempeh", "Noodle", "Rice", "Bread", "Pasta", "Soy Sauce", "Honey", "Vinegar", "Sesame Oil"};
+        String[] dummy5 = {"Almond Flour", "Baking Powder", "Baking Soda", "Berry", "Blackpepper", "Bread",
+                "Brown Sugar", "Canola Oil", "Candlenut", "Celery", "Chili Flakes", "Chili Oil", "Chili Sauce", "Cinnamon",
+                "Coconut Oil", "Coconut Sugar", "Cooking Oil", "Corn", "Corn Starch",
+                "Cocoa Powder", "Curry Powder", "Egg", "Espresso Powder", "Fish Sauce", "Furikake", "Garlic Powder",
+                "Gochugaru", "Gochujang Sauce", "Granulated Sugar", "Green Chili", "Green Plum Extract",
+                "Honey", "Kosher Salt", "Kencur", "Lime Juice", "Maple Syrup", "Neutral Oil", "Noodles",
+                "Oyster Sauce", "Red Onion", "Red Pepper Flakes", "Rice", "Rice Flour", "Rosemary",
+                "Salt", "Sesame Oil", "Sesame Seeds", "Shallot", "Shaoxing Wine", "Shrimp Sauce", "Soy Sauce", "Sugar",
+                "Sweet Soy Sauce", "Tamari Sauce", "Tapioca Flour", "Thyme", "Tomato Ketchup", "Vegetable Oil", "Vinegar", "Whitepepper"};
         for(String s : dummy5) {
             ingredients5.add(new Ingredient(s));
         }
