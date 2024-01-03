@@ -2,9 +2,12 @@ package com.example.cookmark_app.activity;
 
 import static com.google.firebase.appcheck.internal.util.Logger.TAG;
 
+import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -18,6 +21,7 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 
 import com.example.cookmark_app.R;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -49,6 +53,15 @@ public class LandingActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_landing);
 
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            if (ActivityCompat.checkSelfPermission(this,Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
+                requestPermissions(new String[] {Manifest.permission.POST_NOTIFICATIONS}, 1);
+            }
+            else {
+                // klw ini, nnt notif hrs enable manual dari settings
+            }
+        }
+
         // kalo user udah pernah login sebelumnya
         // akan langsung redirect ke explore page
         if (isLoggedIn()) {
@@ -56,17 +69,16 @@ public class LandingActivity extends AppCompatActivity {
         }
 
 //        Ini buat nampilin FCM Regist token di log nnti, buat dipake push notif ke device tersebut
-//        FirebaseMessaging.getInstance().getToken()
-//                .addOnCompleteListener(new OnCompleteListener<String>() {
-//                    @Override
-//                    public void onComplete(@NonNull Task<String> task) {
-//                        String token = task.getResult();
-//
-//                        String msg = getString(R.string.msg_token_fmt, token);
-//                        Log.d(TAG, msg);
-//                        Toast.makeText(LandingActivity.this, msg, Toast.LENGTH_SHORT).show();
-//                    }
-//                });
+        FirebaseMessaging.getInstance().getToken()
+                .addOnCompleteListener(new OnCompleteListener<String>() {
+                    @Override
+                    public void onComplete(@NonNull Task<String> task) {
+                        String token = task.getResult();
+
+                        String msg = getString(R.string.msg_token_fmt, token);
+                        Log.d("LandingActivity", msg);
+                    }
+                });
 
         TextView logInButton = findViewById(R.id.buttonLogIn);
         logInButton.setOnClickListener(new View.OnClickListener() {
