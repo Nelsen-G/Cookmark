@@ -184,6 +184,8 @@ public class AccountFragment extends Fragment implements EditNameDialog.OnUserna
                 Ed.putString("userid", null);
                 Ed.commit();
 
+                it.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+
                 startActivity(it);
             }
         });
