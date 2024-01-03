@@ -139,6 +139,18 @@ public class RecipeDetailActivity extends AppCompatActivity implements OnItemCli
             backToPrevious.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    String callingFragment = getIntent().getStringExtra("callingFragment");
+                    Intent intent = new Intent(RecipeDetailActivity.this, MainActivity.class);
+
+                    if(callingFragment.equals("cookmark")){
+                        intent.putExtra("loadFragment", "cookmark");
+                    } else if (callingFragment.equals("plan")){
+                        intent.putExtra("loadFragment", "plan");
+                    } else if (callingFragment.equals("explore")){
+                        intent.putExtra("loadFragment", "explore");
+                    }
+
+                    startActivity(intent);
                     finish();
                 }
             });

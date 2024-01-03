@@ -69,6 +69,7 @@ public class CookMarkedListAdapter extends RecyclerView.Adapter<CookMarkedListAd
                     Intent intent = new Intent(context, RecipeDetailActivity.class);
                     intent.putExtra("recipe", recipe);
                     intent.putExtra("currentCookmarkStatus", currentStatus);
+                    intent.putExtra("callingFragment", "cookmark");
                     context.startActivity(intent);
                 }
             }

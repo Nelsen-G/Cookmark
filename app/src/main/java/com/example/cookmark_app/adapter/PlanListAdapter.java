@@ -87,6 +87,7 @@ public class PlanListAdapter extends RecyclerView.Adapter<PlanListAdapter.ViewHo
                                             Recipe selected = recipe.toObject(Recipe.class);
                                             Intent intent = new Intent(context, RecipeDetailActivity.class);
                                             intent.putExtra("recipe", selected);
+                                            intent.putExtra("callingFragment", "plan");
                                             context.startActivity(intent);
                                         }
                                     }

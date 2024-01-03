@@ -69,6 +69,7 @@ public class RegularRecipeListAdapter extends RecyclerView.Adapter<RegularRecipe
                     Intent intent = new Intent(context, RecipeDetailActivity.class);
                     intent.putExtra("recipe", recipe);
                     intent.putExtra("currentCookmarkStatus", currentStatus);
+                    intent.putExtra("callingFragment", "explore");
                     context.startActivity(intent);
                 }
             }
