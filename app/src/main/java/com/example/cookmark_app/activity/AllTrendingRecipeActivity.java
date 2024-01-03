@@ -56,6 +56,9 @@ public class AllTrendingRecipeActivity extends AppCompatActivity {
         backToPrevious.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent intent = new Intent(AllTrendingRecipeActivity.this, MainActivity.class);
+                intent.putExtra("loadFragment", "explore");
+                startActivity(intent);
                 finish();
             }
         });

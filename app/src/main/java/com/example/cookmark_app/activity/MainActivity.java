@@ -94,11 +94,11 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    @Override
-    protected void onRestart() {
-        super.onRestart();
-        refresh();
-    }
+//    @Override
+//    protected void onRestart() {
+//        super.onRestart();
+//        refresh();
+//    }
 
     private void replaceFragment(Fragment fragment){
         FragmentManager fragmentManager = getSupportFragmentManager();
@@ -113,11 +113,11 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
-    private void refresh() {
-        finish();
-        overridePendingTransition(0, 0);
-        startActivity(getIntent());
-        overridePendingTransition(0, 0);
-        Log.d("TAG", "onRestart: aaa");
-    }
+//    private void refresh() {
+//        finish();
+//        overridePendingTransition(0, 0);
+//        startActivity(getIntent());
+//        overridePendingTransition(0, 0);
+//        Log.d("TAG", "onRestart: aaa");
+//    }
 }
