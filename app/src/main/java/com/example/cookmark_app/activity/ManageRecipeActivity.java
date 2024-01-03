@@ -56,6 +56,9 @@ public class ManageRecipeActivity extends AppCompatActivity {
         backToPrevious.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent intent = new Intent(ManageRecipeActivity.this, MainActivity.class);
+                intent.putExtra("loadFragment", "account");
+                startActivity(intent);
                 finish();
             }
         });
