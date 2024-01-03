@@ -34,6 +34,9 @@ public class AboutActivity extends AppCompatActivity implements OnMapReadyCallba
         backToPrevious.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent intent = new Intent(AboutActivity.this, MainActivity.class);
+                intent.putExtra("loadFragment", "account");
+                startActivity(intent);
                 finish();
             }
         });

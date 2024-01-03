@@ -70,6 +70,18 @@ public class MainActivity extends AppCompatActivity {
         searchBtn.setOnClickListener(item -> {
             replaceFragment(new SearchFragment());
         });
+
+
+        if (getIntent().hasExtra("loadFragment")) {
+            String fragmentToLoad = getIntent().getStringExtra("loadFragment");
+
+            if (fragmentToLoad.equals("account")) {
+                replaceFragment(new AccountFragment());
+            }
+            //reset
+            getIntent().removeExtra("loadFragment");
+        }
+
     }
 
     @Override
