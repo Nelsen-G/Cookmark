@@ -73,6 +73,9 @@ public class SearchResultActivity extends AppCompatActivity {
         backToPrevious.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent intent = new Intent(SearchResultActivity.this, MainActivity.class);
+                intent.putExtra("loadFragment", "search");
+                startActivity(intent);
                 finish();
             }
         });

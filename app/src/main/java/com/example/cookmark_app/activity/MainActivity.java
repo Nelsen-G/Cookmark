@@ -77,6 +77,16 @@ public class MainActivity extends AppCompatActivity {
 
             if (fragmentToLoad.equals("account")) {
                 replaceFragment(new AccountFragment());
+            } else if (fragmentToLoad.equals("search")) {
+                replaceFragment(new SearchFragment());
+            } else if (fragmentToLoad.equals("cookmark")){
+                replaceFragment(new CookMarkedFragment());
+            } else if (fragmentToLoad.equals("plan")){
+                replaceFragment(new PlanFragment());
+            } else if (fragmentToLoad.equals("explore")){
+                replaceFragment(new ExploreFragment());
+            } else {
+                replaceFragment(new ExploreFragment());
             }
             //reset
             getIntent().removeExtra("loadFragment");
