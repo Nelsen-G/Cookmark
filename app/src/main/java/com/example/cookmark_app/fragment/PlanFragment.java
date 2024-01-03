@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -213,15 +214,25 @@ public class PlanFragment extends Fragment {
         mealPlanDialog.setOnOptionsMenuClosedListener(new MealPlanDialog.OnOptionsMenuClosedListener() {
             @Override
             public void onOptionsMenuClosed() {
+
                 Log.d("Coba", "Masuk");
 
                 Date date = calendar.getTime();
                 updateCurrDateTv(date);
                 updateMealPlanList();
+
+                //refresh plan meal
+                //refresh();
             }
+
+
         });
         mealPlanDialog.show(getChildFragmentManager(), "dialog");
     }
 
-
+//    private void refresh() {
+//        Log.d("TAG", "refresh: ");
+//        FragmentTransaction ft = getParentFragmentManager().beginTransaction();
+//        ft.detach(this).attach(this).commit();
+//    }
 }
