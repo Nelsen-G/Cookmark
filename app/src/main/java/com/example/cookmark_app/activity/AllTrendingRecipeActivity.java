@@ -111,7 +111,7 @@ public class AllTrendingRecipeActivity extends AppCompatActivity {
                         }
                         originalRecipeList.clear();
                         originalRecipeList.addAll(items);
-                        
+
                         updateAdapter(items);
                     } else {
                         Exception e = task.getException();
