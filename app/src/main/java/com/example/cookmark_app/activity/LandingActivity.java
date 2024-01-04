@@ -102,7 +102,7 @@ public class LandingActivity extends AppCompatActivity {
         database = FirebaseDatabase.getInstance();
 
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestIdToken("924421925643-7s41gvt59tk8h0djaurejhl4kf9bmqfh.apps.googleusercontent.com")
+                .requestIdToken("924421925643-2ajktpi6i3oej4cl20ftb20nikhpsop5.apps.googleusercontent.com")
                 .requestEmail()
                 .build();
 

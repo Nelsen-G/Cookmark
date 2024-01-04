@@ -5,17 +5,24 @@ plugins {
 }
 
 android {
+    signingConfigs {
+        config {
+            storeFile file('C:\\Users\\derpy\\.android\\debug.keystore')
+            keyAlias 'androiddebugkey'
+        }
+    }
     namespace 'com.example.cookmark_app'
     compileSdk 34
 
     defaultConfig {
         applicationId "com.example.cookmark_app"
-        minSdk 21
+        minSdk 24
         targetSdk 34
         versionCode 1
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        signingConfig signingConfigs.debug
     }
 
     buildTypes {
@@ -26,6 +33,7 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
             manifestPlaceholders = [ MAPS_API_KEY:"AIzaSyD4bckX1lRU4BT4pdOkS2WrOiS_8V"]
+            signingConfig signingConfigs.config
         }
     }
     compileOptions {
