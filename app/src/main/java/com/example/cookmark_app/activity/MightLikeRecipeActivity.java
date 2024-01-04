@@ -99,7 +99,6 @@ public class MightLikeRecipeActivity extends AppCompatActivity {
         query.get()
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
-                        initializeRecyclerView(recipeList);
                         List<Recipe> items = new ArrayList<>();
                         items.clear();
                         for (QueryDocumentSnapshot document : task.getResult()) {
