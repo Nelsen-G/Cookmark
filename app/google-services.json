@@ -15,7 +15,15 @@
       },
       "oauth_client": [
         {
-          "client_id": "924421925643-7s41gvt59tk8h0djaurejhl4kf9bmqfh.apps.googleusercontent.com",
+          "client_id": "924421925643-k2gaenn8hi6q1b353n5mkce62gsrpe1s.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.cookmark_app",
+            "certificate_hash": "33dd98b396412cc9d56a697406991aa2ace683bf"
+          }
+        },
+        {
+          "client_id": "924421925643-2ajktpi6i3oej4cl20ftb20nikhpsop5.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
@@ -28,7 +36,7 @@
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "924421925643-7s41gvt59tk8h0djaurejhl4kf9bmqfh.apps.googleusercontent.com",
+              "client_id": "924421925643-2ajktpi6i3oej4cl20ftb20nikhpsop5.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
