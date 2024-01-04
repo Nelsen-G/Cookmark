@@ -23,6 +23,14 @@
           }
         },
         {
+          "client_id": "924421925643-sd98dndl40ffesk4kglnd5fch5ve9qdn.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.cookmark_app",
+            "certificate_hash": "bfc546dafffb7140bf3251a28562a9b7b81e5597"
+          }
+        },
+        {
           "client_id": "924421925643-2ajktpi6i3oej4cl20ftb20nikhpsop5.apps.googleusercontent.com",
           "client_type": 3
         }
